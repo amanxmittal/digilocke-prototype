@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DigiLocker · Show ID</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css"><link rel="stylesheet" href="desktop.css">
+<script>try{var t=localStorage.getItem('dl-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>.qbox{width:240px;height:240px;border-radius:18px;background:repeating-linear-gradient(90deg,#111 0 6px,transparent 6px 12px),repeating-linear-gradient(0deg,#111 0 6px,transparent 6px 12px);background-size:12px 12px;position:relative;margin:0 auto}.qbox::after{content:"";position:absolute;inset:38%;background:#fff;border-radius:8px}</style>
+</head><body>
+<div class="app">
+  <aside class="side"><div class="brand"><span class="logo"><span data-ic="shield" data-icc=""></span></span>DigiLocker</div><nav class="navi"><div class="grp">Main</div><a href="06-home.html"><span data-ic="home" data-icc=""></span>Dashboard</a><a class="on" href="07-wallet.html"><span data-ic="cards" data-icc=""></span>Wallet</a><a href="11-fetch.html"><span data-ic="dl" data-icc=""></span>Get Document</a><a href="12-drive.html"><span data-ic="drive" data-icc=""></span>Drive</a><a href="04-nominee.html"><span data-ic="people" data-icc=""></span>Nominee</a><a href="07-consent.html"><span data-ic="lock" data-icc=""></span>Consent</a><div class="grp">You</div><a href="19-health.html"><span data-ic="health" data-icc=""></span>Health</a><a href="05-vc-wallet.html"><span data-ic="shield" data-icc=""></span>Credentials</a><a href="12-activity.html"><span data-ic="activity" data-icc=""></span>Activity</a><a href="13-account.html"><span data-ic="user" data-icc=""></span>Account</a><a href="15-settings.html"><span data-ic="settings" data-icc=""></span>Settings</a></nav></aside>
+  <div class="main">
+    <div class="top"><div class="search"><span data-ic="search" data-icc="ic-sm"></span> Search documents, issuers, services…</div>
+      <div class="ticons"><button class="iconbtn"><span data-ic="bell" data-icc=""></span></button><button class="iconbtn"><span data-ic="access" data-icc=""></span></button><div class="avatar-wrap">
+  <button class="avatar" aria-haspopup="true" aria-expanded="false" aria-label="Profile menu">DN</button>
+  <div class="avatar-dropdown" role="menu" aria-label="Profile menu">
+    <div class="avatar-dropdown__header">
+      <div class="avatar-dropdown__name" title="Debabrata Nayak">Debabrata Nayak</div>
+      <div class="avatar-dropdown__email" title="dnayak@digitalindia.gov.in">dnayak@digitalindia.gov.in</div>
+    </div>
+    <hr class="div">
+    <a class="avatar-dropdown__item" role="menuitem" href="13-account.html">
+      <span data-ic="user" data-icc="ic-sm"></span> My Account
+    </a>
+    <a class="avatar-dropdown__item avatar-dropdown__item--danger" role="menuitem" href="01-login.html">
+      <span data-ic="logout" data-icc="ic-sm"></span> Logout
+    </a>
+  </div>
+</div></div></div>
+    <div class="content" style="max-width:640px;text-align:center">
+      <div class="between" style="text-align:left"><h1 class="h1">Show ID</h1><span class="badge green"><span data-ic="check" data-icc="ic-sm"></span> Offline-ready</span></div>
+
+      <div class="row gap2 mt5" style="justify-content:center"><span class="chip on">QR</span><span class="chip">Tap (NFC)</span></div>
+
+      <div class="card mt5" style="padding:32px">
+        <div class="qbox"></div>
+        <div style="margin-top:20px"><b style="font-size:16px">Aadhaar · Debabrata N.</b></div>
+        <div class="muted" style="font-size:13px">Verifiable presentation · signed on-device</div>
+      </div>
+
+      <div class="card mt4" style="text-align:left">
+        <div class="eyebrow">This QR proves</div>
+        <div class="row wrap gap2 mt3"><span class="chip on">Name</span><span class="chip on">Photo</span><span class="chip on">Age over 18</span></div>
+        <div class="muted mt3" style="font-size:13px">Valid for <b>04:58</b> · anyone scanning verifies authenticity without calling a server.</div>
+      </div>
+
+      <div class="card mt4" style="background:var(--dl-primary-50);border-color:var(--dl-primary-100);text-align:left">
+        <div class="row"><span data-ic="shield" data-icc=""></span><span style="font-size:13.5px">Device-signed offline token. Works at checkpoints with no network.</span></div>
+      </div>
+
+      <button class="btn ghost mt5" onclick="location='09-share.html'" style="width:100%">Change what I show</button>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

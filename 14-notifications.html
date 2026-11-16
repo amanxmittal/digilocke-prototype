@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DigiLocker · Notifications</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css"><link rel="stylesheet" href="desktop.css">
+<script>try{var t=localStorage.getItem('dl-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>
+.notif-item{position:relative}
+.notif-item.unread::before{content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--dl-primary)}
+.notif-actions{display:flex;gap:8px;margin-top:8px}
+.notif-actions .btn{padding:8px 14px;font-size:12.5px;border-radius:8px}
+.notif-actions .btn.deny{background:var(--g100);color:var(--ink);border:1px solid var(--hair)}
+.notif-item.actioned .notif-actions{display:none}
+.notif-item.actioned::after{content:attr(data-action-label);display:block;margin-top:6px;font-size:12px;font-weight:600;color:var(--green);padding-left:52px}
+</style>
+</head><body>
+<div class="app">
+  <aside class="side"><div class="brand"><span class="logo"><span data-ic="shield" data-icc=""></span></span>DigiLocker</div><nav class="navi"><div class="grp">Main</div><a href="06-home.html"><span data-ic="home" data-icc=""></span>Dashboard</a><a href="07-wallet.html"><span data-ic="cards" data-icc=""></span>Wallet</a><a href="11-fetch.html"><span data-ic="dl" data-icc=""></span>Get Document</a><a href="12-drive.html"><span data-ic="drive" data-icc=""></span>Drive</a><a href="04-nominee.html"><span data-ic="people" data-icc=""></span>Nominee</a><a href="07-consent.html"><span data-ic="lock" data-icc=""></span>Consent</a><div class="grp">You</div><a href="19-health.html"><span data-ic="health" data-icc=""></span>Health</a><a href="05-vc-wallet.html"><span data-ic="shield" data-icc=""></span>Credentials</a><a href="12-activity.html"><span data-ic="activity" data-icc=""></span>Activity</a><a href="13-account.html"><span data-ic="user" data-icc=""></span>Account</a><a href="15-settings.html"><span data-ic="settings" data-icc=""></span>Settings</a></nav></aside>
+  <div class="main">
+    <div class="top"><div class="search"><span data-ic="search" data-icc="ic-sm"></span> Search documents, issuers, services…</div>
+      <div class="ticons"><a class="iconbtn" href="14-notifications.html"><span data-ic="bell" data-icc=""></span></a><button class="iconbtn"><span data-ic="access" data-icc=""></span></button><div class="avatar-wrap">
+  <button class="avatar" aria-haspopup="true" aria-expanded="false" aria-label="Profile menu">DN</button>
+  <div class="avatar-dropdown" role="menu" aria-label="Profile menu">
+    <div class="avatar-dropdown__header">
+      <div class="avatar-dropdown__name" title="Debabrata Nayak">Debabrata Nayak</div>
+      <div class="avatar-dropdown__email" title="dnayak@digitalindia.gov.in">dnayak@digitalindia.gov.in</div>
+    </div>
+    <hr class="div">
+    <a class="avatar-dropdown__item" role="menuitem" href="13-account.html">
+      <span data-ic="user" data-icc="ic-sm"></span> My Account
+    </a>
+    <a class="avatar-dropdown__item avatar-dropdown__item--danger" role="menuitem" href="01-login.html">
+      <span data-ic="logout" data-icc="ic-sm"></span> Logout
+    </a>
+  </div>
+</div></div></div>
+    <div class="content"><div class="between"><div><h1 class="h1">Notifications</h1><p class="muted" style="margin:4px 0 0">Requests, reminders and updates.</p></div></div>
+
+<div class="two mt5">
+  <div>
+    <div class="card" style="padding:6px 16px">
+      <!-- Category filter tabs -->
+      <div class="row gap2" id="notif-tabs" style="padding:12px 0 8px">
+        <span class="chip on" data-filter="all">All</span>
+        <span class="chip" data-filter="requests">Requests</span>
+        <span class="chip" data-filter="documents">Documents</span>
+        <span class="chip" data-filter="reminders">Reminders</span>
+      </div>
+
+      <!-- Today group -->
+      <div class="eyebrow notif-group-heading" style="padding:12px 0 4px">Today</div>
+
+      <div class="lrow notif-item unread" data-category="requests" data-actionable="true">
+        <div class="lico"><span data-ic="idcard" data-icc=""></span></div>
+        <div style="flex:1">
+          <b style="font-size:14px">ICICI Bank — verify your identity</b>
+          <div class="muted" style="font-size:12.5px">New account KYC · verify via DigiLocker</div>
+          <div class="notif-actions">
+            <button class="btn" onclick="approveNotif(this)">Approve</button>
+            <button class="btn deny" onclick="denyNotif(this)">Deny</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lrow notif-item unread" data-category="requests" data-actionable="true">
+        <div class="lico"><span data-ic="shield" data-icc=""></span></div>
+        <div style="flex:1">
+          <b style="font-size:14px">HDFC Bank sign-in approval</b>
+          <div class="muted" style="font-size:12.5px">Approve or deny a sign-in request</div>
+          <div class="notif-actions">
+            <button class="btn" onclick="approveNotif(this)">Approve</button>
+            <button class="btn deny" onclick="denyNotif(this)">Deny</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lrow notif-item unread" data-category="documents">
+        <div class="lico"><span data-ic="dl" data-icc=""></span></div>
+        <div style="flex:1">
+          <b style="font-size:14px">New document available</b>
+          <div class="muted" style="font-size:12.5px">Your updated RC is ready to fetch</div>
+        </div>
+      </div>
+
+      <!-- Earlier group -->
+      <div class="eyebrow notif-group-heading" style="padding:12px 0 4px">Earlier</div>
+
+      <div class="lrow notif-item" data-category="reminders">
+        <div class="lico"><span data-ic="clock" data-icc=""></span></div>
+        <div style="flex:1">
+          <b style="font-size:14px">Insurance expiring</b>
+          <div class="muted" style="font-size:12.5px">Vehicle RC in 8 days</div>
+        </div>
+      </div>
+
+      <div class="lrow notif-item" data-category="documents">
+        <div class="lico"><span data-ic="health" data-icc=""></span></div>
+        <div style="flex:1">
+          <b style="font-size:14px">Lab report received</b>
+          <div class="muted" style="font-size:12.5px">Apollo added a CBC report</div>
+        </div>
+      </div>
+
+      <div class="lrow notif-item" data-category="reminders">
+        <div class="lico"><span data-ic="award" data-icc=""></span></div>
+        <div style="flex:1">
+          <b style="font-size:14px">You may be eligible</b>
+          <div class="muted" style="font-size:12.5px">Post-Matric Scholarship</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary sidebar -->
+  <aside>
+    <div class="card"><div class="eyebrow">Summary</div>
+      <div class="lrow mt3"><div style="flex:1"><span class="muted">Unread</span></div><span class="badge amber" id="unread-count">3</span></div>
+      <div class="lrow"><div style="flex:1"><span class="muted">Action required</span></div><span class="badge indigo" id="action-count">2</span></div>
+      <div class="lrow"><div style="flex:1"><span class="muted">This week</span></div><b id="weekly-total">6</b></div>
+      <button class="btn ghost mt4" style="width:100%" id="mark-all-read" onclick="markAllRead()">Mark all as read</button>
+    </div>
+
+    <!-- Notification preferences -->
+    <div class="card mt4"><div class="eyebrow">Preferences</div>
+      <div class="row between mt3" style="padding:8px 0;border-bottom:1px solid var(--hair)"><span style="font-size:14px">Push notifications</span><button class="switch on" data-pref="push" onclick="togglePref(this)"><i></i></button></div>
+      <div class="row between" style="padding:8px 0;border-bottom:1px solid var(--hair)"><span style="font-size:14px">Email digest</span><button class="switch" data-pref="email" onclick="togglePref(this)"><i></i></button></div>
+      <div class="row between" style="padding:8px 0"><span style="font-size:14px">Document alerts</span><button class="switch on" data-pref="documents" onclick="togglePref(this)"><i></i></button></div>
+    </div>
+
+    <div class="card mt4"><div class="eyebrow">Quick actions</div>
+      <button class="btn outline mt3" style="width:100%;font-size:13px"><span data-ic="settings" data-icc="ic-sm"></span> Notification settings</button>
+      <button class="btn outline mt2" style="width:100%;font-size:13px"><span data-ic="trash" data-icc="ic-sm"></span> Clear all notifications</button>
+    </div>
+  </aside>
+</div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+// Category filter tab functionality
+(function(){
+  var tabs = document.querySelectorAll('#notif-tabs .chip');
+  var items = document.querySelectorAll('.notif-item');
+  var headings = document.querySelectorAll('.notif-group-heading');
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      // Update active tab
+      tabs.forEach(function(t){ t.classList.remove('on'); });
+      tab.classList.add('on');
+
+      var filter = tab.getAttribute('data-filter');
+
+      // Show/hide notifications based on category
+      items.forEach(function(item){
+        if(filter === 'all' || item.getAttribute('data-category') === filter){
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Show/hide group headings if they have visible items
+      headings.forEach(function(heading){
+        var sibling = heading.nextElementSibling;
+        var hasVisible = false;
+        while(sibling && !sibling.classList.contains('notif-group-heading')){
+          if(sibling.classList.contains('notif-item') && sibling.style.display !== 'none'){
+            hasVisible = true;
+            break;
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        heading.style.display = hasVisible ? '' : 'none';
+      });
+    });
+  });
+})();
+
+// Mark all as read functionality
+function markAllRead(){
+  var items = document.querySelectorAll('.notif-item.unread');
+  items.forEach(function(item){
+    item.classList.remove('unread');
+  });
+  // Set unread count to zero
+  var countEl = document.getElementById('unread-count');
+  if(countEl) countEl.textContent = '0';
+}
+
+// Approve notification
+function approveNotif(btn){
+  var item = btn.closest('.notif-item');
+  if(item){
+    item.classList.add('actioned');
+    item.setAttribute('data-action-label', '✓ Approved');
+    item.classList.remove('unread');
+    updateCounts();
+  }
+}
+
+// Deny notification
+function denyNotif(btn){
+  var item = btn.closest('.notif-item');
+  if(item){
+    item.classList.add('actioned');
+    item.setAttribute('data-action-label', '✗ Denied');
+    item.classList.remove('unread');
+    updateCounts();
+  }
+}
+
+// Update summary counts after actions
+function updateCounts(){
+  var unread = document.querySelectorAll('.notif-item.unread').length;
+  var actionable = document.querySelectorAll('.notif-item[data-actionable="true"]:not(.actioned)').length;
+  var countEl = document.getElementById('unread-count');
+  var actionEl = document.getElementById('action-count');
+  if(countEl) countEl.textContent = unread;
+  if(actionEl) actionEl.textContent = actionable;
+}
+
+// Toggle notification preference
+function togglePref(btn){
+  btn.classList.toggle('on');
+}
+</script>
+</body></html>

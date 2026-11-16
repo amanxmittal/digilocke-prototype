@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DigiLocker · Switch account</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css"><link rel="stylesheet" href="desktop.css">
+<script>try{var t=localStorage.getItem('dl-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head><body>
+<div class="app">
+  <aside class="side"><div class="brand"><span class="logo"><span data-ic="shield" data-icc=""></span></span>DigiLocker</div><nav class="navi"><div class="grp">Main</div><a href="06-home.html"><span data-ic="home" data-icc=""></span>Dashboard</a><a href="07-wallet.html"><span data-ic="cards" data-icc=""></span>Wallet</a><a href="11-fetch.html"><span data-ic="dl" data-icc=""></span>Get Document</a><a href="12-drive.html"><span data-ic="drive" data-icc=""></span>Drive</a><a href="04-nominee.html"><span data-ic="people" data-icc=""></span>Nominee</a><a href="07-consent.html"><span data-ic="lock" data-icc=""></span>Consent</a><div class="grp">You</div><a href="19-health.html"><span data-ic="health" data-icc=""></span>Health</a><a href="05-vc-wallet.html"><span data-ic="shield" data-icc=""></span>Credentials</a><a href="12-activity.html"><span data-ic="activity" data-icc=""></span>Activity</a><a class="on" href="13-account.html"><span data-ic="user" data-icc=""></span>Account</a><a href="15-settings.html"><span data-ic="settings" data-icc=""></span>Settings</a></nav></aside>
+  <div class="main">
+    <div class="top"><div class="search"><span data-ic="search" data-icc="ic-sm"></span> Search documents, issuers, services…</div>
+      <div class="ticons"><button class="iconbtn"><span data-ic="bell" data-icc=""></span></button><button class="iconbtn"><span data-ic="access" data-icc=""></span></button><div class="avatar-wrap">
+  <button class="avatar" aria-haspopup="true" aria-expanded="false" aria-label="Profile menu">DN</button>
+  <div class="avatar-dropdown" role="menu" aria-label="Profile menu">
+    <div class="avatar-dropdown__header">
+      <div class="avatar-dropdown__name" title="Debabrata Nayak">Debabrata Nayak</div>
+      <div class="avatar-dropdown__email" title="dnayak@digitalindia.gov.in">dnayak@digitalindia.gov.in</div>
+    </div>
+    <hr class="div">
+    <a class="avatar-dropdown__item" role="menuitem" href="13-account.html">
+      <span data-ic="user" data-icc="ic-sm"></span> My Account
+    </a>
+    <a class="avatar-dropdown__item avatar-dropdown__item--danger" role="menuitem" href="01-login.html">
+      <span data-ic="logout" data-icc="ic-sm"></span> Logout
+    </a>
+  </div>
+</div></div></div>
+    <div class="content">
+      <div class="row" style="gap:16px"><a href="13-account.html" style="color:var(--ink-3)"><span data-ic="back" data-icc=""></span></a><h1 class="h1">Switch account</h1></div>
+
+<div class="two mt5">
+  <div>
+      <div class="card">
+        <div class="eyebrow">Profiles on +91 98765 43210</div>
+        <div class="muted mt2" style="font-size:13px">Same mobile number · switching only needs your MPIN</div>
+        <div class="lrow mt4" style="border:1.5px solid var(--dl-primary);border-radius:14px;padding:14px"><div style="width:46px;height:46px;border-radius:14px;background:var(--dl-grad);color:#fff;display:grid;place-items:center;font-weight:800">DN</div><div style="flex:1"><b>Debabrata Nayak</b><div class="muted" style="font-size:12.5px">debabrata.n · Aadhaar-verified</div></div><span class="badge indigo">Active</span></div>
+        <a href="05-mpin.html#next=06-home.html" class="lrow mt2" style="border:1.5px solid var(--hair);border-radius:14px;padding:14px;cursor:pointer;text-decoration:none;color:inherit"><div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#0E7C86,#22C7D6);color:#fff;display:grid;place-items:center;font-weight:800">SN</div><div style="flex:1"><b>Sunita Nayak</b><div class="muted" style="font-size:12.5px">sunita.n · Aadhaar-verified</div></div><span data-ic="chev" data-icc="ic-sm"></span></a>
+        <button class="btn ghost mt4" style="width:100%" onclick="location='78-add-profile-samenumber.html'"><span data-ic="plus" data-icc="ic-sm"></span> Add a profile on this number</button>
+      </div>
+
+      <hr class="div">
+
+      <div class="card">
+        <div class="eyebrow">Other people on this device</div>
+        <div class="muted mt2" style="font-size:13px">Different Aadhaar/VID · verified independently</div>
+        <div class="lrow mt4" style="border:1.5px solid var(--hair);border-radius:14px;padding:14px;cursor:pointer"><div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#8A4B00,#FF8F00);color:#fff;display:grid;place-items:center;font-weight:800">RK</div><div style="flex:1"><b>Ravi Kumar</b><div class="muted" style="font-size:12.5px">Added on this device · own Aadhaar</div></div><span data-ic="chev" data-icc="ic-sm"></span></div>
+        <button class="btn ghost mt4" style="width:100%" onclick="location='76-add-account-identity.html'"><span data-ic="plus" data-icc="ic-sm"></span> Add another person's account</button>
+      </div>
+  </div>
+  <aside>
+    <div class="card"><div class="eyebrow">About multi-account</div>
+      <div class="muted mt3" style="font-size:13px;line-height:1.6">
+        <div style="margin-bottom:8px"><b style="color:var(--ink)">Same number profiles</b> share a mobile number. Switching only asks for that profile's MPIN.</div>
+        <div><b style="color:var(--ink)">Other accounts</b> are different people with their own Aadhaar. They need their own OTP + MPIN.</div>
+      </div>
+    </div>
+    <div class="card mt4" style="border-left:4px solid var(--warning)"><div class="eyebrow">Important</div>
+      <div class="muted mt3" style="font-size:13px;line-height:1.6">Only add people who <b>already have</b> a DigiLocker account. They'll need their own Aadhaar/VID, OTP access, and existing MPIN.</div>
+    </div>
+    <div class="card mt4"><div class="eyebrow">On this device</div>
+      <div class="lrow mt3"><div style="flex:1"><span class="muted">Profiles</span></div><b>2</b></div>
+      <div class="lrow"><div style="flex:1"><span class="muted">Other accounts</span></div><b>1</b></div>
+      <div class="lrow"><div style="flex:1"><span class="muted">Max allowed</span></div><b>5</b></div>
+    </div>
+  </aside>
+</div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DigiLocker · Add another person</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css"><link rel="stylesheet" href="desktop.css">
+<script>try{var t=localStorage.getItem('dl-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head><body>
+<div class="app">
+  <aside class="side"><div class="brand"><span class="logo"><span data-ic="shield" data-icc=""></span></span>DigiLocker</div><nav class="navi"><div class="grp">Main</div><a href="06-home.html"><span data-ic="home" data-icc=""></span>Dashboard</a><a href="07-wallet.html"><span data-ic="cards" data-icc=""></span>Wallet</a><a href="11-fetch.html"><span data-ic="dl" data-icc=""></span>Get Document</a><a href="12-drive.html"><span data-ic="drive" data-icc=""></span>Drive</a><a href="04-nominee.html"><span data-ic="people" data-icc=""></span>Nominee</a><a href="07-consent.html"><span data-ic="lock" data-icc=""></span>Consent</a><div class="grp">You</div><a href="19-health.html"><span data-ic="health" data-icc=""></span>Health</a><a href="05-vc-wallet.html"><span data-ic="shield" data-icc=""></span>Credentials</a><a href="12-activity.html"><span data-ic="activity" data-icc=""></span>Activity</a><a class="on" href="13-account.html"><span data-ic="user" data-icc=""></span>Account</a><a href="15-settings.html"><span data-ic="settings" data-icc=""></span>Settings</a></nav></aside>
+  <div class="main">
+    <div class="top"><div class="search"><span data-ic="search" data-icc="ic-sm"></span> Search documents, issuers, services…</div>
+      <div class="ticons"><button class="iconbtn"><span data-ic="bell" data-icc=""></span></button><button class="iconbtn"><span data-ic="access" data-icc=""></span></button><div class="avatar-wrap">
+  <button class="avatar" aria-haspopup="true" aria-expanded="false" aria-label="Profile menu">DN</button>
+  <div class="avatar-dropdown" role="menu" aria-label="Profile menu">
+    <div class="avatar-dropdown__header">
+      <div class="avatar-dropdown__name" title="Debabrata Nayak">Debabrata Nayak</div>
+      <div class="avatar-dropdown__email" title="dnayak@digitalindia.gov.in">dnayak@digitalindia.gov.in</div>
+    </div>
+    <hr class="div">
+    <a class="avatar-dropdown__item" role="menuitem" href="13-account.html">
+      <span data-ic="user" data-icc="ic-sm"></span> My Account
+    </a>
+    <a class="avatar-dropdown__item avatar-dropdown__item--danger" role="menuitem" href="01-login.html">
+      <span data-ic="logout" data-icc="ic-sm"></span> Logout
+    </a>
+  </div>
+</div></div></div>
+    <div class="content" style="max-width:560px">
+      <div class="row" style="gap:16px"><a href="75-switch-account.html" style="color:var(--ink-3)"><span data-ic="back" data-icc=""></span></a><h1 class="h1">Add another person</h1></div>
+
+      <div class="card mt5" style="background:var(--dl-primary-50);border-color:var(--dl-primary-100)">
+        <div class="row"><span data-ic="people" data-icc=""></span><span style="font-size:13.5px">This adds a separate, existing DigiLocker account to this device — not linked to your mobile number.</span></div>
+      </div>
+
+      <!-- Tab switcher -->
+      <div style="display:flex;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:20px">
+        <button id="tabAadhaar" onclick="setMode('aadhaar')" style="flex:1;padding:12px;font-weight:600;font-size:14px;border:none;cursor:pointer;background:var(--dl-primary);color:#fff">Aadhaar</button>
+        <button id="tabVid" onclick="setMode('vid')" style="flex:1;padding:12px;font-weight:600;font-size:14px;border:none;cursor:pointer;background:var(--bg);color:var(--ink)">VID</button>
+      </div>
+
+      <!-- Aadhaar tab content -->
+      <div id="aadhaarTab" class="card mt4">
+        <label style="font-size:13px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:6px">Their Aadhaar number</label>
+        <input class="field" type="text" inputmode="numeric" maxlength="12" placeholder="XXXX XXXX XXXX">
+      </div>
+
+      <!-- VID tab content -->
+      <div id="vidTab" class="card mt4" style="display:none">
+        <label style="font-size:13px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:6px">Their VID</label>
+        <input class="field" type="text" inputmode="numeric" maxlength="19" placeholder="XXXX XXXX XXXX XXXX">
+      </div>
+
+      <div class="card mt4" style="background:var(--dl-primary-50);border-color:var(--dl-primary-100)">
+        <div class="row"><span data-ic="lock" data-icc=""></span><span style="font-size:13.5px">An OTP will be sent to <b>their</b> Aadhaar-linked mobile number — not to this device.</span></div>
+      </div>
+      <div class="card mt3" style="border-left:4px solid var(--warning)">
+        <div class="row"><span data-ic="shield" data-icc=""></span><span style="font-size:13.5px">Only an <b>existing</b> DigiLocker account can be added this way. They must already have Aadhaar/VID linked and an MPIN set.</span></div>
+      </div>
+
+      <a href="04-otp.html#next=77-add-account-mpin.html" class="btn mt5" style="width:100%;text-align:center;text-decoration:none">Send OTP</a>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function setMode(m){
+  document.getElementById('aadhaarTab').style.display=m==='aadhaar'?'block':'none';
+  document.getElementById('vidTab').style.display=m==='vid'?'block':'none';
+  document.getElementById('tabAadhaar').style.background=m==='aadhaar'?'var(--dl-primary)':'var(--bg)';
+  document.getElementById('tabAadhaar').style.color=m==='aadhaar'?'#fff':'var(--ink)';
+  document.getElementById('tabVid').style.background=m==='vid'?'var(--dl-primary)':'var(--bg)';
+  document.getElementById('tabVid').style.color=m==='vid'?'#fff':'var(--ink)';
+}
+</script>
+</body></html>

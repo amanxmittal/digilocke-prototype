@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DigiLocker · Verifiable Credentials</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css"><link rel="stylesheet" href="desktop.css">
+<script>try{var t=localStorage.getItem('dl-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head><body>
+<div class="app">
+  <aside class="side"><div class="brand"><span class="logo"><span data-ic="shield" data-icc=""></span></span>DigiLocker</div><nav class="navi"><div class="grp">Main</div><a href="02-dashboard.html"><span data-ic="home" data-icc=""></span>Dashboard</a><a href="03-wallet.html"><span data-ic="cards" data-icc=""></span>Wallet</a><a href="11-fetch.html"><span data-ic="dl" data-icc=""></span>Get Document</a><a href="06-drive.html"><span data-ic="drive" data-icc=""></span>Drive</a><a href="04-nominee.html"><span data-ic="people" data-icc=""></span>Nominee</a><a href="07-consent.html"><span data-ic="lock" data-icc=""></span>Consent</a><div class="grp">You</div><a href="19-health.html"><span data-ic="health" data-icc=""></span>Health</a><a class="on" href="05-vc-wallet.html"><span data-ic="shield" data-icc=""></span>Credentials</a><a href="12-activity.html"><span data-ic="activity" data-icc=""></span>Activity</a><a href="13-account.html"><span data-ic="user" data-icc=""></span>Account</a><a href="15-settings.html"><span data-ic="settings" data-icc=""></span>Settings</a></nav></aside>
+  <div class="main">
+    <div class="top"><div class="search"><span data-ic="search" data-icc="ic-sm"></span> Search documents, issuers, services…</div>
+      <div class="ticons"><button class="iconbtn"><span data-ic="bell" data-icc=""></span></button><button class="iconbtn"><span data-ic="access" data-icc=""></span></button><div class="avatar-wrap">
+  <button class="avatar" aria-haspopup="true" aria-expanded="false" aria-label="Profile menu">DN</button>
+  <div class="avatar-dropdown" role="menu" aria-label="Profile menu">
+    <div class="avatar-dropdown__header">
+      <div class="avatar-dropdown__name" title="Debabrata Nayak">Debabrata Nayak</div>
+      <div class="avatar-dropdown__email" title="dnayak@digitalindia.gov.in">dnayak@digitalindia.gov.in</div>
+    </div>
+    <hr class="div">
+    <a class="avatar-dropdown__item" role="menuitem" href="13-account.html">
+      <span data-ic="user" data-icc="ic-sm"></span> My Account
+    </a>
+    <a class="avatar-dropdown__item avatar-dropdown__item--danger" role="menuitem" href="01-login.html">
+      <span data-ic="logout" data-icc="ic-sm"></span> Logout
+    </a>
+  </div>
+</div></div></div>
+    <div class="content">
+      <div class="between"><div><h1 class="h1">Verifiable Credentials</h1><p class="muted" style="margin:4px 0 0">Cryptographically signed credentials you can present or share instantly.</p></div><button class="btn"><span data-ic="plus" data-icc="ic-sm"></span> Create new credential</button></div>
+      <div class="two mt5">
+        <div>
+          <div class="cardgrid">
+            <div class="card">
+              <div class="row"><div class="lico" style="background:linear-gradient(135deg,#3A1C8C,#7C4DFF);color:#fff"><span data-ic="fp" data-icc=""></span></div><div><b style="font-size:15px">Aadhaar VC</b><div class="muted" style="font-size:13px">UIDAI · Issued 12 Jan 2024</div></div></div>
+              <hr class="div">
+              <div class="between"><span class="badge green">Verified</span><span class="muted" style="font-size:12px">W3C VC 1.1</span></div>
+              <div class="mt3" style="font-size:13px;color:var(--ink-2)">Contains: Name, DOB, Address, Photo</div>
+              <div class="row mt4"><button class="btn" style="font-size:13px">Present</button><button class="btn outline" style="font-size:13px">Share</button></div>
+            </div>
+            <div class="card">
+              <div class="row"><div class="lico" style="background:linear-gradient(135deg,#0E5A63,#22C7D6);color:#fff"><span data-ic="doc" data-icc=""></span></div><div><b style="font-size:15px">PAN VC</b><div class="muted" style="font-size:13px">Income Tax Dept · Issued 18 Feb 2024</div></div></div>
+              <hr class="div">
+              <div class="between"><span class="badge green">Verified</span><span class="muted" style="font-size:12px">W3C VC 1.1</span></div>
+              <div class="mt3" style="font-size:13px;color:var(--ink-2)">Contains: Name, PAN Number, Status</div>
+              <div class="row mt4"><button class="btn" style="font-size:13px">Present</button><button class="btn outline" style="font-size:13px">Share</button></div>
+            </div>
+            <div class="card">
+              <div class="row"><div class="lico" style="background:linear-gradient(135deg,#9A1668,#FF7AC6);color:#fff"><span data-ic="car" data-icc=""></span></div><div><b style="font-size:15px">Driving License VC</b><div class="muted" style="font-size:13px">Transport Dept · Issued 05 Mar 2024</div></div></div>
+              <hr class="div">
+              <div class="between"><span class="badge green">Verified</span><span class="muted" style="font-size:12px">W3C VC 1.1</span></div>
+              <div class="mt3" style="font-size:13px;color:var(--ink-2)">Contains: Name, DL Number, Class, Validity</div>
+              <div class="row mt4"><button class="btn" style="font-size:13px">Present</button><button class="btn outline" style="font-size:13px">Share</button></div>
+            </div>
+          </div>
+        </div>
+        <aside>
+          <div class="card"><div class="eyebrow">What are VCs?</div><div class="mt3" style="font-size:13.5px;line-height:1.7;color:var(--ink-2)"><p style="margin:0 0 12px">Verifiable Credentials are tamper-proof, cryptographically signed digital documents that you own and control.</p><p style="margin:0">Present them anywhere — no need to contact the issuer for verification.</p></div></div>
+          <div class="card mt4"><div class="eyebrow">Recent Activity</div><div class="mt3" style="font-size:13px;color:var(--ink-2);line-height:1.8"><div class="lrow"><div class="lico" style="width:28px;height:28px"><span data-ic="shield" data-icc="ic-sm"></span></div><div><b style="font-size:13px;color:var(--ink)">Aadhaar VC presented</b><div class="muted" style="font-size:12px">To ICICI Bank · 2 days ago</div></div></div><div class="lrow"><div class="lico" style="width:28px;height:28px"><span data-ic="shield" data-icc="ic-sm"></span></div><div><b style="font-size:13px;color:var(--ink)">PAN VC created</b><div class="muted" style="font-size:12px">18 Feb 2024</div></div></div><div class="lrow"><div class="lico" style="width:28px;height:28px"><span data-ic="shield" data-icc="ic-sm"></span></div><div><b style="font-size:13px;color:var(--ink)">DL VC shared</b><div class="muted" style="font-size:12px">To Zoomcar · 05 Mar 2024</div></div></div></div></div>
+          <div class="card mt4" style="background:var(--dl-primary-50);border-color:var(--dl-primary-100)"><div class="row"><span data-ic="shield" data-icc="" style="color:var(--dl-primary)"></span><div><b style="font-size:14px;color:var(--dl-primary)">W3C Standard</b><div class="muted mt2" style="font-size:13px">All credentials follow the W3C Verifiable Credentials 1.1 specification for maximum interoperability.</div></div></div></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>
