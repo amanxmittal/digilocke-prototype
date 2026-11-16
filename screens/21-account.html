@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><div class="title grow">Account</div><button class="iconbtn" onclick="nav('22-settings.html')" aria-label="Settings"><span data-ic="settings"></span></button></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="card row"><div style="width:56px;height:56px;border-radius:18px;background:var(--dl-grad);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px">DN</div><div class="grow"><div class="h3">Debabrata Nayak</div><div class="sm muted">@debabrata · +91 98765 43210</div></div><span class="badge green"><span data-ic="check" data-icc="ic-sm"></span>KYC</span></div>
+
+        <div class="eyebrow mt6">Identity &amp; security</div>
+        <div class="card mt3">
+          <div class="lrow" onclick="toast('Update profile','user')"><div class="lico"><span data-ic="user"></span></div><div class="grow bold sm">Profile &amp; photo</div><span data-ic="chev" data-icc="ic-sm"></span></div>
+          <div class="lrow" onclick="toast('Manage sessions','phone')"><div class="lico"><span data-ic="phone"></span></div><div class="grow bold sm">Where you're signed in</div><span class="badge indigo">3</span></div>
+          <div class="lrow" onclick="nav('16-consent.html')"><div class="lico"><span data-ic="lock"></span></div><div class="grow bold sm">Consent &amp; connected apps</div><span data-ic="chev" data-icc="ic-sm"></span></div>
+          <div class="lrow" style="border-bottom:0" onclick="nav('17-nominee.html')"><div class="lico"><span data-ic="family"></span></div><div class="grow bold sm">Nominee &amp; legacy</div><span data-ic="chev" data-icc="ic-sm"></span></div>
+        </div>
+
+        <div class="eyebrow mt6">Accounts on this device</div>
+        <div class="card mt3">
+          <div class="lrow" style="border-bottom:0" onclick="nav('75-switch-account.html')"><div class="lico"><span data-ic="people"></span></div><div class="grow bold sm">Switch account</div><span class="sm muted">2 profiles</span></div>
+        </div>
+
+        <div class="eyebrow mt6">Two-factor &amp; sign-in</div>
+        <div class="card mt3">
+          <div class="lrow" style="border-bottom:0" onclick="nav('79-authenticator.html')"><div class="lico"><span data-ic="key"></span></div><div class="grow bold sm">DigiLocker Authenticator</div><span data-ic="chev" data-icc="ic-sm"></span></div>
+        </div>
+
+        <div class="eyebrow mt6">Preferences</div>
+        <div class="card mt3">
+          <div class="lrow" onclick="nav('22-settings.html')"><div class="lico"><span data-ic="settings"></span></div><div class="grow bold sm">Settings</div><span data-ic="chev" data-icc="ic-sm"></span></div>
+          <div class="lrow" style="border-bottom:0" onclick="toast('22 languages','lang')"><div class="lico"><span data-ic="lang"></span></div><div class="grow bold sm">Language</div><span class="sm muted">English</span></div>
+        </div>
+
+        <button class="btn ghost block mt6" style="color:var(--danger)" onclick="confirmDo('Sign out?','You will need MPIN or OTP to sign in again.','Sign out',true,'Signed out','logout','03-login.html')"><span data-ic="logout" data-icc="ic-sm"></span> Sign out</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+    <nav class="tabbar"><a class="tab" href="06-home.html"><span data-ic="home"></span><span>Home</span></a><a class="tab" href="07-wallet.html"><span data-ic="cards"></span><span>Wallet</span></a><button class="tab center" onclick="nav('10-verify.html')" aria-label="Show / Verify"><span class="fab"><span data-ic="scan"></span></span></button><a class="tab" href="13-activity.html"><span data-ic="activity"></span><span>Activity</span></a><a class="tab on" href="21-account.html"><span data-ic="user"></span><span>Account</span></a></nav>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

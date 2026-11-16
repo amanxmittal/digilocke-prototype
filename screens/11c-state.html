@@ -1,0 +1,161 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Browse by State</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+/* State header when a state is selected */
+.state-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--hair);background:var(--surface-2)}
+.state-header .state-name{font-size:var(--t-h3);font-weight:700;color:var(--ink)}
+.state-header .change-btn{font-size:var(--t-sm);font-weight:700;color:var(--dl-primary);background:none;border:none;cursor:pointer;padding:8px 12px;border-radius:var(--pill);min-height:36px}
+.state-header .change-btn:hover{background:var(--dl-primary-50)}
+.state-header .change-btn:focus-visible{outline:0;box-shadow:var(--focus)}
+</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar">
+        <button class="iconbtn" onclick="goBack('11-fetch.html')" aria-label="Back"><span data-ic="back"></span></button>
+        <div class="title" id="appbarTitle">Browse by State</div>
+      </div>
+      <div class="pad" style="padding-top:10px">
+
+        <!-- Content area: state list or issuer list -->
+        <div class="card" style="padding:0" id="contentArea"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+/* ---- All 36 States/UTs (alphabetical, from state_district.json) ---- */
+var STATES = [
+  {code:"35", name:"Andaman and Nicobar Islands"},
+  {code:"28", name:"Andhra Pradesh"},
+  {code:"12", name:"Arunachal Pradesh"},
+  {code:"18", name:"Assam"},
+  {code:"10", name:"Bihar"},
+  {code:"04", name:"Chandigarh"},
+  {code:"22", name:"Chhattisgarh"},
+  {code:"26", name:"Dadra and Nagar Haveli and Daman and Diu"},
+  {code:"07", name:"Delhi"},
+  {code:"30", name:"Goa"},
+  {code:"24", name:"Gujarat"},
+  {code:"06", name:"Haryana"},
+  {code:"02", name:"Himachal Pradesh"},
+  {code:"01", name:"Jammu and Kashmir"},
+  {code:"20", name:"Jharkhand"},
+  {code:"29", name:"Karnataka"},
+  {code:"32", name:"Kerala"},
+  {code:"37", name:"Ladakh"},
+  {code:"31", name:"Lakshadweep"},
+  {code:"23", name:"Madhya Pradesh"},
+  {code:"27", name:"Maharashtra"},
+  {code:"14", name:"Manipur"},
+  {code:"17", name:"Meghalaya"},
+  {code:"15", name:"Mizoram"},
+  {code:"13", name:"Nagaland"},
+  {code:"21", name:"Odisha"},
+  {code:"34", name:"Puducherry"},
+  {code:"03", name:"Punjab"},
+  {code:"08", name:"Rajasthan"},
+  {code:"11", name:"Sikkim"},
+  {code:"33", name:"Tamil Nadu"},
+  {code:"36", name:"Telangana"},
+  {code:"16", name:"Tripura"},
+  {code:"09", name:"Uttar Pradesh"},
+  {code:"05", name:"Uttarakhand"},
+  {code:"19", name:"West Bengal"}
+];
+
+/* ---- Issuer templates (4-5 per state, dynamically generated) ---- */
+function getIssuersForState(stateName){
+  var issuers = [
+    {id:"DOM", name:"Domicile Certificate", org:stateName+" Revenue Department", icon:"doc"},
+    {id:"CASTE", name:"Caste Certificate", org:stateName+" Revenue Department", icon:"doc"},
+    {id:"INCOME", name:"Income Certificate", org:stateName+" Revenue Department", icon:"doc"},
+    {id:"BIRTH", name:"Birth Certificate", org:stateName+" Municipal Corporation", icon:"doc"},
+    {id:"DL", name:"Driving Licence", org:stateName+" Transport Department", icon:"car"}
+  ];
+  return issuers;
+}
+
+/* ---- Parse hash parameters ---- */
+function getHashParams(){
+  var hash = location.hash.replace(/^#/,'');
+  var params = {};
+  hash.split('&').forEach(function(pair){
+    var parts = pair.split('=');
+    if(parts.length===2) params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+  });
+  return params;
+}
+
+/* ---- Render the state list ---- */
+function renderStateList(){
+  var area = document.getElementById('contentArea');
+  document.getElementById('appbarTitle').textContent = 'Browse by State';
+
+  area.innerHTML = STATES.map(function(s, i){
+    var isLast = i === STATES.length - 1;
+    return '<div class="lrow" style="padding:14px 16px;'+(isLast?'border-bottom:0':'border-bottom:1px solid var(--hair)')+'" onclick="selectState(\''+s.code+'\',\''+s.name.replace(/'/g,"\\'")+'\')" role="button" tabindex="0" aria-label="'+s.name+'">'
+      + '<div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)">'+svg('map')+'</div>'
+      + '<div class="grow"><div class="bold sm">'+s.name+'</div></div>'
+      + svg('chev','ic-sm')+'</div>';
+  }).join('');
+}
+
+/* ---- Render issuer list for a selected state ---- */
+function selectState(code, name){
+  var area = document.getElementById('contentArea');
+  var issuers = getIssuersForState(name);
+
+  /* Update appbar title to state name */
+  document.getElementById('appbarTitle').textContent = name;
+
+  /* Build header + issuer rows */
+  var headerHtml = '<div class="state-header">'
+    + '<div class="state-name">'+name+'</div>'
+    + '<button class="change-btn" onclick="renderStateList()" aria-label="Change state">Change</button>'
+    + '</div>';
+
+  var rowsHtml = issuers.map(function(d, i){
+    var isLast = i === issuers.length - 1;
+    return '<div class="lrow" style="padding:14px 16px;'+(isLast?'border-bottom:0':'border-bottom:1px solid var(--hair)')+'" onclick="nav(\'11d-confirm.html#doc='+d.id+'_'+code+'&name='+encodeURIComponent(d.name)+'&issuer='+encodeURIComponent(d.org)+'&icon='+d.icon+'\')" role="button" tabindex="0" aria-label="'+d.name+' from '+d.org+'">'
+      + '<div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)">'+svg(d.icon)+'</div>'
+      + '<div class="grow"><div class="bold sm">'+d.name+'</div><div class="sm muted">'+d.org+'</div></div>'
+      + svg('chev','ic-sm')+'</div>';
+  }).join('');
+
+  area.innerHTML = headerHtml + rowsHtml;
+
+  /* Scroll to top */
+  var view = document.querySelector('.view');
+  if(view) view.scrollTop = 0;
+}
+
+/* ---- Initialize ---- */
+(function(){
+  var params = getHashParams();
+  if(params.state){
+    /* If a state code was passed in the hash, pre-select it */
+    var match = STATES.find(function(s){ return s.code === params.state; });
+    if(match){
+      selectState(match.code, match.name);
+      return;
+    }
+  }
+  renderStateList();
+})();
+</script>
+</body></html>

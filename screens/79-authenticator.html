@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Authenticator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.otpcard{border-radius:var(--r-xl);padding:22px;background:var(--dl-grad);color:#fff;box-shadow:var(--e-brand);position:relative;overflow:hidden;text-align:center;cursor:pointer}
+.otpcard .ribbon{position:absolute;right:-30px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.12)}
+.ringwrap{position:relative;width:64px;height:64px;margin:0 auto}
+.ringwrap svg{transform:rotate(-90deg)}
+.ringwrap .rt{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:800}
+.faqrow{border-bottom:1px solid var(--hair);padding:13px 0}
+.faqrow:last-child{border-bottom:0}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('06-home.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">DigiLocker Authenticator</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="body ink2">Use this 6-digit code as a second factor when signing in to DigiLocker on the web or another device.</div>
+
+        <div class="otpcard mt5" id="otpCard" onclick="copyOtp()">
+          <div class="ribbon"></div>
+          <div class="cap" style="opacity:.85;letter-spacing:1px;font-weight:700;position:relative">YOUR CODE</div>
+          <div class="totpcode mt2" id="otpText" style="color:#fff;font-size:34px;position:relative">••• •••</div>
+          <div class="row mt4" style="justify-content:center;gap:10px;position:relative">
+            <div class="ringwrap">
+              <svg width="64" height="64" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,.25)" stroke-width="5" fill="none"/>
+                <circle id="ringProgress" cx="32" cy="32" r="28" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="0"/>
+              </svg>
+              <div class="rt" id="ringText" style="color:#fff">60</div>
+            </div>
+          </div>
+          <div class="sm mt3" style="opacity:.85;position:relative">Tap to copy</div>
+        </div>
+
+        <div class="card mt5" style="padding:10px 14px">
+          <div class="faqrow"><b class="sm">What is this code for?</b><div class="sm muted mt1">A time-based one-time passcode (TOTP), like Google Authenticator, that proves this device belongs to your DigiLocker account.</div></div>
+          <div class="faqrow"><b class="sm">Why does it change every 60 seconds?</b><div class="sm muted mt1">Each code is valid for one time window only, so a leaked code can't be reused later.</div></div>
+          <div class="faqrow" style="border-bottom:0"><b class="sm">Lost your device?</b><div class="sm muted mt1">Sign in with MPIN/OTP on a new device and this code will regenerate using your account's secret key.</div></div>
+        </div>
+
+        <button class="btn ghost block mt5" onclick="nav('23-scan.html')"><span data-ic="scan" data-icc="ic-sm"></span> Scan a "Sign in on web" QR instead</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+// Mirrors v2's AuthenticatorActivity: fetch/cache a secret key once, derive a 6-digit TOTP,
+// and run a 60s countdown ring that regenerates the code on expiry (TOTPGenerator + otpInterval=60).
+var otpInterval=60;
+function pseudoTotp(){ // demo-only stand-in for TOTPGenerator().generateTOTP(secret,6,60)
+  var n=Math.floor(100000+Math.random()*900000).toString();
+  return n.slice(0,3)+' '+n.slice(3);
+}
+var ring=document.getElementById('ringProgress');
+var circumference=176; // 2*PI*28, rounded
+function tick(remaining){
+  document.getElementById('ringText').textContent=remaining;
+  ring.setAttribute('stroke-dashoffset', circumference*(1-remaining/otpInterval));
+}
+var remaining=otpInterval;
+function startCycle(){
+  document.getElementById('otpText').textContent=pseudoTotp();
+  remaining=otpInterval;
+  tick(remaining);
+  clearInterval(window._totpIv);
+  window._totpIv=setInterval(function(){
+    remaining--;
+    if(remaining<=0){ startCycle(); return; }
+    tick(remaining);
+  },1000);
+}
+function copyOtp(){
+  var code=document.getElementById('otpText').textContent;
+  toast('Copied '+code+' to clipboard','check');
+}
+startCycle();
+</script>
+</body></html>

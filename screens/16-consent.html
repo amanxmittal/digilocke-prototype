@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Consent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('06-home.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Consent manager</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="subjbanner"><span data-ic="shield" data-icc="ic-sm"></span><span>Every app you've allowed access to your documents. Revoke anytime.</span></div>
+        <div class="eyebrow mt5">Active</div>
+        <div class="card mt3">
+          <div class="lrow"><div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)"><span data-ic="building"></span></div><div class="grow"><div class="bold sm">HDFC Bank</div><div class="sm muted">Aadhaar, PAN · expires in 22 days</div></div><button class="btn ghost sm" onclick="confirmDo('Revoke access?','HDFC Bank will no longer access these documents.','Revoke',true,'Access revoked','lock')">Revoke</button></div>
+          <div class="lrow" style="border-bottom:0"><div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)"><span data-ic="grad"></span></div><div class="grow"><div class="bold sm">University Portal</div><div class="sm muted">Marksheet · expires in 3 days</div></div><button class="btn ghost sm" onclick="confirmDo('Revoke access?','University Portal will lose access.','Revoke',true,'Access revoked','lock')">Revoke</button></div>
+        </div>
+        <div class="eyebrow mt6">Expired</div>
+        <div class="card mt3">
+          <div class="lrow" style="border-bottom:0;opacity:.7"><div class="lico"><span data-ic="car"></span></div><div class="grow"><div class="bold sm">Insurance Co.</div><div class="sm muted">RC · expired 10 Jun</div></div><span class="badge">Expired</span></div>
+        </div>
+        <div class="alert info mt6"><span data-ic="doc" data-icc="ic-sm"></span><span>Each grant has a consent receipt — who, what, purpose, and expiry — you can download for your records.</span></div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

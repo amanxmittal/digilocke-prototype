@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar onbrand"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view" style="background:#0a0c14">
+      <div class="appbar" style="background:transparent;border:0"><button class="iconbtn" onclick="goBack('06-home.html')" aria-label="Back" style="background:rgba(255,255,255,.12);border:0;color:#fff"><span data-ic="back"></span></button><div class="title" style="color:#fff">Scan</div></div>
+      <div class="pad" style="padding-top:6px">
+        <div class="scanbox">
+          <div class="scanframe"></div>
+          <div class="scanline" style="left:44px;right:44px;top:44px"></div>
+          <div style="position:absolute;bottom:24px;left:0;right:0;text-align:center;color:#fff;font-weight:600;font-size:13px">Point at a QR to verify or link</div>
+        </div>
+        <div class="center mt5" style="color:#fff"><div class="h3" style="color:#fff">Verify a credential</div><div class="sm" style="opacity:.8">Scan someone's Show-ID QR, or a "Sign in on web" QR to approve it.</div></div>
+        <button class="btn block mt5" onclick="toast('Verified: Authentic ✓','check');setTimeout(function(){nav('06-home.html')},900)">Simulate credential scan</button>
+        <button class="btn ghost block mt3" style="background:rgba(255,255,255,.12);color:#fff;border:0" onclick="nav('80-qr-login-approval.html')">Simulate "Sign in on web" scan</button>
+        <button class="btn ghost block mt3" style="background:rgba(255,255,255,.12);color:#fff;border:0" onclick="toast('Torch','bolt')">Turn on torch</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

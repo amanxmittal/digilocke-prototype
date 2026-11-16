@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · OTP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('03-login.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Verify OTP</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="body ink2">Enter the 6-digit code sent to <b style="color:var(--ink)" id="dest">+91 98765 43210</b></div>
+        <div class="otp mt6" id="otp"><div class="fill">2</div><div class="fill">4</div><div class="fill">9</div><div></div><div></div><div></div></div>
+        <div class="between mt5"><span class="sm muted">Resend code in <b class="tnum">00:24</b></span><a class="link sm" onclick="toast('OTP resent','check')">Resend</a></div>
+
+        <div class="keypad mt8">
+          <button onclick="press('1')">1</button><button onclick="press('2')">2</button><button onclick="press('3')">3</button>
+          <button onclick="press('4')">4</button><button onclick="press('5')">5</button><button onclick="press('6')">6</button>
+          <button onclick="press('7')">7</button><button onclick="press('8')">8</button><button onclick="press('9')">9</button>
+          <button style="background:transparent;border:0;box-shadow:none"></button>
+          <button onclick="press('0')">0</button>
+          <button onclick="press('<')" aria-label="Delete"><span data-ic="back"></span></button>
+        </div>
+        <button class="btn lg block mt6" onclick="done()">Verify &amp; continue</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function nextTarget(){var m=location.hash.match(/next=([^&]+)/);return m?decodeURIComponent(m[1]):'06-home.html';}
+function done(){nav(nextTarget());}
+var boxes=[].slice.call(document.querySelectorAll('#otp div'));var i=3;
+function press(k){if(k==='<'){if(i>0){i--;boxes[i].textContent='';boxes[i].classList.remove('fill');}return;}
+  if(i<6){boxes[i].textContent=k;boxes[i].classList.add('fill');i++; if(i===6) setTimeout(done,380);}}
+</script>
+</body></html>

@@ -1,0 +1,210 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Fetch document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+/* Form fields */
+.field{width:100%;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:14px 16px;font-size:15px;color:var(--ink);font-family:inherit}
+.field:focus{outline:0;border-color:var(--dl-primary);box-shadow:var(--focus)}
+.field-label{font-size:var(--t-sm);font-weight:600;color:var(--ink-2);margin-bottom:6px;display:block}
+.field-group{margin-top:var(--s4)}
+/* Steps */
+.step{display:flex;gap:12px;align-items:flex-start;padding:12px 0}
+.step .n{width:26px;height:26px;border-radius:50%;background:var(--g200);color:var(--ink-3);display:grid;place-items:center;font-size:12px;font-weight:800;flex:0 0 auto;transition:background .3s,color .3s}
+.step.done .n{background:var(--success-50);color:var(--green)}
+.step.active .n{background:var(--dl-primary);color:#fff}
+.step .stxt{font-size:var(--t-sm);color:var(--ink-3);line-height:1.4;padding-top:3px}
+.step.active .stxt{color:var(--ink);font-weight:600}
+.step.done .stxt{color:var(--green);font-weight:600}
+/* Orb animation */
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.05)}}
+.orb{width:72px;height:72px;border-radius:50%;background:var(--dl-grad);margin:0 auto;box-shadow:var(--glow);animation:orbFloat 1.6s ease-in-out infinite}
+/* Checkdraw animation */
+@keyframes checkdraw{0%{stroke-dashoffset:40}100%{stroke-dashoffset:0}}
+.success-circle{width:80px;height:80px;border-radius:50%;background:var(--success-50);display:grid;place-items:center;margin:0 auto}
+.success-circle svg{width:36px;height:36px;stroke:var(--green);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.success-circle svg path{stroke-dasharray:40;stroke-dashoffset:40;animation:checkdraw .5s ease forwards .2s}
+/* Section visibility */
+.sec{display:none}
+.sec.show{display:block}
+/* Header card */
+.doc-header{display:flex;align-items:center;gap:14px;padding:16px;background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-lg);box-shadow:var(--e1)}
+.doc-header .dh-ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--dl-primary-50);color:var(--dl-primary);flex:0 0 auto}
+/* Fallback */
+.fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 20px;gap:16px}
+</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('11-fetch.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Fetch document</div></div>
+      <div class="pad" style="padding-top:14px" id="mainContent">
+
+        <!-- Fallback: no params -->
+        <div class="fallback sec" id="fallback">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--g200);display:grid;place-items:center"><span data-ic="doc"></span></div>
+          <div class="h2">Select a document first</div>
+          <div class="sm muted">Go back and choose a document to fetch from the catalogue.</div>
+          <button class="btn outline mt4" onclick="goBack('11-fetch.html')" aria-label="Go back to browse">Go back to browse</button>
+        </div>
+
+        <!-- Section 1: Confirm Details -->
+        <div class="sec" id="s1">
+          <div class="doc-header" id="docHeader">
+            <div class="dh-ic"><span data-ic="doc" id="headerIcon"></span></div>
+            <div>
+              <div class="bold" id="docName">Document</div>
+              <div class="sm muted" id="docIssuer">Issuer</div>
+            </div>
+          </div>
+
+          <div id="formFields"></div>
+
+          <div class="alert info mt5" role="alert">
+            <span data-ic="shield" data-icc="ic-sm" style="flex:0 0 auto;margin-top:1px"></span>
+            <span>By fetching, you authorise the issuer to share this document with your DigiLocker account.</span>
+          </div>
+
+          <button class="btn block mt5 lg" id="fetchBtn" aria-label="Fetch document">Fetch document</button>
+        </div>
+
+        <!-- Section 2: Fetch Progress -->
+        <div class="sec" id="s2" style="padding-top:32px">
+          <div class="orb"></div>
+          <div class="h2 center mt6">Fetching your document…</div>
+          <div class="sm muted center mt2">This usually takes a few seconds</div>
+
+          <div class="card mt6" style="padding:4px 16px">
+            <div class="step done" id="step1">
+              <div class="n">1</div>
+              <div class="stxt">Request raised</div>
+            </div>
+            <div class="step active" id="step2">
+              <div class="n">2</div>
+              <div class="stxt">Waiting for issuer</div>
+            </div>
+            <div class="step" id="step3">
+              <div class="n">3</div>
+              <div class="stxt">Document received</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Success -->
+        <div class="sec" id="s3" style="padding-top:48px">
+          <div class="success-circle">
+            <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>
+          </div>
+          <div class="h1 center mt5">Added to your wallet</div>
+          <div class="sm muted center mt2"><span id="successDocName">Document</span> · Verified by issuer</div>
+
+          <button class="btn block mt8 lg" onclick="nav('08-document-detail.html')" aria-label="View document">View document</button>
+          <button class="btn ghost block mt3" onclick="nav('07-wallet.html')" aria-label="Back to wallet">Back to wallet</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+/* ---- Document parameter simulation ---- */
+var DOC_PARAMS = {
+  "DL001": [{key:"dlno",label:"DL Number",example:"MH02 2019 0009920"},{key:"dob",label:"Date of birth",example:"DD/MM/YYYY"}],
+  "ED001": [{key:"rollno",label:"Roll Number",example:"12345678"},{key:"year",label:"Year of passing",example:"2020"}],
+  "ED002": [{key:"rollno",label:"Roll Number",example:"12345678"},{key:"year",label:"Year of passing",example:"2020"}],
+  "FIN001": [{key:"pan",label:"PAN Number",example:"ABCDE1234F"},{key:"name",label:"Name as on PAN",example:"Full name"}],
+  "VEH001": [{key:"regno",label:"Registration Number",example:"MH02AB1234"},{key:"chassis",label:"Chassis Number",example:"Last 5 digits"}],
+  "HLT001": [{key:"beneficiary",label:"Beneficiary ID",example:"1234567890123"},{key:"dob",label:"Date of birth",example:"DD/MM/YYYY"}],
+  "ID001": [{key:"aadhaar",label:"Aadhaar Number",example:"XXXX XXXX XXXX"},{key:"name",label:"Full Name",example:"As per Aadhaar"}],
+  "SKL001": [{key:"certno",label:"Certificate Number",example:"NSDC-2023-XXXXX"},{key:"name",label:"Full Name",example:"As per certificate"}],
+  "_default": [{key:"id",label:"Document ID",example:"Enter your ID"},{key:"name",label:"Full Name",example:"As per records"}]
+};
+
+/* ---- Parse hash parameters ---- */
+function parseHash(){
+  var h = location.hash.replace(/^#/,'');
+  if(!h) return null;
+  var params = {};
+  h.split('&').forEach(function(pair){
+    var kv = pair.split('=');
+    if(kv.length===2) params[kv[0]] = decodeURIComponent(kv[1].replace(/\+/g,' '));
+  });
+  return params;
+}
+
+/* ---- Show a section ---- */
+function showSec(id){
+  document.querySelectorAll('.sec').forEach(function(el){el.classList.remove('show');});
+  document.getElementById(id).classList.add('show');
+}
+
+/* ---- Initialize ---- */
+(function(){
+  var p = parseHash();
+
+  // Fallback if no params
+  if(!p || !p.doc || !p.name){
+    showSec('fallback');
+    return;
+  }
+
+  // Populate header
+  var iconEl = document.getElementById('headerIcon');
+  if(p.icon && iconEl){ iconEl.innerHTML = svg(p.icon); }
+  document.getElementById('docName').textContent = p.name;
+  document.getElementById('docIssuer').textContent = p.issuer || 'Issuer';
+  document.getElementById('successDocName').textContent = p.name;
+
+  // Render form fields
+  var fields = DOC_PARAMS[p.doc] || DOC_PARAMS['_default'];
+  var formHtml = '';
+  fields.forEach(function(f){
+    formHtml += '<div class="field-group">'
+      + '<label class="field-label" for="f_'+f.key+'">'+f.label+'</label>'
+      + '<input class="field" type="text" id="f_'+f.key+'" placeholder="'+f.example+'" autocomplete="off">'
+      + '</div>';
+  });
+  document.getElementById('formFields').innerHTML = formHtml;
+
+  // Show confirm section
+  showSec('s1');
+})();
+
+/* ---- Fetch button handler ---- */
+document.getElementById('fetchBtn').addEventListener('click', function(){
+  showSec('s2');
+
+  // Step 1 already done, step 2 active at start
+  var step2 = document.getElementById('step2');
+  var step3 = document.getElementById('step3');
+
+  // After 1600ms: step 2 done, step 3 active
+  setTimeout(function(){
+    step2.classList.remove('active');
+    step2.classList.add('done');
+    step3.classList.add('active');
+  }, 1600);
+
+  // After 2600ms: step 3 done
+  setTimeout(function(){
+    step3.classList.remove('active');
+    step3.classList.add('done');
+  }, 2600);
+
+  // After 3100ms: show success
+  setTimeout(function(){
+    showSec('s3');
+  }, 3100);
+});
+</script>
+</body></html>

@@ -1,0 +1,422 @@
+/* ============================================================
+   DigiLocker · Reimagined — Desktop Layout System
+   Loaded conditionally via: <link rel="stylesheet" href="../assets/desktop.css" media="(min-width: 840px)">
+   All rules in this file apply at 840dp+ viewports.
+   ============================================================ */
+
+/* === Custom Properties === */
+:root {
+  --rail-width: 72px;
+}
+
+/* === Navigation Rail — Base === */
+.nav-rail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: var(--rail-width);
+  z-index: 100;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--s8);
+  box-shadow: var(--e1);
+  overflow: hidden;
+}
+
+/* === Navigation Rail — Collapsed (840–1024px default) === */
+.nav-rail--collapsed {
+  width: 72px;
+}
+
+.nav-rail--collapsed .nav-rail__label {
+  display: none;
+}
+
+/* === Navigation Rail — Expanded (>1024px) === */
+.nav-rail--expanded {
+  width: 256px;
+  align-items: flex-start;
+  padding-left: var(--s4);
+  padding-right: var(--s4);
+}
+
+.nav-rail--expanded .nav-rail__label {
+  display: inline;
+}
+
+/* === Content Offset (only when nav-rail is present) === */
+.nav-rail ~ .screen,
+.nav-rail + .screen {
+  margin-left: var(--rail-width);
+}
+
+/* === Hide Mobile Bottom Navigation === */
+.tabbar {
+  display: none;
+}
+
+/* === Content Width Constraint === */
+.content-area {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* === Form Centering (auth screens) === */
+.auth-form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* === Pre-login Header (no nav-rail, logo only) === */
+.prelogin-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--s6);
+  background: var(--surface);
+  box-shadow: var(--e1);
+}
+
+/* === Transitions — Nav Rail Width === */
+@media (prefers-reduced-motion: no-preference) {
+  .nav-rail {
+    transition: width 0.28s var(--ease, ease);
+  }
+
+  .nav-rail ~ .screen,
+  .nav-rail + .screen {
+    transition: margin-left 0.28s var(--ease, ease);
+  }
+}
+
+/* === Suppress transitions for reduced-motion preference === */
+@media (prefers-reduced-motion: reduce) {
+  .nav-rail,
+  .nav-rail ~ .screen {
+    transition: none;
+  }
+}
+
+/* === Expanded Nav Rail at 1024px+ === */
+@media (min-width: 1024px) {
+  :root {
+    --rail-width: 256px;
+  }
+
+  .nav-rail {
+    width: 256px;
+    align-items: flex-start;
+    padding-left: var(--s4);
+    padding-right: var(--s4);
+  }
+
+  .nav-rail .nav-rail__label {
+    display: inline;
+  }
+}
+
+/* === Multi-Column Grid Layouts === */
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--s4, 16px);
+}
+
+.drive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--s4, 16px);
+}
+
+.consent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--s4, 16px);
+}
+
+.notifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--s4, 16px);
+}
+
+.home-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--s4, 16px);
+}
+
+
+/* === Navigation Rail — Item Styles === */
+.nav-rail__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--s3, 12px) var(--s2, 8px);
+  margin-bottom: var(--s1, 4px);
+  border-radius: var(--r3, 12px);
+  text-decoration: none;
+  color: var(--ink2, #5f6368);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-rail__item:hover {
+  background: var(--hover, rgba(0, 0, 0, 0.06));
+}
+
+.nav-rail__item:focus-visible {
+  outline: 2px solid var(--accent, #1a73e8);
+  outline-offset: 2px;
+}
+
+/* Active nav item */
+.nav-rail__item--active {
+  color: var(--accent, #1a73e8);
+  background: var(--active-bg, rgba(26, 115, 232, 0.1));
+}
+
+/* Active indicator — vertical 3px bar on left */
+.nav-rail__indicator {
+  display: none;
+}
+
+.nav-rail__item--active .nav-rail__indicator {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  border-radius: 0 3px 3px 0;
+  background: var(--accent, #1a73e8);
+}
+
+/* Icon inside nav item */
+.nav-rail__icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+/* Label inside nav item */
+.nav-rail__label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Collapsed state (840–1024px): hide labels */
+@media (max-width: 1023px) {
+  .nav-rail__label {
+    display: none;
+  }
+
+  .nav-rail__item {
+    padding: var(--s3, 12px) var(--s2, 8px);
+  }
+}
+
+/* Expanded state (>1024px): show labels, row layout */
+@media (min-width: 1024px) {
+  .nav-rail__item {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: var(--s3, 12px) var(--s4, 16px);
+    gap: var(--s3, 12px);
+  }
+
+  .nav-rail__icon {
+    margin-bottom: 0;
+  }
+
+  .nav-rail__label {
+    display: inline;
+    font-size: 0.875rem;
+  }
+}
+
+
+/* === Tooltip on Hover — Collapsed State (840–1024px) === */
+@media (max-width: 1023px) {
+  .nav-rail__item {
+    position: relative;
+  }
+
+  .nav-rail__item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--ink, #202124);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 8px;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.18s ease 0.3s;
+  }
+
+  .nav-rail__item:hover::after {
+    opacity: 1;
+  }
+
+  /* Suppress tooltip transition for reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .nav-rail__item::after {
+      transition: none;
+    }
+  }
+}
+
+/* Hide tooltip in expanded state (>1024px) — labels are already visible */
+@media (min-width: 1024px) {
+  .nav-rail__item::after {
+    display: none;
+  }
+}
+
+
+/* === Review Board Desktop Layout === */
+.rb-sidebar {
+  display: none;
+}
+
+@media (min-width: 840px) {
+  .rb-sidebar {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px 12px 24px;
+    background: var(--surface, #fff);
+    border-right: 1px solid var(--hair, #e5e5e5);
+    z-index: 40;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    transition: transform .25s ease;
+  }
+
+  .rb-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rb-sidebar__toggle {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--hair, #e5e5e5);
+    border-radius: 8px;
+    background: var(--surface, #fff);
+    color: var(--ink-3, #888);
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 12px;
+  }
+  .rb-sidebar__toggle:hover {
+    background: var(--hover, rgba(0,0,0,.06));
+    color: var(--ink, #222);
+  }
+
+  .rb-sidebar__show {
+    display: block;
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,.2);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 70;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .rb-sidebar__show:hover {
+    background: rgba(255,255,255,.35);
+  }
+
+  .rb-sidebar__title {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--ink-3, #888);
+    margin: 0 0 10px 6px;
+  }
+
+  .rb-sidebar a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-2, #444);
+    text-decoration: none;
+    border-radius: 6px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rb-sidebar a:hover {
+    background: var(--hover, rgba(0,0,0,.06));
+    color: var(--primary, #1a73e8);
+  }
+
+  .rb-sidebar a:focus-visible {
+    outline: 2px solid var(--primary, #1a73e8);
+    outline-offset: 2px;
+  }
+
+  /* Offset header and content when sidebar is present */
+  body.rb-desktop .hd {
+    margin-left: 180px;
+    transition: margin-left .25s ease;
+  }
+
+  body.rb-desktop .wrap {
+    margin-left: 180px;
+    transition: margin-left .25s ease;
+  }
+
+  /* When sidebar hidden, header goes full width */
+  body:not(.rb-desktop) .hd {
+    margin-left: 0;
+    transition: margin-left .25s ease;
+  }
+
+  body:not(.rb-desktop) .wrap {
+    margin-left: 0;
+    transition: margin-left .25s ease;
+  }
+
+  /* Minimum 3-column grid for device frames */
+  body.rb-desktop .grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}

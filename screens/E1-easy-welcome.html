@@ -1,0 +1,43 @@
+<!doctype html><html lang="hi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Easy · Welcome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen easy">
+    <div class="statusbar "><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+<div class="epad" data-greet="नमस्ते! डिजीलॉकर में आपका स्वागत है।" style="display:flex;flex-direction:column;min-height:100%;padding-top:60px">
+  <div style="width:84px;height:84px;border-radius:26px;background:var(--dl-grad);display:grid;place-items:center;box-shadow:0 14px 30px rgba(62,13,245,.4)">
+    <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.6" fill="#fff" stroke="none"/></svg></div>
+  <div class="eq mt5">नमस्ते 🙏<span class="en">Welcome to DigiLocker</span></div>
+  <button class="listenbtn mt4" onclick="speak('नमस्ते! डिजीलॉकर आपके सभी ज़रूरी कागज़ — आधार, पैन, लाइसेंस — सुरक्षित रखता है। मैं हर कदम पर आपकी मदद करूँगी।')"><span data-ic="speaker" data-icc=""></span><span>यहाँ दबाकर सुनिए · Tap to listen</span></button>
+  <div class="eq mt6">अपनी भाषा चुनें<span class="en">Choose your language</span></div>
+  <div class="etiles mt4">
+    <button class="etile" onclick="speak('हिंदी चुनी गई');nav('E2-easy-home.html')"><div class="eic" style="background:var(--dl-primary)"><b style="font-size:26px">अ</b></div><b>हिन्दी</b><small>Hindi</small></button>
+    <button class="etile" onclick="speak('English selected','en-IN');nav('E2-easy-home.html')"><div class="eic" style="background:#0a7d8c"><b style="font-size:24px">A</b></div><b>English</b><small>English</small></button>
+    <button class="etile" onclick="nav('E2-easy-home.html')"><div class="eic" style="background:var(--dl-secondary)"><b style="font-size:24px">ଓ</b></div><b>ଓଡ଼ିଆ</b><small>Odia</small></button>
+    <button class="etile" onclick="nav('E2-easy-home.html')"><div class="eic" style="background:var(--green)"><b style="font-size:24px">అ</b></div><b>తెలుగు</b><small>Telugu</small></button>
+  </div>
+  <button class="micbtn mt6" style="position:static" onclick="nav('E2-easy-home.html')">शुरू करें · Start <span data-ic="chev" data-icc="mi"></span></button>
+</div></div>
+    <div class="homebar"></div>
+    
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function boardTheme(){var on=localStorage.getItem('dl-theme')==='dark';localStorage.setItem('dl-theme',on?'light':'dark');
+  document.querySelectorAll('iframe').forEach(function(f){f.src=f.src});
+  var b=document.getElementById('tg');if(b)b.textContent=on?'🌙 Dark preview':'☀️ Light preview';}
+</script>
+</body></html>

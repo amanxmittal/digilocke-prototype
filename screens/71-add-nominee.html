@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Add nominee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.field{width:100%;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:14px 16px;font-size:15px;color:var(--ink);font-family:inherit}
+.field:focus{outline:0;border-color:var(--dl-primary);box-shadow:var(--focus)}
+.genderrow{display:flex;gap:10px}
+.gpill{flex:1;text-align:center;padding:12px;border-radius:12px;border:1.5px solid var(--hair);cursor:pointer;font-weight:700;font-size:13.5px;color:var(--ink-2)}
+.gpill.on{border-color:var(--dl-primary);background:var(--dl-primary-50);color:var(--dl-primary)}
+.selrow{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:14px 16px;cursor:pointer}
+.selrow.placeholder{color:var(--ink-3)}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('17-nominee.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Add a nominee</div></div>
+      <div class="pad" style="padding-top:14px">
+
+        <label class="sm bold" style="display:block">Full name</label>
+        <input class="field mt2" id="name" placeholder="Nominee's full name">
+
+        <label class="sm bold mt4" style="display:block">Date of birth</label>
+        <input class="field mt2" id="dob" placeholder="DD-MM-YYYY" readonly onclick="pickDob()">
+
+        <label class="sm bold mt4" style="display:block">Gender</label>
+        <div class="genderrow mt2">
+          <div class="gpill" id="gM" onclick="setGender('M')">Male</div>
+          <div class="gpill" id="gF" onclick="setGender('F')">Female</div>
+          <div class="gpill" id="gT" onclick="setGender('T')">Other</div>
+        </div>
+
+        <label class="sm bold mt4" style="display:block">Relationship</label>
+        <div class="selrow mt2 placeholder" id="relRow" onclick="pickRelation()"><span id="relTxt">Select gender first</span><span data-ic="chev" data-icc="ic-sm"></span></div>
+
+        <label class="sm bold mt4" style="display:block">Nominee's mobile number</label>
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:4px 14px" class="mt2">
+          <span class="bold ink2">+91</span><input class="field" id="mobile" style="border:0;box-shadow:none;padding:15px 0" inputmode="numeric" maxlength="10" placeholder="98765 43210">
+        </div>
+
+        <label class="sm bold mt4" style="display:block">Nominee's Aadhaar number</label>
+        <input class="field mt2" id="aadhaar" inputmode="numeric" maxlength="14" placeholder="XXXX XXXX XXXX">
+
+        <label class="sm bold mt4" style="display:block">Nominee's email (optional)</label>
+        <input class="field mt2" id="email" type="email" placeholder="name@example.com">
+
+        <div class="alert info mt5"><span data-ic="lock" data-icc="ic-sm"></span><span>We'll send an OTP to <b>your own</b> registered mobile to confirm this addition.</span></div>
+
+        <button class="btn lg block mt5" onclick="submitNominee()">Continue</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+var RELATIONS={
+  M:['Brother','Brother-in-law','Father','Father-in-law','Grandson','Husband','Nephew','Son','Son-in-law','Uncle','Other'],
+  F:['Aunt','Daughter','Daughter-in-law','Granddaughter','Mother','Mother-in-law','Niece','Sister','Sister-in-law','Wife','Other'],
+  T:['Aunt','Brother','Brother-in-law','Daughter','Daughter-in-law','Father','Father-in-law','Grandson','Granddaughter','Husband','Mother','Mother-in-law','Nephew','Niece','Sister','Sister-in-law','Son','Son-in-law','Uncle','Wife','Other']
+};
+var gender='',relation='',dob='';
+function setGender(g){gender=g;['gM','gF','gT'].forEach(function(id){document.getElementById(id).classList.remove('on');});
+  document.getElementById('g'+g).classList.add('on');
+  relation='';document.getElementById('relTxt').textContent='Select relationship';document.getElementById('relRow').classList.remove('placeholder');}
+function pickRelation(){
+  if(!gender){toast('Select gender first','user');return;}
+  var s=document.querySelector('.screen');
+  var scrim=document.createElement('div');scrim.className='cscrim';scrim.setAttribute('role','dialog');scrim.setAttribute('aria-label','Select relationship');
+  var rows=RELATIONS[gender].map(function(r){return '<div class="lrow" data-r="'+r+'"><div class="grow bold sm">'+r+'</div></div>';}).join('');
+  scrim.innerHTML='<div class="csheet" style="max-height:70vh;overflow:auto"><div class="grab"></div><div class="h3">Select relationship</div><div class="mt2">'+rows+'</div></div>';
+  s.appendChild(scrim);requestAnimationFrame(function(){scrim.classList.add('show');});
+  function close(){scrim.classList.remove('show');setTimeout(function(){scrim.remove();},260);}
+  scrim.querySelectorAll('.lrow').forEach(function(r){r.addEventListener('click',function(){relation=r.dataset.r;document.getElementById('relTxt').textContent=relation;close();});});
+  scrim.addEventListener('click',function(e){if(e.target===scrim)close();});
+}
+function pickDob(){
+  // simple demo date pick
+  dob='12-04-1995';document.getElementById('dob').value=dob;
+}
+function submitNominee(){
+  var name=document.getElementById('name').value.trim();
+  var mobile=document.getElementById('mobile').value.trim();
+  var aadhaar=document.getElementById('aadhaar').value.trim();
+  if(!name){toast('Enter nominee name','user');return;}
+  if(!dob){toast('Select date of birth','user');return;}
+  if(!gender){toast('Select gender','user');return;}
+  if(mobile.length!==10){toast('Enter a valid mobile number','phone');return;}
+  if(aadhaar.replace(/\s/g,'').length!==12){toast('Enter a valid Aadhaar number','idcard');return;}
+  if(!relation){toast('Select relationship','user');return;}
+  nav('04-otp.html#next=17-nominee.html');
+}
+</script>
+</body></html>

@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Set new MPIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.pindot{width:16px;height:16px;border-radius:50%;border:2px solid var(--g400)}
+.pindot.on{background:var(--dl-primary);border-color:var(--dl-primary)}
+.pinrow{display:flex;gap:14px;justify-content:center}
+.pinlabel{font-size:12px;font-weight:700;color:var(--ink-3);text-align:center;margin-bottom:8px}
+.rule{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-3);padding:4px 0}
+.rule .rc{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--g400);flex:0 0 auto}
+.rule.ok{color:var(--green)} .rule.ok .rc{background:var(--success-50);border-color:var(--green)}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('63-forgot-dob.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Set a new MPIN</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="body ink2" id="phaseTxt">Create a 6-digit MPIN to lock your wallet.</div>
+
+        <div class="mt5">
+          <div class="pinlabel" id="lbl">NEW MPIN</div>
+          <div class="pinrow" id="pins"><span class="pindot"></span><span class="pindot"></span><span class="pindot"></span><span class="pindot"></span><span class="pindot"></span><span class="pindot"></span></div>
+        </div>
+
+        <div class="card mt5" style="padding:10px 14px">
+          <div class="rule" id="r_len"><span class="rc"></span>6 digits</div>
+          <div class="rule" id="r_seq"><span class="rc"></span>Not sequential (e.g. 123456)</div>
+          <div class="rule" id="r_rep"><span class="rc"></span>No 3+ identical digits in a row</div>
+          <div class="rule" id="r_pat"><span class="rc"></span>No mirrored / repeated patterns</div>
+        </div>
+
+        <div class="a11yrow card mt5" style="padding:12px 14px"><span data-ic="fp" data-icc="ic-sm"></span><span class="sm grow" style="margin-left:8px">Enable biometric unlock</span><button class="switch on" id="bioSwitch" onclick="pin(this)"><i></i></button></div>
+
+        <div class="keypad mt5" style="max-width:280px;margin:20px auto 0">
+          <button onclick="press('1')">1</button><button onclick="press('2')">2</button><button onclick="press('3')">3</button>
+          <button onclick="press('4')">4</button><button onclick="press('5')">5</button><button onclick="press('6')">6</button>
+          <button onclick="press('7')">7</button><button onclick="press('8')">8</button><button onclick="press('9')">9</button>
+          <button style="background:transparent;border:0;box-shadow:none"></button>
+          <button onclick="press('0')">0</button>
+          <button onclick="press('<')" aria-label="Delete"><span data-ic="back"></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function nextTarget(){var m=location.hash.match(/next=([^&]+)/);return m?decodeURIComponent(m[1]):'06-home.html';}
+var newPin='',confirmPin='',phase=1;
+var dots=[].slice.call(document.querySelectorAll('#pins .pindot'));
+function isSequential(p){var up='0123456789',dn='9876543210';return up.indexOf(p)>=0||dn.indexOf(p)>=0;}
+function threeIdentical(p){return /(\d)\1\1/.test(p);}
+function mirrored(p){return p===p.split('').reverse().join('');}
+function repeatedSet(p){return p.slice(0,3)===p.slice(3);}
+function render(){var v=phase===1?newPin:confirmPin;dots.forEach(function(d,i){d.classList.toggle('on',i<v.length);});validate();}
+function setRule(id,ok){document.getElementById(id).classList.toggle('ok',ok);}
+function validate(){var p=newPin;
+  setRule('r_len',p.length===6);
+  setRule('r_seq',p.length===6&&!isSequential(p));
+  setRule('r_rep',p.length===6&&!threeIdentical(p));
+  setRule('r_pat',p.length===6&&!mirrored(p)&&!repeatedSet(p));
+}
+function strong(p){return p.length===6&&!isSequential(p)&&!threeIdentical(p)&&!mirrored(p)&&!repeatedSet(p);}
+function press(k){
+  if(phase===1){
+    if(k==='<'){newPin=newPin.slice(0,-1);}
+    else if(newPin.length<6){newPin+=k;}
+    render();
+    if(newPin.length===6){
+      if(!strong(newPin)){toast('Choose a less predictable PIN','lock');return;}
+      setTimeout(function(){phase=2;document.getElementById('lbl').textContent='CONFIRM MPIN';document.getElementById('phaseTxt').textContent='Re-enter your new MPIN to confirm.';render();},350);
+    }
+  } else {
+    if(k==='<'){confirmPin=confirmPin.slice(0,-1);}
+    else if(confirmPin.length<6){confirmPin+=k;}
+    render();
+    if(confirmPin.length===6){
+      if(confirmPin!==newPin){toast('PINs do not match','lock');confirmPin='';setTimeout(render,300);return;}
+      var bioOn=document.getElementById('bioSwitch').classList.contains('on');
+      localStorage.setItem('dl-biometric-enabled', bioOn?'true':'false');
+      toast('MPIN set','check');setTimeout(function(){nav(nextTarget());},700);
+    }
+  }
+}
+render();
+</script>
+</body></html>

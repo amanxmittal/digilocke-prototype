@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Nominee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.lrow .menubtn{margin-left:auto}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('06-home.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Nominee</div></div>
+      <div class="pad" style="padding-top:14px">
+
+        <!-- Tab shown only when the signed-in user has been granted access by at least one nominator -->
+        <div class="seg" id="seg">
+          <button class="on" onclick="tab(this);showTab('mine')">My Nominees</button>
+          <button onclick="tab(this);showTab('access')">Access as Nominee</button>
+        </div>
+
+        <!-- ===== MY NOMINEES ===== -->
+        <div id="tab-mine" class="mt5">
+          <div class="between"><span class="sm bold">Nominees</span><span class="sm muted" id="nomCount">(2/5)</span></div>
+
+          <div class="card mt3" id="nomineeList">
+            <div class="lrow" onclick="nav('72-view-nominee.html?name=Sunita+Nayak&relation=Wife&dob=12-04-1988&gender=F&mobile=%2B91+90123+45678&email=sunita.n%40example.com')">
+              <div style="width:42px;height:42px;border-radius:12px;background:var(--dl-grad);color:#fff;display:grid;place-items:center;font-weight:800">SN</div>
+              <div class="grow"><div class="bold sm">Sunita Nayak</div><div class="sm muted">Wife</div></div>
+              <button class="iconbtn menubtn" onclick="event.stopPropagation();nomineeMenu(this,'Sunita Nayak')" aria-label="More"><span data-ic="dots"></span></button>
+            </div>
+            <div class="lrow" style="border-bottom:0" onclick="nav('72-view-nominee.html?name=Ravi+Nayak&relation=Son&dob=03-11-2010&gender=M&mobile=%2B91+91234+56789&email=')">
+              <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#0E7C86,#22C7D6);color:#fff;display:grid;place-items:center;font-weight:800">RN</div>
+              <div class="grow"><div class="bold sm">Ravi Nayak</div><div class="sm muted">Son</div></div>
+              <button class="iconbtn menubtn" onclick="event.stopPropagation();nomineeMenu(this,'Ravi Nayak')" aria-label="More"><span data-ic="dots"></span></button>
+            </div>
+          </div>
+
+          <button class="btn ghost block mt4" id="addNomineeBtn" onclick="addNomineeClick()"><span data-ic="plus" data-icc="ic-sm"></span> Add a nominee</button>
+
+          <div class="alert info mt5"><span data-ic="shield" data-icc="ic-sm"></span><span>A nominee can access your documents only after DigiLocker enables it for their account. You can remove a nominee anytime.</span></div>
+        </div>
+
+        <!-- ===== ACCESS AS NOMINEE ===== -->
+        <div id="tab-access" class="mt5" style="display:none">
+          <div class="body ink2">Accounts where you've been added as a nominee.</div>
+          <div class="card mt3">
+            <div class="lrow" onclick="openNominator(true,'Debabrata Nayak')">
+              <div style="width:42px;height:42px;border-radius:12px;background:var(--dl-grad);color:#fff;display:grid;place-items:center;font-weight:800">DN</div>
+              <div class="grow"><div class="bold sm">Debabrata Nayak</div><div class="sm muted">Access granted</div></div>
+              <span class="badge green"><span data-ic="check" data-icc="ic-sm"></span>Enabled</span>
+            </div>
+            <div class="lrow" style="border-bottom:0" onclick="openNominator(false,'Kiran Nayak')">
+              <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#8A4B00,#FF8F00);color:#fff;display:grid;place-items:center;font-weight:800">KN</div>
+              <div class="grow"><div class="bold sm">Kiran Nayak</div><div class="sm muted">Awaiting activation</div></div>
+              <span class="badge amber">Locked</span>
+            </div>
+          </div>
+          <div class="alert warn mt5"><span data-ic="lock" data-icc="ic-sm"></span><span>Access stays locked until the account holder's nominee access is enabled. You'll be notified when it activates.</span></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function showTab(t){document.getElementById('tab-mine').style.display=t==='mine'?'block':'none';document.getElementById('tab-access').style.display=t==='access'?'block':'none';}
+
+// v2: tapping Add checks the user has a linked mobile number first; if not, a bottom sheet asks to verify one.
+function addNomineeClick(){
+  var hasMobile=true; // demo flag
+  if(!hasMobile){ confirmDo('Verify mobile number','You need a verified mobile number before adding a nominee.','Verify now',false,'','phone'); return; }
+  nav('71-add-nominee.html');
+}
+
+function nomineeMenu(el,name){
+  var s=document.querySelector('.screen');
+  var scrim=document.createElement('div');scrim.className='cscrim';scrim.setAttribute('role','dialog');scrim.setAttribute('aria-label','Nominee options');
+  scrim.innerHTML='<div class="csheet"><div class="grab"></div>'
+    +'<div class="lrow" id="mView"><div class="lico"><span data-ic="user"></span></div><div class="grow bold sm">View</div></div>'
+    +'<div class="lrow" style="border-bottom:0" id="mRemove"><div class="lico" style="background:var(--danger-50);color:var(--danger)"><span data-ic="trash"></span></div><div class="grow bold sm" style="color:var(--danger)">Remove nominee</div></div>'
+    +'</div>';
+  s.appendChild(scrim);requestAnimationFrame(function(){scrim.classList.add('show');});
+  function close(){scrim.classList.remove('show');setTimeout(function(){scrim.remove();},260);}
+  scrim.querySelector('#mView').onclick=function(){close();nav('72-view-nominee.html');};
+  scrim.querySelector('#mRemove').onclick=function(){close();confirmDo('Remove nominee?','This removes '+name+' as your nominee.','Remove',true,name+' removed','trash');};
+  scrim.addEventListener('click',function(e){if(e.target===scrim)close();});
+}
+
+// v2 (NominatorRecyclerAdapter): enabled -> open the nominator's locker; not enabled -> "Access not granted" alert.
+function openNominator(enabled,name){
+  if(enabled){ nav('73-nominator-locker.html?name='+encodeURIComponent(name)); }
+  else { confirmDo('Access not granted','You have not been granted access to '+name+"'s locker yet.",'OK',false,'','lock'); }
+}
+</script>
+</body></html>

@@ -1,0 +1,16 @@
+{
+  "multiLanguageListNew": [
+    {"code": "en", "name": "English", "colorCode": "FFB54A", "hash": "en_v1"},
+    {"code": "hi", "name": "हिंदी", "colorCode": "2196F3", "hash": "hi_v1"},
+    {"code": "as", "name": "অসমীয়া", "colorCode": "CC5D00", "hash": "as_v1"},
+    {"code": "bn", "name": "বাংলা", "colorCode": "4AC367", "hash": "bn_v1"},
+    {"code": "gu", "name": "ગુજરાતી", "colorCode": "CC5D00", "hash": "gu_v1"},
+    {"code": "kn", "name": "ಕನ್ನಡ", "colorCode": "4AC367", "hash": "kn_v1"},
+    {"code": "ml", "name": "മലയാളം", "colorCode": "FB6721", "hash": "ml_v1"},
+    {"code": "mr", "name": "मराठी", "colorCode": "FB6721", "hash": "mr_v1"},
+    {"code": "or", "name": "ଓଡ଼ିଆ", "colorCode": "2196F3", "hash": "or_v1"},
+    {"code": "pa", "name": "ਪੰਜਾਬੀ", "colorCode": "CC5D00", "hash": "pa_v1"},
+    {"code": "ta", "name": "தமிழ்", "colorCode": "FBC8C8", "hash": "ta_v1"},
+    {"code": "te", "name": "తెలుగు", "colorCode": "2196F3", "hash": "te_v1"}
+  ]
+}

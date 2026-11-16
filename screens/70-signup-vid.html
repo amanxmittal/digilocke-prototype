@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Sign up with VID</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.inpwrap{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:4px 14px}
+.inpwrap:focus-within{border-color:var(--dl-primary);box-shadow:var(--focus)}
+.field{border:0;box-shadow:none;padding:15px 0;width:100%;font-size:16px;color:var(--ink);font-family:inherit;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.field:focus{outline:0}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('03-login.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Continue with VID</div></div>
+      <div class="pad" style="padding-top:14px">
+        <label class="sm bold" style="display:block">Virtual ID (VID)</label>
+        <div class="inpwrap mt2"><span data-ic="idcard" data-icc="ic-sm"></span><input class="field" inputmode="numeric" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"></div>
+        <div class="alert info mt4"><span data-ic="shield" data-icc="ic-sm"></span><span>We didn't find an account for this VID — we'll create one. Generate a VID on the UIDAI portal if you don't have one.</span></div>
+
+        <button class="btn lg block mt6" onclick="nav('04-otp.html#next=64-set-mpin.html%23next=66-add-mobile.html')">Send OTP</button>
+        <div class="alert ok mt5"><span data-ic="shield" data-icc="ic-sm"></span><span>Your name, DOB and gender come from Aadhaar via the VID — no manual details needed.</span></div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

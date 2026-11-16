@@ -1,0 +1,341 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DigiLocker Wallet · Core Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ds.css">
+<link rel="stylesheet" href="assets/desktop.css" media="(min-width: 840px)">
+<style>
+body{background:var(--bg);padding:0;margin:0}
+.hd{padding:24px 24px 18px;background:var(--dl-grad);color:#fff;position:relative;z-index:60}
+.hd .display{color:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 20px 80px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:26px}
+.item .cap2{font-weight:800;font-size:14px;margin:10px 2px 0}
+.item .mut{color:var(--ink-3);font-size:12.5px;margin:2px}
+.frame{border:0;width:430px;height:900px;border-radius:0;background:transparent}
+.holder{transform:scale(.55);transform-origin:top left;width:430px;height:900px}
+.cell{height:500px;overflow:hidden;border-radius:0;box-shadow:none;background:transparent}
+.toolbar{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.tg{background:#fff;border:1px solid rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.16);border-radius:999px;padding:9px 16px;font-weight:700;cursor:pointer}
+.sec{font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);margin:34px 2px 4px;grid-column:1/-1}
+.deck-play{background:none;border:1px solid var(--ink-3);color:var(--ink-3);border-radius:99px;padding:3px 10px;font-size:11px;cursor:pointer;margin-left:8px;vertical-align:middle}
+.deck-play:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tg-link{text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.badge-soon{background:#ff9800;color:#fff;font-size:10px;font-weight:700;border-radius:99px;padding:2px 7px;vertical-align:middle}
+</style>
+</head><body>
+<div class="hd">
+  <div style="max-width:1180px;margin:0 auto">
+    <div class="eyebrow" style="color:rgba(255,255,255,.8)">Concept · Core Wallet Blueprint</div>
+    <div class="display">DigiLocker Wallet</div>
+    <div class="body" style="opacity:.92;margin-top:6px;max-width:640px">A curated, clickable prototype of the core flows that will drive the Kotlin Multiplatform build — reusing the current app's locked API contracts and calling sequences. Address-update is intentionally excluded.</div>
+    <div class="toolbar">
+      <button class="tg" onclick="boardTheme()" id="tg">🌙 Toggle dark preview</button>
+      <button class="tg" onclick="deckLaunchFromToolbar()">▶ Deck Mode</button>
+      <a href="flow.html" class="tg tg-link" id="nav-flow">🗺 Flow Map</a>
+      <a href="apis.html" class="tg tg-link" id="nav-apis">⚙ API Mapping</a>
+      <a href="desktop/desktop.html" class="tg tg-link" id="nav-desktop">🖥 Desktop Preview</a>
+      <span class="tg" style="cursor:default">20 flows, ordered end-to-end</span>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="grid" id="grid"></div>
+</div>
+<script src="assets/app.js"></script>
+<script>
+const SCREENS=[
+  ['① SIGN-IN FLOW · MOBILE-BASED'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro · “Skip” → guest browse'],
+  ['74-prelogin-home.html','2a · Browse (guest)','Pre-login home · promo banner (ad slot hidden)'],
+  ['03-login.html','3 · Sign in','Choose “Mobile number”'],
+  ['60-enter-mobile.html','4 · Mobile','SIM 1/2 default · try another number'],
+  ['67-select-profile.html','5 · Choose profile','Multiple accounts on one number'],
+  ['05-mpin.html','6 · MPIN','Keypad + “enable biometric” + Forgot MPIN'],
+  ['04-otp.html','7 · OTP','OTP sent → verify'],
+  ['06-home.html','8 · Home','Post-login dashboard'],
+
+  ['① SIGN-IN FLOW · AADHAAR — OTP-BASED'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Choose “Aadhaar / VID” → Aadhaar'],
+  ['61-enter-aadhaar-vid.html','4 · Enter Aadhaar','Aadhaar tab'],
+  ['65-verify-method.html','5 · Choose verify','Pick OTP'],
+  ['04-otp.html','6 · OTP','6-digit verify'],
+  ['05-mpin.html','7 · MPIN','Confirm MPIN'],
+  ['06-home.html','8 · Home','Post-login dashboard'],
+
+  ['① SIGN-IN FLOW · AADHAAR — FACE (RD)-BASED'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Choose “Aadhaar / VID” → Aadhaar'],
+  ['61-enter-aadhaar-vid.html','4 · Enter Aadhaar','Aadhaar tab'],
+  ['65-verify-method.html','5 · Choose verify','Pick Face authentication'],
+  ['62-face-auth.html','6 · Face auth','Aadhaar FaceRD liveness'],
+  ['05-mpin.html','7 · MPIN','Confirm MPIN'],
+  ['06-home.html','8 · Home','Post-login dashboard'],
+
+  ['① SIGN-IN FLOW · VID-BASED'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Choose “Aadhaar / VID” → VID'],
+  ['61-enter-aadhaar-vid.html','4 · Enter VID','VID tab'],
+  ['04-otp.html','5 · OTP','OTP first → verify'],
+  ['05-mpin.html','6 · MPIN','Then verify MPIN'],
+  ['06-home.html','7 · Home','Post-login dashboard'],
+
+  ['② RETURNING USER FLOW · BIOMETRIC  (if enabled at sign-in/sign-up)'],
+  ['03-login.html','1 · Sign in','Tap “Continue as Debabrata”'],
+  ['05-mpin.html','2 · Biometric','Auto fingerprint/face — no MPIN needed'],
+  ['06-home.html','3 · Home','Post-login dashboard'],
+
+  ['② RETURNING USER FLOW · MPIN  (if biometric not enabled)'],
+  ['03-login.html','1 · Sign in','Tap "Continue as Debabrata"'],
+  ['05-mpin.html','2 · MPIN','6-digit keypad entry'],
+  ['06-home.html','3 · Home','Post-login dashboard'],
+
+  ['③ SIGN-UP FLOW · MOBILE-BASED  (has details page, no set-mobile)'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Continue with mobile'],
+  ['60-enter-mobile.html','4 · Mobile no.','Enter number'],
+  ['04-otp.html','5 · Verify OTP','Confirm the number'],
+  ['68-link-aadhaar-signup.html','6 · Link Aadhaar','Has Skip button'],
+  ['③a …if Aadhaar entered'],
+  ['04-otp.html','7a · Verify OTP','Aadhaar OTP'],
+  ['64-set-mpin.html','8a · Set PIN','PIN-strength rules + biometric'],
+  ['06-home.html','9a · Home','Post-login dashboard'],
+  ['③b …if Skip tapped'],
+  ['52-signup.html','7b · Enter details','Name · DOB · Gender · Email'],
+  ['64-set-mpin.html','8b · Set PIN','PIN-strength rules + biometric'],
+  ['06-home.html','9b · Home','Post-login dashboard'],
+
+  ['③ SIGN-UP FLOW · AADHAAR — OTP-BASED  (no details page, mobile mandatory)'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Continue with Aadhaar'],
+  ['69-signup-aadhaar.html','4 · Enter Aadhaar','Choose OTP or Face'],
+  ['04-otp.html','5 · Aadhaar OTP','verify with OTP'],
+  ['64-set-mpin.html','6 · Create MPIN','name/DOB come from Aadhaar — no details page'],
+  ['66-add-mobile.html','7 · Set mobile','mandatory · no skip'],
+  ['04-otp.html','8 · Verify mobile','OTP to the mobile'],
+  ['06-home.html','9 · Home','Post-login dashboard'],
+
+  ['③ SIGN-UP FLOW · AADHAAR — FACE (RD)-BASED  (no details page, mobile mandatory)'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Continue with Aadhaar'],
+  ['69-signup-aadhaar.html','4 · Enter Aadhaar','Choose OTP or Face'],
+  ['62-face-auth.html','5 · Face auth','Aadhaar FaceRD liveness'],
+  ['64-set-mpin.html','6 · Create MPIN','name/DOB come from Aadhaar — no details page'],
+  ['66-add-mobile.html','7 · Set mobile','mandatory · no skip'],
+  ['04-otp.html','8 · Verify mobile','OTP to the mobile'],
+  ['06-home.html','9 · Home','Post-login dashboard'],
+
+  ['③ SIGN-UP FLOW · VID-BASED  (no details page, mobile mandatory)'],
+  ['01-splash.html','1 · Splash','Get started'],
+  ['02-onboarding.html','2 · Onboarding','Value intro'],
+  ['03-login.html','3 · Sign in','Continue with VID'],
+  ['70-signup-vid.html','4 · Enter VID','Send OTP'],
+  ['04-otp.html','5 · Verify OTP','VID OTP verify'],
+  ['64-set-mpin.html','6 · Create MPIN','name/DOB come from Aadhaar — no details page'],
+  ['66-add-mobile.html','7 · Set mobile','mandatory · no skip'],
+  ['04-otp.html','8 · Verify mobile','OTP to the mobile'],
+  ['06-home.html','9 · Home','Post-login dashboard'],
+
+  ['④ FORGOT PIN FLOW'],
+  ['05-mpin.html','1 · MPIN','Tap “Forgot MPIN?”'],
+  ['63-forgot-dob.html','2 · Verify DOB','verifyDob'],
+  ['04-otp.html','3 · OTP','6-digit verify'],
+  ['64-set-mpin.html','4 · Set new MPIN','signupSetPin'],
+  ['06-home.html','5 · Home','Post-login dashboard'],
+
+  ['⑤ SWITCH ACCOUNT FLOW  (profiles linked to the logged-in number)'],
+  ['21-account.html','1 · Account','“Switch account” entry point'],
+  ['75-switch-account.html','2 · Switch account hub','All profiles linked to this number'],
+  ['78-add-profile-samenumber.html','3 · Add profile (same number)','v2 bottom-sheet pattern → Aadhaar/VID'],
+  ['04-otp.html','4 · OTP','To the shared device number'],
+  ['64-set-mpin.html','5 · Set MPIN','New profile’s own MPIN'],
+  ['05-mpin.html','6 · MPIN to switch','No OTP — identity already proven'],
+  ['06-home.html','7 · Home','Shows the switched-to profile’s name'],
+
+  ['⑥ ADD ANOTHER PERSON’S ACCOUNT FLOW  (existing DigiLocker users only)'],
+  ['75-switch-account.html','1 · Switch account hub','“Add another person’s account”'],
+  ['76-add-account-identity.html','2 · Their Aadhaar/VID','Independent of this device’s number'],
+  ['04-otp.html','3 · OTP','Sent to THEIR Aadhaar-linked mobile'],
+  ['77-add-account-mpin.html','4 · Their existing MPIN','Must already have a DigiLocker account'],
+  ['77-add-account-done.html','5 · Added','Now listed under “Other people on this device”'],
+  ['06-home.html','6 · Home','Logged in as that person'],
+
+  ['⑦ NOTIFICATION FLOW'],
+  ['06-home.html','1 · Home','Bell icon (unread indicator)'],
+  ['20-notifications.html','2 · Notifications','Typed inbox · verify requests, docs, security'],
+
+  ['⑧ POST-LOGIN DASHBOARD FLOW'],
+  ['06-home.html','Home','Identity health, wallet, promo banner + ad slot, quick actions, services'],
+
+  ['⑨ TOTP FLOW · DIGILOCKER AUTHENTICATOR'],
+  ['21-account.html','1 · Account','“DigiLocker Authenticator” entry'],
+  ['79-authenticator.html','2 · Authenticator','60s rotating 6-digit code · tap to copy'],
+  ['23-scan.html','2a · Or: Scan','“Sign in on web” QR option'],
+  ['80-qr-login-approval.html','3 · Approve sign-in','Website/device/time → Allow / Deny'],
+
+  ['⑩ YOUR DOCUMENT / WALLET FLOW'],
+  ['07-wallet.html','1 · Wallet','All credentials'],
+  ['08-document-detail.html','2 · Document detail','Field-level disclosure'],
+  ['09-share.html','3 · Share','Field-level consent'],
+  ['10-verify.html','4 · Show ID','Offline QR / NFC'],
+  ['11-fetch.html','5 · Get a document','Discovery — search or browse issuers'],
+  ['11b-category.html','6 · Category detail','Issuer list for chosen category'],
+  ['11c-state.html','7 · Browse by State','State-wise issuer directory'],
+  ['11d-confirm.html','8 · Confirm & Fetch','Review details → pull document'],
+
+  ['⑪ DRIVE FLOW'],
+  ['12-drive.html','1 · Drive','Self-uploaded files'],
+  ['15-drive-file.html','2 · File','Viewer + actions'],
+  ['14-upload.html','3 · Upload','Encrypted upload'],
+
+  ['⑫ ESIGN FLOW'],
+  ['30-esign.html','eSign','Aadhaar eSign'],
+
+  ['⑬ NOMINEE / NOMINATOR FLOW'],
+  ['17-nominee.html','1 · Nominee hub','My Nominees + Access as Nominee tabs'],
+  ['71-add-nominee.html','2 · Add nominee','Details → OTP (to your own mobile)'],
+  ['72-view-nominee.html','3 · View nominee','Read-only detail + remove'],
+  ['73-nominator-locker.html','4 · Nominator locker','Access another account (Issued/Drive)'],
+
+  ['⑭ SCAN QR CODE FLOW'],
+  ['23-scan.html','1 · Scan','Credential QR or “Sign in on web” QR'],
+  ['80-qr-login-approval.html','2 · Approve sign-in','Only for the web-login QR path'],
+
+  ['⑮ CONSENT MANAGER FLOW'],
+  ['16-consent.html','Consent','Connected apps · revoke access'],
+
+  ['⑯ VERIFIABLE CREDENTIAL FLOW'],
+  ['19-vc-wallet.html','Credentials','Selective disclosure'],
+
+  ['⑰ HEALTH LOCKER FLOW'],
+  ['18-health.html','Health','ABHA records'],
+
+  ['⑱ ACTIVITY FLOW'],
+  ['13-activity.html','Activity','Audit trail'],
+
+  ['⑲ ACCOUNT FLOW'],
+  ['21-account.html','Account','Profile, security, switch account, authenticator, settings'],
+  ['22-settings.html','Settings','Lock, appearance, privacy'],
+
+  ['⑳ SARAL MODE · सरल मोड (voice + pictures)'],
+  ['E1-easy-welcome.html','Welcome','Language + voice'],
+  ['E2-easy-home.html','Easy home','One task per screen'],
+  ['E3-easy-show.html','Show ID','Big QR'],
+  ['E4-easy-docs.html','My papers','Picture-led'],
+  ['E5-easy-get.html','Get paper','Guided fetch'],
+  ['E6-easy-talk.html','Talk','Voice assistant'],
+  ['E7-easy-help.html','Help','Call / assist'],
+];
+const g=document.getElementById('grid');
+SCREENS.forEach(function(s,idx){
+  if(s.length===1){var h=document.createElement('div');h.className='sec';h.innerHTML=s[0]+' <button class="deck-play" onclick="deckLaunchFlow('+idx+')" aria-label="Play '+s[0].replace(/"/g,'&quot;')+'" title="Play flow">▶</button>';g.appendChild(h);return;}
+  var d=document.createElement('div');d.className='item';
+  d.innerHTML='<div class="cell"><div class="holder"><iframe class="frame" src="screens/'+s[0]+'" loading="lazy"></iframe></div></div>'
+    +'<div class="cap2">'+s[1]+'</div><div class="mut">'+s[2]+'</div>';
+  g.appendChild(d);
+});
+</script>
+<script>
+/* Review Board Sidebar — desktop only, toggleable */
+(function(){
+  var secs=document.querySelectorAll('.sec');
+  if(!secs.length) return;
+
+  // Assign IDs to each .sec for anchor targeting
+  secs.forEach(function(el,i){
+    el.id='flow-'+(i+1);
+  });
+
+  // Build sidebar nav
+  var nav=document.createElement('nav');
+  nav.className='rb-sidebar';
+  nav.setAttribute('aria-label','Flow sections');
+
+  // Toggle button inside sidebar
+  var toggleBtn=document.createElement('button');
+  toggleBtn.className='rb-sidebar__toggle';
+  toggleBtn.innerHTML='◀';
+  toggleBtn.title='Hide sidebar';
+  toggleBtn.setAttribute('aria-label','Toggle sidebar');
+  nav.appendChild(toggleBtn);
+
+  var title=document.createElement('div');
+  title.className='rb-sidebar__title';
+  title.textContent='Flows';
+  nav.appendChild(title);
+
+  secs.forEach(function(el,i){
+    var a=document.createElement('a');
+    a.href='#flow-'+(i+1);
+    a.textContent=el.textContent.replace(/\s*▶\s*$/,'').trim();
+    a.title=a.textContent;
+    nav.appendChild(a);
+  });
+
+  document.body.appendChild(nav);
+
+  // Show button (visible when sidebar is hidden)
+  var showBtn=document.createElement('button');
+  showBtn.className='rb-sidebar__show';
+  showBtn.innerHTML='☰';
+  showBtn.title='Show sidebar';
+  showBtn.setAttribute('aria-label','Show sidebar');
+  document.body.appendChild(showBtn);
+
+  // Toggle logic
+  var hidden=false;
+  function toggleSidebar(){
+    hidden=!hidden;
+    if(hidden){
+      nav.style.transform='translateX(-100%)';
+      showBtn.style.opacity='1';
+      showBtn.style.pointerEvents='auto';
+      document.body.classList.remove('rb-desktop');
+    } else {
+      nav.style.transform='translateX(0)';
+      showBtn.style.opacity='0';
+      showBtn.style.pointerEvents='none';
+      if(window.matchMedia('(min-width: 840px)').matches){
+        document.body.classList.add('rb-desktop');
+      }
+    }
+  }
+  toggleBtn.addEventListener('click',toggleSidebar);
+  showBtn.addEventListener('click',toggleSidebar);
+
+  // Toggle rb-desktop class based on viewport
+  var mq=window.matchMedia('(min-width: 840px)');
+  function applyDesktop(e){
+    if(e.matches && !hidden){
+      document.body.classList.add('rb-desktop');
+    } else {
+      document.body.classList.remove('rb-desktop');
+    }
+  }
+  mq.addEventListener('change',applyDesktop);
+  applyDesktop(mq);
+})();
+</script>
+<script src="assets/deck.js"></script>
+<script>
+// Navigation: links to flow.html and apis.html are always active
+// (files exist in the same directory as index.html)
+(function(){
+  // Desktop Preview: apply desktop class if ?viewport=desktop is in URL
+  if(new URLSearchParams(window.location.search).get('viewport')==='desktop'){
+    document.documentElement.classList.add('desktop-preview');
+  }
+})();
+
+/* activateDesktop removed — Desktop Preview now navigates to desktop.html */
+</script>
+</body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Wallet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+<div class="appbar"><div class="title grow">Wallet</div>
+  <button class="iconbtn" onclick="nav('11-fetch.html')" aria-label="Add document"><span data-ic="plus"></span></button></div>
+<div class="pad" style="padding-top:14px">
+  <div class="seg"><button class="on" onclick="tab(this)">All</button><button onclick="tab(this);toast('Identity','user')">Identity</button><button onclick="tab(this);toast('Vehicle','car')">Vehicle</button><button onclick="tab(this);toast('Education','grad')">Education</button></div>
+  <div class="col gap4 mt5">
+    <div class="cred tier1 sk-aadhaar" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="fp"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span>Verified</span></div>
+      <div class="cname">Aadhaar</div><div class="cissuer">UIDAI · Govt. of India</div>
+      <div class="cnum">XXXX XXXX 4821</div><div class="cfoot"><div><small>Holder</small><b>Debabrata N.</b></div><div style="text-align:right"><small>DOB</small><b>•• ••• 1986</b></div></div></div>
+    <div class="cred tier1 sk-pan" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="doc"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span>Verified</span></div>
+      <div class="cname">PAN Card</div><div class="cissuer">Income Tax Department</div>
+      <div class="cnum">BXXPN 4821 K</div><div class="cfoot"><div><small>Holder</small><b>Debabrata N.</b></div><div style="text-align:right"><small>Status</small><b>Active</b></div></div></div>
+    <div class="cred tier1 sk-dl" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="doc"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span>Verified</span></div>
+      <div class="cname">Driving Licence</div><div class="cissuer">Transport Dept · MH</div>
+      <div class="cnum">MH02 •••• ••920</div><div class="cfoot"><div><small>Class</small><b>LMV</b></div><div style="text-align:right"><small>Valid till</small><b>2031</b></div></div></div>
+    <div class="cred tier1 sk-rc" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="car"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span>Verified</span></div>
+      <div class="cname">Vehicle RC</div><div class="cissuer">Transport Dept · MH</div>
+      <div class="cnum">MH 02 CK 9920</div><div class="cfoot"><div><small>Model</small><b>Tata Nexon</b></div><div style="text-align:right"><small>Insurance</small><b>8 days</b></div></div></div>
+    <div class="cred tier1 sk-abha" onclick="nav('18-health.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="health"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span>Verified</span></div>
+      <div class="cname">ABHA Health ID</div><div class="cissuer">Nat. Health Authority</div>
+      <div class="cnum">14-3456-7890-4821</div><div class="cfoot"><div><small>Records</small><b>14 linked</b></div><div style="text-align:right"><small>ABHA</small><b>@debabrata</b></div></div></div>
+    <div class="cred tier1 sk-edu" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="grad"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span>Verified</span></div>
+      <div class="cname">Class XII Marksheet</div><div class="cissuer">CBSE</div>
+      <div class="cnum">Roll 4821007</div><div class="cfoot"><div><small>Year</small><b>2003</b></div><div style="text-align:right"><small>Result</small><b>89.4%</b></div></div></div>
+  </div>
+</div></div>
+    <div class="homebar"></div>
+    <nav class="tabbar"><a class="tab" href="06-home.html"><span data-ic="home"></span><span>Home</span></a><a class="tab on" href="07-wallet.html"><span data-ic="cards"></span><span>Wallet</span></a><button class="tab center" onclick="nav('10-verify.html')" aria-label="Show / Verify"><span class="fab"><span data-ic="scan"></span></span></button><a class="tab" href="13-activity.html"><span data-ic="activity"></span><span>Activity</span></a><a class="tab" href="21-account.html"><span data-ic="user"></span><span>Account</span></a></nav>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

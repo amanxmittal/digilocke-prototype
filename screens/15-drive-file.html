@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('12-drive.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title grow">Rent Agreement.pdf</div>
+        <button class="iconbtn" onclick="toast('Downloaded','upload')" aria-label="Download"><span data-ic="upload"></span></button></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="thumb"><div class="pg"><div class="w90"></div><div class="w70"></div><div class="w90"></div><div class="w50"></div><div class="w70"></div><div class="w90"></div><div class="w50"></div></div></div>
+        <div class="card mt5">
+          <div class="fieldfill"><div class="v"><div class="lab">Size</div><div class="val">820 KB</div></div></div>
+          <div class="fieldfill"><div class="v"><div class="lab">Uploaded</div><div class="val">2 days ago</div></div></div>
+          <div class="fieldfill" style="border-bottom:0"><div class="v"><div class="lab">Location</div><div class="val">Documents</div></div></div>
+        </div>
+        <div class="grid4 mt5" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="srctile" onclick="nav('09-share.html')"><div class="si"><span data-ic="share"></span></div><b class="sm">Share</b></div>
+          <div class="srctile" onclick="toast('Rename','pen')"><div class="si"><span data-ic="pen"></span></div><b class="sm">Rename</b></div>
+          <div class="srctile" onclick="confirmDo('Delete file?','This permanently deletes Rent Agreement.pdf.','Delete',true,'Deleted','trash','12-drive.html')"><div class="si" style="background:var(--danger-50);color:var(--danger)"><span data-ic="trash"></span></div><b class="sm">Delete</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

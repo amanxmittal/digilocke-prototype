@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Choose verification</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.optrow{display:flex;align-items:center;gap:12px;border:1.5px solid var(--hair);border-radius:16px;padding:16px;cursor:pointer;background:var(--surface);box-shadow:var(--e1)}
+.optrow:active{transform:scale(.99)}
+.optrow .oi{width:48px;height:48px;border-radius:14px;background:var(--dl-primary-50);color:var(--dl-primary);display:grid;place-items:center;flex:0 0 auto}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('61-enter-aadhaar-vid.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Verify your Aadhaar</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="body ink2">Choose how you'd like to verify your Aadhaar.</div>
+
+        <div class="optrow mt5" onclick="nav('04-otp.html#next=05-mpin.html')">
+          <div class="oi"><span data-ic="phone"></span></div>
+          <div class="grow"><div class="bold">Aadhaar OTP</div><div class="sm muted">One-time code to your Aadhaar-linked mobile</div></div>
+          <span data-ic="chev" data-icc="ic-sm"></span></div>
+
+        <div class="optrow mt3" onclick="nav('62-face-auth.html#next=05-mpin.html')">
+          <div class="oi"><span data-ic="face"></span></div>
+          <div class="grow"><div class="bold">Face authentication</div><div class="sm muted">Aadhaar FaceRD (Registered Device) · no OTP</div></div>
+          <span data-ic="chev" data-icc="ic-sm"></span></div>
+
+        <div class="alert info mt6"><span data-ic="shield" data-icc="ic-sm"></span><span>Both methods verify with UIDAI. After verification, confirm your MPIN to enter your wallet.</span></div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

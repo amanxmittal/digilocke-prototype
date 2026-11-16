@@ -1,0 +1,1101 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DigiLocker · Flow Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ds.css">
+<link rel="stylesheet" href="assets/desktop.css" media="(min-width: 840px)">
+<style>
+body{background:var(--bg);padding:0;margin:0}
+.hd{padding:34px 24px 22px;background:var(--dl-grad);color:#fff}
+.hd .display{color:#fff}
+.back{color:rgba(255,255,255,.85);font-weight:700;font-size:var(--t-sm);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.back:hover{color:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 20px 80px}
+.toc{background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-lg);padding:var(--s6);margin-bottom:var(--s8)}
+.toc h2{font-size:var(--t-h2);font-weight:800;margin:0 0 var(--s4)}
+.toc-group{margin-bottom:var(--s4)}
+.toc-group h3{font-size:var(--t-sm);font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);margin:0 0 var(--s2)}
+.toc-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:var(--s2)}
+.toc-list li a{display:inline-block;padding:6px 12px;border-radius:var(--pill);background:var(--g100);border:1px solid var(--hair);color:var(--dl-primary);font-weight:600;font-size:var(--t-sm);text-decoration:none;transition:var(--fast)}
+.toc-list li a:hover{background:var(--dl-primary-50);border-color:var(--dl-primary-100)}
+.flow-section{margin-bottom:48px;scroll-margin-top:24px}
+.flow-section h2{font-size:var(--t-h1);font-weight:800;margin:0 0 var(--s3);color:var(--ink);display:flex;align-items:center;gap:var(--s3)}
+.flow-section h2 .badge{font-size:var(--t-cap);background:var(--dl-primary-50);color:var(--dl-primary);padding:4px 10px;border-radius:var(--pill);font-weight:700}
+.flow-section .desc{color:var(--ink-3);font-size:var(--t-sm);margin-bottom:var(--s4)}
+.mermaid-wrap{background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-lg);padding:var(--s6);margin-bottom:var(--s4);overflow-x:auto}
+.step-table{width:100%;border-collapse:collapse;font-size:var(--t-sm)}
+.step-table th{text-align:left;font-weight:700;padding:10px 12px;background:var(--g100);border-bottom:2px solid var(--hair)}
+.step-table td{padding:10px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+.step-table tr:last-child td{border-bottom:0}
+.step-table .api{font-family:monospace;font-size:12px;color:var(--dl-primary);background:var(--dl-primary-50);padding:2px 6px;border-radius:4px}
+.step-table .no-api{color:var(--ink-3)}
+.placeholder{color:var(--ink-3);font-style:italic;padding:var(--s6);text-align:center;border:2px dashed var(--hair);border-radius:var(--r);margin-top:var(--s3)}
+pre.fallback{display:none;white-space:pre-wrap;font-family:'Noto Sans',monospace;font-size:var(--t-sm);background:var(--surface);border:1px solid var(--hair);border-radius:var(--r);padding:var(--s4);color:var(--ink-2);overflow-x:auto}
+.mermaid-failed pre.fallback{display:block}
+.mermaid-failed .mermaid{display:none}
+</style>
+</head><body>
+<div class="hd">
+  <div style="max-width:1180px;margin:0 auto">
+    <a href="index.html" class="back">← Back to Review Board</a>
+    <div class="display" style="margin-top:10px">Flow Map</div>
+    <div class="body" style="opacity:.92;margin-top:6px;max-width:640px">All 20+ user journeys documented with screen transitions, user actions, and API call sequences. Each flow shows the complete path from entry to completion.</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============================================================ TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+
+  <div class="toc-group">
+    <h3>① Sign-in Flows</h3>
+    <ul class="toc-list">
+      <li><a href="#signin-mobile">Mobile</a></li>
+      <li><a href="#signin-aadhaar-otp">Aadhaar OTP</a></li>
+      <li><a href="#signin-aadhaar-face">Aadhaar Face</a></li>
+      <li><a href="#signin-vid">VID</a></li>
+    </ul>
+  </div>
+
+  <div class="toc-group">
+    <h3>② Returning-User Flows</h3>
+    <ul class="toc-list">
+      <li><a href="#returning-biometric">Biometric</a></li>
+      <li><a href="#returning-mpin">MPIN</a></li>
+    </ul>
+  </div>
+
+  <div class="toc-group">
+    <h3>③ Sign-up Flows</h3>
+    <ul class="toc-list">
+      <li><a href="#signup-mobile">Mobile</a></li>
+      <li><a href="#signup-aadhaar-otp">Aadhaar OTP</a></li>
+      <li><a href="#signup-aadhaar-face">Aadhaar Face</a></li>
+      <li><a href="#signup-vid">VID</a></li>
+    </ul>
+  </div>
+
+  <div class="toc-group">
+    <h3>④ Utility Flows</h3>
+    <ul class="toc-list">
+      <li><a href="#forgot-pin">Forgot PIN</a></li>
+      <li><a href="#switch-account">Switch Account</a></li>
+      <li><a href="#add-another-person">Add Another Person</a></li>
+    </ul>
+  </div>
+
+  <div class="toc-group">
+    <h3>⑤ Post-login Flows</h3>
+    <ul class="toc-list">
+      <li><a href="#flow-notifications">Notifications</a></li>
+      <li><a href="#flow-dashboard">Dashboard</a></li>
+      <li><a href="#flow-totp">TOTP / Authenticator</a></li>
+      <li><a href="#flow-wallet">Wallet / Documents</a></li>
+      <li><a href="#flow-drive">Drive</a></li>
+      <li><a href="#flow-esign">eSign</a></li>
+      <li><a href="#flow-nominee">Nominee / Nominator</a></li>
+      <li><a href="#flow-scan-qr">Scan QR</a></li>
+      <li><a href="#flow-consent">Consent</a></li>
+      <li><a href="#flow-vc">Verifiable Credential</a></li>
+      <li><a href="#flow-health">Health</a></li>
+      <li><a href="#flow-activity">Activity</a></li>
+      <li><a href="#flow-account">Account / Settings</a></li>
+      <li><a href="#flow-saral">Saral Mode</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ SIGN-IN FLOWS -->
+
+<section class="flow-section" id="signin-mobile">
+  <h2>Sign-in · Mobile <span class="badge">Sign-in</span></h2>
+  <p class="desc">01-splash → 02-onboarding → 03-login → 60-enter-mobile → 67-select-profile → 05-mpin → 04-otp → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Get started" (01-splash)
+    S->>S: 02-onboarding
+    U->>S: Tap "Sign in" (03-login)
+    U->>S: Choose "Mobile number" (60-enter-mobile)
+    Note over S: POST loginSignupMobile
+    U->>S: Select profile (67-select-profile)
+    U->>S: Enter MPIN (05-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: OTP verify (04-otp)
+    Note over S: POST mobileVerifyPinSendOtp
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-in Mobile Flow:
+1. 01-splash → Tap "Get started"
+2. 02-onboarding → Value intro
+3. 03-login → Choose "Mobile number" 
+4. 60-enter-mobile → Enter number, tap Continue → API: POST loginSignupMobile
+5. 67-select-profile → Select profile (if multiple accounts)
+6. 05-mpin → Enter MPIN → API: POST loginVerifyPin
+7. 04-otp → Verify OTP → API: POST mobileVerifyPinSendOtp
+8. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>01-splash.html</td><td>Tap "Get started"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>02-onboarding.html</td><td>Tap "Sign in" / Skip</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>3</td><td>03-login.html</td><td>Choose "Mobile number"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>4</td><td>60-enter-mobile.html</td><td>Enter number, tap Continue</td><td><span class="api">POST loginSignupMobile</span></td></tr>
+      <tr><td>5</td><td>67-select-profile.html</td><td>Select profile (if multiple)</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>6</td><td>05-mpin.html</td><td>Enter 6-digit MPIN</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>7</td><td>04-otp.html</td><td>Enter OTP, tap Verify</td><td><span class="api">POST mobileVerifyPinSendOtp / POST loginVerifyMobileOtp</span></td></tr>
+      <tr><td>8</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="signin-aadhaar-otp">
+  <h2>Sign-in · Aadhaar OTP <span class="badge">Sign-in</span></h2>
+  <p class="desc">01-splash → 02-onboarding → 03-login → 61-enter-aadhaar-vid → 65-verify-method → 04-otp → 05-mpin → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Get started" (01-splash)
+    S->>S: 02-onboarding
+    U->>S: Choose "Aadhaar / VID" → Aadhaar (03-login)
+    U->>S: Enter Aadhaar (61-enter-aadhaar-vid)
+    Note over S: POST loginSignupAadhaar
+    U->>S: Pick OTP method (65-verify-method)
+    S->>S: OTP verify (04-otp)
+    Note over S: POST loginVerifyAadhaarOtp
+    U->>S: Confirm MPIN (05-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-in Aadhaar OTP Flow:
+1. 01-splash → Tap "Get started"
+2. 02-onboarding → Value intro
+3. 03-login → Choose "Aadhaar / VID" → Aadhaar
+4. 61-enter-aadhaar-vid → Enter Aadhaar → API: POST loginSignupAadhaar
+5. 65-verify-method → Pick OTP
+6. 04-otp → Verify OTP → API: POST loginVerifyAadhaarOtp
+7. 05-mpin → Confirm MPIN → API: POST loginVerifyPin
+8. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>01-splash.html</td><td>Tap "Get started"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>02-onboarding.html</td><td>Tap "Sign in" / Skip</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>3</td><td>03-login.html</td><td>Choose "Aadhaar / VID" → Aadhaar tab</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>4</td><td>61-enter-aadhaar-vid.html</td><td>Enter Aadhaar number, tap Continue</td><td><span class="api">POST loginSignupAadhaar</span></td></tr>
+      <tr><td>5</td><td>65-verify-method.html</td><td>Pick OTP verification method</td><td><span class="api">POST aadhaarVerifyPinSendOtp</span></td></tr>
+      <tr><td>6</td><td>04-otp.html</td><td>Enter 6-digit OTP, tap Verify</td><td><span class="api">POST loginVerifyAadhaarOtp</span></td></tr>
+      <tr><td>7</td><td>05-mpin.html</td><td>Enter MPIN to confirm</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>8</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="signin-aadhaar-face">
+  <h2>Sign-in · Aadhaar Face (RD) <span class="badge">Sign-in</span></h2>
+  <p class="desc">01-splash → 02-onboarding → 03-login → 61-enter-aadhaar-vid → 65-verify-method → 62-face-auth → 05-mpin → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Get started" (01-splash)
+    S->>S: 02-onboarding
+    U->>S: Choose "Aadhaar / VID" → Aadhaar (03-login)
+    U->>S: Enter Aadhaar (61-enter-aadhaar-vid)
+    Note over S: POST loginSignupAadhaar
+    U->>S: Pick Face authentication (65-verify-method)
+    S->>S: Face auth liveness (62-face-auth)
+    Note over S: POST faceAuthVerifyPid
+    U->>S: Confirm MPIN (05-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-in Aadhaar Face Flow:
+1. 01-splash → Tap "Get started"
+2. 02-onboarding → Value intro
+3. 03-login → Choose "Aadhaar / VID" → Aadhaar
+4. 61-enter-aadhaar-vid → Enter Aadhaar → API: POST loginSignupAadhaar
+5. 65-verify-method → Pick Face authentication
+6. 62-face-auth → Aadhaar FaceRD liveness → API: POST faceAuthVerifyPid
+7. 05-mpin → Confirm MPIN → API: POST loginVerifyPin
+8. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>01-splash.html</td><td>Tap "Get started"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>02-onboarding.html</td><td>Tap "Sign in" / Skip</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>3</td><td>03-login.html</td><td>Choose "Aadhaar / VID" → Aadhaar tab</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>4</td><td>61-enter-aadhaar-vid.html</td><td>Enter Aadhaar number, tap Continue</td><td><span class="api">POST loginSignupAadhaar</span></td></tr>
+      <tr><td>5</td><td>65-verify-method.html</td><td>Pick Face authentication</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>6</td><td>62-face-auth.html</td><td>Complete face liveness check</td><td><span class="api">POST faceAuthVerifyPid</span></td></tr>
+      <tr><td>7</td><td>05-mpin.html</td><td>Enter MPIN to confirm</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>8</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="signin-vid">
+  <h2>Sign-in · VID <span class="badge">Sign-in</span></h2>
+  <p class="desc">01-splash → 02-onboarding → 03-login → 61-enter-aadhaar-vid → 04-otp → 05-mpin → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Get started" (01-splash)
+    S->>S: 02-onboarding
+    U->>S: Choose "Aadhaar / VID" → VID (03-login)
+    U->>S: Enter VID (61-enter-aadhaar-vid)
+    Note over S: POST loginSignupAadhaar
+    S->>S: OTP verify (04-otp)
+    Note over S: POST loginVerifyAadhaarOtp
+    U->>S: Verify MPIN (05-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-in VID Flow:
+1. 01-splash → Tap "Get started"
+2. 02-onboarding → Value intro
+3. 03-login → Choose "Aadhaar / VID" → VID
+4. 61-enter-aadhaar-vid → Enter VID → API: POST loginSignupAadhaar
+5. 04-otp → OTP verify → API: POST loginVerifyAadhaarOtp
+6. 05-mpin → Verify MPIN → API: POST loginVerifyPin
+7. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>01-splash.html</td><td>Tap "Get started"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>02-onboarding.html</td><td>Tap "Sign in" / Skip</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>3</td><td>03-login.html</td><td>Choose "Aadhaar / VID" → VID tab</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>4</td><td>61-enter-aadhaar-vid.html</td><td>Enter VID, tap Continue</td><td><span class="api">POST loginSignupAadhaar</span></td></tr>
+      <tr><td>5</td><td>04-otp.html</td><td>Enter OTP, tap Verify</td><td><span class="api">POST loginVerifyAadhaarOtp</span></td></tr>
+      <tr><td>6</td><td>05-mpin.html</td><td>Enter MPIN to confirm</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>7</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================ RETURNING-USER FLOWS -->
+
+<section class="flow-section" id="returning-biometric">
+  <h2>Returning User · Biometric <span class="badge">Returning</span></h2>
+  <p class="desc">03-login → 05-mpin (auto biometric) → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Continue as [Name]" (03-login)
+    S->>S: Auto biometric prompt (05-mpin)
+    Note over S: POST loginVerifyPin (biometric token)
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Returning User Biometric Flow:
+1. 03-login → Tap "Continue as [Name]"
+2. 05-mpin → Auto fingerprint/face (no MPIN needed) → API: POST loginVerifyPin
+3. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>03-login.html</td><td>Tap "Continue as [Name]"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>05-mpin.html</td><td>Auto fingerprint/face prompt (no MPIN needed)</td><td><span class="api">POST loginVerifyPin (biometric token)</span></td></tr>
+      <tr><td>3</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="returning-mpin">
+  <h2>Returning User · MPIN <span class="badge">Returning</span></h2>
+  <p class="desc">03-login → 05-mpin (keypad) → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Continue as [Name]" (03-login)
+    U->>S: Enter 6-digit MPIN (05-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Returning User MPIN Flow:
+1. 03-login → Tap "Continue as [Name]"
+2. 05-mpin → Enter 6-digit MPIN → API: POST loginVerifyPin
+3. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>03-login.html</td><td>Tap "Continue as [Name]"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>05-mpin.html</td><td>Enter 6-digit MPIN on keypad</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>3</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================ SIGN-UP FLOWS -->
+
+<section class="flow-section" id="signup-mobile">
+  <h2>Sign-up · Mobile <span class="badge">Sign-up</span></h2>
+  <p class="desc">03-login → 60-enter-mobile → 04-otp → 68-link-aadhaar → (branch: Aadhaar OTP or Skip) → 64-set-mpin → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+flowchart TD
+    A[03-login: Continue with mobile] --> B[60-enter-mobile: Enter number]
+    B -->|POST signupMobileGenerateOtp| C[04-otp: Verify mobile OTP]
+    C -->|POST signupMobileVerifyOtp| D{68-link-aadhaar: Link Aadhaar?}
+    D -->|Enter Aadhaar| E[04-otp: Aadhaar OTP]
+    D -->|Skip| F[52-signup: Enter details]
+    E -->|POST signupLinkAadhaarVerifyOtp| G[64-set-mpin: Set PIN]
+    F -->|POST signupNonAadhaar| G
+    G -->|POST signupSetPin| H[06-home: Dashboard]
+    </div>
+    <pre class="fallback">Sign-up Mobile Flow:
+1. 03-login → Continue with mobile
+2. 60-enter-mobile → Enter number → API: POST signupMobileGenerateOtp
+3. 04-otp → Verify OTP → API: POST signupMobileVerifyOtp
+4. 68-link-aadhaar → Link Aadhaar? (decision point)
+   Path A: Enter Aadhaar → 04-otp (Aadhaar OTP) → API: POST signupLinkAadhaarVerifyOtp → 64-set-mpin
+   Path B: Skip → 52-signup (Enter details) → API: POST signupNonAadhaar → 64-set-mpin
+5. 64-set-mpin → Set PIN → API: POST signupSetPin
+6. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>03-login.html</td><td>Tap "Continue with mobile" (new user)</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>60-enter-mobile.html</td><td>Enter number, tap Continue</td><td><span class="api">POST signupMobileGenerateOtp</span></td></tr>
+      <tr><td>3</td><td>04-otp.html</td><td>Enter OTP, tap Verify</td><td><span class="api">POST signupMobileVerifyOtp</span></td></tr>
+      <tr><td>4</td><td>68-link-aadhaar-signup.html</td><td>Decision: Link Aadhaar or Skip?</td><td><span class="no-api">—</span></td></tr>
+      <tr><td colspan="4" style="background:var(--g100);font-weight:700;font-size:12px">↳ Path A: If user enters Aadhaar</td></tr>
+      <tr><td>5a</td><td>04-otp.html</td><td>Enter Aadhaar OTP</td><td><span class="api">POST signupLinkAadhaarVerifyOtp</span></td></tr>
+      <tr><td colspan="4" style="background:var(--g100);font-weight:700;font-size:12px">↳ Path B: If user skips Aadhaar</td></tr>
+      <tr><td>5b</td><td>52-signup.html</td><td>Enter name, DOB, gender, email</td><td><span class="api">POST signupNonAadhaar</span></td></tr>
+      <tr><td>6</td><td>64-set-mpin.html</td><td>Set PIN + enable biometric</td><td><span class="api">POST signupSetPin</span></td></tr>
+      <tr><td>7</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="signup-aadhaar-otp">
+  <h2>Sign-up · Aadhaar OTP <span class="badge">Sign-up</span></h2>
+  <p class="desc">03-login → 69-signup-aadhaar → 04-otp → 64-set-mpin → 66-add-mobile → 04-otp → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Continue with Aadhaar (03-login)
+    U->>S: Enter Aadhaar, choose OTP (69-signup-aadhaar)
+    Note over S: POST signupAadhaarGenerateOtp
+    S->>S: Aadhaar OTP verify (04-otp)
+    Note over S: POST signupAadhaarVerifyOtp
+    U->>S: Create MPIN (64-set-mpin)
+    Note over S: POST signupSetPin
+    U->>S: Set mobile number (66-add-mobile)
+    Note over S: POST addMobileSendOtp
+    S->>S: Verify mobile OTP (04-otp)
+    Note over S: POST addMobileVerifyOtp
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-up Aadhaar OTP Flow:
+1. 03-login → Continue with Aadhaar
+2. 69-signup-aadhaar → Enter Aadhaar, choose OTP → API: POST signupAadhaarGenerateOtp
+3. 04-otp → Verify Aadhaar OTP → API: POST signupAadhaarVerifyOtp
+4. 64-set-mpin → Create MPIN → API: POST signupSetPin
+5. 66-add-mobile → Set mobile (mandatory) → API: POST addMobileSendOtp
+6. 04-otp → Verify mobile OTP → API: POST addMobileVerifyOtp
+7. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>03-login.html</td><td>Continue with Aadhaar</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>69-signup-aadhaar.html</td><td>Enter Aadhaar, choose OTP</td><td><span class="api">POST signupAadhaarGenerateOtp</span></td></tr>
+      <tr><td>3</td><td>04-otp.html</td><td>Verify Aadhaar OTP</td><td><span class="api">POST signupAadhaarVerifyOtp</span></td></tr>
+      <tr><td>4</td><td>64-set-mpin.html</td><td>Create MPIN (name/DOB from Aadhaar)</td><td><span class="api">POST signupSetPin</span></td></tr>
+      <tr><td>5</td><td>66-add-mobile.html</td><td>Set mobile number (mandatory)</td><td><span class="api">POST addMobileSendOtp</span></td></tr>
+      <tr><td>6</td><td>04-otp.html</td><td>Verify mobile OTP</td><td><span class="api">POST addMobileVerifyOtp</span></td></tr>
+      <tr><td>7</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="signup-aadhaar-face">
+  <h2>Sign-up · Aadhaar Face (RD) <span class="badge">Sign-up</span></h2>
+  <p class="desc">03-login → 69-signup-aadhaar → 62-face-auth → 64-set-mpin → 66-add-mobile → 04-otp → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Continue with Aadhaar (03-login)
+    U->>S: Enter Aadhaar, choose Face (69-signup-aadhaar)
+    Note over S: POST signupAadhaarGenerateOtp
+    S->>S: Face auth liveness (62-face-auth)
+    Note over S: POST faceAuthVerifyPid
+    U->>S: Create MPIN (64-set-mpin)
+    Note over S: POST signupSetPin
+    U->>S: Set mobile number (66-add-mobile)
+    Note over S: POST addMobileSendOtp
+    S->>S: Verify mobile OTP (04-otp)
+    Note over S: POST addMobileVerifyOtp
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-up Aadhaar Face Flow:
+1. 03-login → Continue with Aadhaar
+2. 69-signup-aadhaar → Enter Aadhaar, choose Face → API: POST signupAadhaarGenerateOtp
+3. 62-face-auth → Face auth liveness → API: POST faceAuthVerifyPid
+4. 64-set-mpin → Create MPIN → API: POST signupSetPin
+5. 66-add-mobile → Set mobile (mandatory) → API: POST addMobileSendOtp
+6. 04-otp → Verify mobile OTP → API: POST addMobileVerifyOtp
+7. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>03-login.html</td><td>Continue with Aadhaar</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>69-signup-aadhaar.html</td><td>Enter Aadhaar, choose Face</td><td><span class="api">POST signupAadhaarGenerateOtp</span></td></tr>
+      <tr><td>3</td><td>62-face-auth.html</td><td>Complete face liveness check</td><td><span class="api">POST faceAuthVerifyPid</span></td></tr>
+      <tr><td>4</td><td>64-set-mpin.html</td><td>Create MPIN (name/DOB from Aadhaar)</td><td><span class="api">POST signupSetPin</span></td></tr>
+      <tr><td>5</td><td>66-add-mobile.html</td><td>Set mobile number (mandatory)</td><td><span class="api">POST addMobileSendOtp</span></td></tr>
+      <tr><td>6</td><td>04-otp.html</td><td>Verify mobile OTP</td><td><span class="api">POST addMobileVerifyOtp</span></td></tr>
+      <tr><td>7</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="signup-vid">
+  <h2>Sign-up · VID <span class="badge">Sign-up</span></h2>
+  <p class="desc">03-login → 70-signup-vid → 04-otp → 64-set-mpin → 66-add-mobile → 04-otp → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Continue with VID (03-login)
+    U->>S: Enter VID (70-signup-vid)
+    Note over S: POST signupAadhaarGenerateOtp
+    S->>S: VID OTP verify (04-otp)
+    Note over S: POST signupAadhaarVerifyOtp
+    U->>S: Create MPIN (64-set-mpin)
+    Note over S: POST signupSetPin
+    U->>S: Set mobile number (66-add-mobile)
+    Note over S: POST addMobileSendOtp
+    S->>S: Verify mobile OTP (04-otp)
+    Note over S: POST addMobileVerifyOtp
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Sign-up VID Flow:
+1. 03-login → Continue with VID
+2. 70-signup-vid → Enter VID, send OTP → API: POST signupAadhaarGenerateOtp
+3. 04-otp → Verify VID OTP → API: POST signupAadhaarVerifyOtp
+4. 64-set-mpin → Create MPIN → API: POST signupSetPin
+5. 66-add-mobile → Set mobile (mandatory) → API: POST addMobileSendOtp
+6. 04-otp → Verify mobile OTP → API: POST addMobileVerifyOtp
+7. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>03-login.html</td><td>Continue with VID</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>70-signup-vid.html</td><td>Enter VID, send OTP</td><td><span class="api">POST signupAadhaarGenerateOtp</span></td></tr>
+      <tr><td>3</td><td>04-otp.html</td><td>Verify VID OTP</td><td><span class="api">POST signupAadhaarVerifyOtp</span></td></tr>
+      <tr><td>4</td><td>64-set-mpin.html</td><td>Create MPIN (name/DOB from Aadhaar)</td><td><span class="api">POST signupSetPin</span></td></tr>
+      <tr><td>5</td><td>66-add-mobile.html</td><td>Set mobile number (mandatory)</td><td><span class="api">POST addMobileSendOtp</span></td></tr>
+      <tr><td>6</td><td>04-otp.html</td><td>Verify mobile OTP</td><td><span class="api">POST addMobileVerifyOtp</span></td></tr>
+      <tr><td>7</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================ UTILITY FLOWS -->
+
+<section class="flow-section" id="forgot-pin">
+  <h2>Forgot PIN <span class="badge">Utility</span></h2>
+  <p class="desc">05-mpin → 63-forgot-dob → 04-otp → 64-set-mpin → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Forgot MPIN?" (05-mpin)
+    U->>S: Verify DOB (63-forgot-dob)
+    Note over S: POST verifyDob
+    S->>S: OTP verify (04-otp)
+    Note over S: POST mobileForgotPinVerifyOtp
+    U->>S: Set new MPIN (64-set-mpin)
+    Note over S: POST signupSetPin
+    S->>S: 06-home (Dashboard)
+    </div>
+    <pre class="fallback">Forgot PIN Flow:
+1. 05-mpin → Tap "Forgot MPIN?"
+2. 63-forgot-dob → Verify DOB → API: POST verifyDob
+3. 04-otp → OTP verify → API: POST mobileForgotPinVerifyOtp
+4. 64-set-mpin → Set new MPIN → API: POST signupSetPin
+5. 06-home → Dashboard</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>05-mpin.html</td><td>Tap "Forgot MPIN?"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>63-forgot-dob.html</td><td>Enter date of birth, tap Verify</td><td><span class="api">POST verifyDob</span></td></tr>
+      <tr><td>3</td><td>04-otp.html</td><td>Enter OTP, tap Verify</td><td><span class="api">POST mobileForgotPinVerifyOtp</span></td></tr>
+      <tr><td>4</td><td>64-set-mpin.html</td><td>Set new MPIN + enable biometric</td><td><span class="api">POST signupSetPin</span></td></tr>
+      <tr><td>5</td><td>06-home.html</td><td>— (Dashboard loaded)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="switch-account">
+  <h2>Switch Account <span class="badge">Utility</span></h2>
+  <p class="desc">21-account → 75-switch-account → 78-add-profile → 04-otp → 64-set-mpin → 05-mpin → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Switch account" (21-account)
+    S->>S: Switch account hub (75-switch-account)
+    U->>S: Add profile same number (78-add-profile)
+    Note over S: POST loginSignupAadhaar
+    S->>S: OTP verify (04-otp)
+    Note over S: POST loginVerifyAadhaarOtp
+    U->>S: Set MPIN for new profile (64-set-mpin)
+    Note over S: POST signupSetPin
+    U->>S: MPIN to switch (05-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: 06-home (switched profile)
+    </div>
+    <pre class="fallback">Switch Account Flow:
+1. 21-account → Tap "Switch account"
+2. 75-switch-account → Switch account hub
+3. 78-add-profile → Add profile (same number) → API: POST loginSignupAadhaar
+4. 04-otp → OTP verify → API: POST loginVerifyAadhaarOtp
+5. 64-set-mpin → Set MPIN for new profile → API: POST signupSetPin
+6. 05-mpin → MPIN to switch → API: POST loginVerifyPin
+7. 06-home → Shows switched profile</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>21-account.html</td><td>Tap "Switch account"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>75-switch-account.html</td><td>View all profiles linked to this number</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>3</td><td>78-add-profile-samenumber.html</td><td>Enter Aadhaar/VID for new profile</td><td><span class="api">POST loginSignupAadhaar</span></td></tr>
+      <tr><td>4</td><td>04-otp.html</td><td>Enter OTP (to shared device number)</td><td><span class="api">POST loginVerifyAadhaarOtp</span></td></tr>
+      <tr><td>5</td><td>64-set-mpin.html</td><td>Set MPIN for new profile</td><td><span class="api">POST signupSetPin</span></td></tr>
+      <tr><td>6</td><td>05-mpin.html</td><td>Enter MPIN to switch (no OTP needed)</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>7</td><td>06-home.html</td><td>— (Shows switched-to profile)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="add-another-person">
+  <h2>Add Another Person's Account <span class="badge">Utility</span></h2>
+  <p class="desc">75-switch-account → 76-add-account-identity → 04-otp → 77-add-account-mpin → 77-add-account-done → 06-home</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "Add another person" (75-switch-account)
+    U->>S: Enter their Aadhaar/VID (76-add-account-identity)
+    Note over S: POST loginSignupAadhaar
+    S->>S: OTP sent to THEIR mobile (04-otp)
+    Note over S: POST loginVerifyAadhaarOtp
+    U->>S: Their existing MPIN (77-add-account-mpin)
+    Note over S: POST loginVerifyPin
+    S->>S: Added confirmation (77-add-account-done)
+    S->>S: 06-home (logged in as that person)
+    </div>
+    <pre class="fallback">Add Another Person Flow:
+1. 75-switch-account → Tap "Add another person's account"
+2. 76-add-account-identity → Enter their Aadhaar/VID → API: POST loginSignupAadhaar
+3. 04-otp → OTP sent to THEIR Aadhaar-linked mobile → API: POST loginVerifyAadhaarOtp
+4. 77-add-account-mpin → Their existing MPIN → API: POST loginVerifyPin
+5. 77-add-account-done → Added confirmation
+6. 06-home → Logged in as that person</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>75-switch-account.html</td><td>Tap "Add another person's account"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>76-add-account-identity.html</td><td>Enter their Aadhaar/VID</td><td><span class="api">POST loginSignupAadhaar</span></td></tr>
+      <tr><td>3</td><td>04-otp.html</td><td>OTP sent to THEIR mobile</td><td><span class="api">POST loginVerifyAadhaarOtp</span></td></tr>
+      <tr><td>4</td><td>77-add-account-mpin.html</td><td>Enter their existing MPIN</td><td><span class="api">POST loginVerifyPin</span></td></tr>
+      <tr><td>5</td><td>77-add-account-done.html</td><td>Added confirmation</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>6</td><td>06-home.html</td><td>— (Logged in as that person)</td><td><span class="api">GET getProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================ POST-LOGIN FLOWS -->
+
+<section class="flow-section" id="flow-notifications">
+  <h2>Notifications <span class="badge">Post-login</span></h2>
+  <p class="desc">06-home → 20-notifications</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap bell icon (06-home)
+    S->>S: Notifications inbox (20-notifications)
+    Note over S: GET notifications (TBD)
+    </div>
+    <pre class="fallback">Notifications Flow:
+1. 06-home → Tap bell icon (unread indicator)
+2. 20-notifications → Typed inbox: verify requests, docs, security → API: TBD</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>06-home.html</td><td>Tap bell icon (unread indicator)</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>20-notifications.html</td><td>View notifications inbox</td><td><span class="api">TBD</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-dashboard">
+  <h2>Dashboard <span class="badge">Post-login</span></h2>
+  <p class="desc">06-home (identity health, wallet, promo banner, quick actions, services)</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 06-home loads
+    Note over S: GET getProfile (screen-load)
+    Note over S: GET allAndRefreshListIssued (screen-load)
+    Note over S: GET getCategoryList (screen-load)
+    </div>
+    <pre class="fallback">Dashboard Flow:
+1. 06-home → Screen loads with:
+   - API: GET getProfile (screen-load)
+   - API: GET allAndRefreshListIssued (screen-load)
+   - API: GET getCategoryList (screen-load)
+   Shows: Identity health, wallet, promo banner + ad slot, quick actions, services</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>06-home.html</td><td>Screen loads</td><td><span class="api">GET getProfile</span></td></tr>
+      <tr><td>2</td><td>06-home.html</td><td>Screen loads</td><td><span class="api">GET allAndRefreshListIssued</span></td></tr>
+      <tr><td>3</td><td>06-home.html</td><td>Screen loads</td><td><span class="api">GET getCategoryList</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-totp">
+  <h2>TOTP / Authenticator <span class="badge">Post-login</span></h2>
+  <p class="desc">21-account → 79-authenticator → 23-scan → 80-qr-login-approval</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Tap "DigiLocker Authenticator" (21-account)
+    S->>S: 79-authenticator (60s rotating code)
+    Note over S: GET getTotpSecretKey
+    U->>S: Or: Tap "Sign in on web" (23-scan)
+    S->>S: Scan QR code
+    S->>S: 80-qr-login-approval
+    Note over S: POST approveQrLogin
+    </div>
+    <pre class="fallback">TOTP / Authenticator Flow:
+1. 21-account → Tap "DigiLocker Authenticator"
+2. 79-authenticator → 60s rotating 6-digit code → API: GET getTotpSecretKey
+3. 23-scan → Or: "Sign in on web" QR option
+4. 80-qr-login-approval → Approve/Deny → API: POST approveQrLogin</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>21-account.html</td><td>Tap "DigiLocker Authenticator"</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>79-authenticator.html</td><td>View 60s rotating code</td><td><span class="api">GET getTotpSecretKey</span></td></tr>
+      <tr><td>3</td><td>23-scan.html</td><td>Or: Tap "Sign in on web" option</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>4</td><td>80-qr-login-approval.html</td><td>Approve/Deny web sign-in</td><td><span class="api">POST approveQrLogin</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-wallet">
+  <h2>Wallet / Documents <span class="badge">Post-login</span></h2>
+  <p class="desc">07-wallet → 08-document-detail → 09-share → 10-verify → 11-fetch → 11b-category → 11c-state → 11d-confirm</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 07-wallet (all credentials)
+    Note over S: GET allAndRefreshListIssued
+    U->>S: Tap document (08-document-detail)
+    Note over S: GET issuedMetadata
+    U->>S: Tap Share (09-share)
+    Note over S: POST profileSharedApi
+    U->>S: Tap Show ID (10-verify)
+    Note over S: POST generateQRToken
+    U->>S: Tap Get document (11-fetch)
+    Note over S: GET getCategoryList
+    U->>S: Choose category (11b-category)
+    U->>S: Browse by state (11c-state)
+    U->>S: Confirm & fetch (11d-confirm)
+    Note over S: POST pullRequest
+    </div>
+    <pre class="fallback">Wallet / Documents Flow:
+1. 07-wallet → All credentials → API: GET allAndRefreshListIssued
+2. 08-document-detail → Field-level disclosure → API: GET issuedMetadata
+3. 09-share → Field-level consent → API: POST profileSharedApi
+4. 10-verify → Offline QR / NFC → API: POST generateQRToken
+5. 11-fetch → Get a document (discovery) → API: GET getCategoryList
+6. 11b-category → Issuer list for chosen category
+7. 11c-state → State-wise issuer directory
+8. 11d-confirm → Confirm & Fetch → API: POST pullRequest</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>07-wallet.html</td><td>View all credentials (screen-load)</td><td><span class="api">GET allAndRefreshListIssued</span></td></tr>
+      <tr><td>2</td><td>08-document-detail.html</td><td>Tap a document</td><td><span class="api">GET issuedMetadata</span></td></tr>
+      <tr><td>3</td><td>09-share.html</td><td>Tap Share</td><td><span class="api">POST profileSharedApi</span></td></tr>
+      <tr><td>4</td><td>10-verify.html</td><td>Tap Show ID (offline QR/NFC)</td><td><span class="api">POST generateQRToken</span></td></tr>
+      <tr><td>5</td><td>11-fetch.html</td><td>Tap "Get a document" (discovery)</td><td><span class="api">GET getCategoryList</span></td></tr>
+      <tr><td>6</td><td>11b-category.html</td><td>Choose category</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>7</td><td>11c-state.html</td><td>Browse by state</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>8</td><td>11d-confirm.html</td><td>Confirm &amp; Fetch</td><td><span class="api">POST pullRequest</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-drive">
+  <h2>Drive <span class="badge">Post-login</span></h2>
+  <p class="desc">12-drive → 15-drive-file → 14-upload</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 12-drive (self-uploaded files)
+    Note over S: GET getAllFiles
+    U->>S: Tap file (15-drive-file)
+    Note over S: GET viewFile
+    U->>S: Upload new (14-upload)
+    Note over S: POST uploadFile
+    </div>
+    <pre class="fallback">Drive Flow:
+1. 12-drive → Self-uploaded files → API: GET getAllFiles
+2. 15-drive-file → File viewer + actions → API: GET viewFile
+3. 14-upload → Encrypted upload → API: POST uploadFile</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>12-drive.html</td><td>View files (screen-load)</td><td><span class="api">GET getAllFiles</span></td></tr>
+      <tr><td>2</td><td>15-drive-file.html</td><td>Tap a file</td><td><span class="api">GET viewFile</span></td></tr>
+      <tr><td>3</td><td>14-upload.html</td><td>Tap Upload</td><td><span class="api">POST uploadFile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-esign">
+  <h2>eSign <span class="badge">Post-login</span></h2>
+  <p class="desc">30-esign</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Navigate to eSign (30-esign)
+    Note over S: Aadhaar eSign flow (TBD)
+    </div>
+    <pre class="fallback">eSign Flow:
+1. 30-esign → Aadhaar eSign → API: TBD</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>30-esign.html</td><td>Navigate to eSign</td><td><span class="api">TBD</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-nominee">
+  <h2>Nominee / Nominator <span class="badge">Post-login</span></h2>
+  <p class="desc">17-nominee → 71-add-nominee → 72-view-nominee → 73-nominator-locker</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 17-nominee (My Nominees + Access as Nominee)
+    Note over S: GET getNominee
+    U->>S: Add nominee (71-add-nominee)
+    Note over S: POST addNominee
+    Note over S: POST sendOTPNominee
+    U->>S: View nominee (72-view-nominee)
+    U->>S: Access nominator's locker (73-nominator-locker)
+    Note over S: GET nominatorIssuedDoc
+    </div>
+    <pre class="fallback">Nominee / Nominator Flow:
+1. 17-nominee → My Nominees + Access as Nominee tabs → API: GET getNominee
+2. 71-add-nominee → Add nominee details → OTP → API: POST addNominee, POST sendOTPNominee
+3. 72-view-nominee → Read-only detail + remove
+4. 73-nominator-locker → Access another account → API: GET nominatorIssuedDoc</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>17-nominee.html</td><td>View nominees (screen-load)</td><td><span class="api">GET getNominee</span></td></tr>
+      <tr><td>2</td><td>71-add-nominee.html</td><td>Tap "Add nominee"</td><td><span class="api">POST addNominee + POST sendOTPNominee</span></td></tr>
+      <tr><td>3</td><td>72-view-nominee.html</td><td>View nominee details</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>4</td><td>73-nominator-locker.html</td><td>Access nominator's locker</td><td><span class="api">GET nominatorIssuedDoc</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-scan-qr">
+  <h2>Scan QR Code <span class="badge">Post-login</span></h2>
+  <p class="desc">23-scan → 80-qr-login-approval</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Open scanner (23-scan)
+    S->>S: Scan credential QR or "Sign in on web" QR
+    S->>S: 80-qr-login-approval (web-login path)
+    Note over S: POST approveQrLogin
+    </div>
+    <pre class="fallback">Scan QR Code Flow:
+1. 23-scan → Credential QR or "Sign in on web" QR
+2. 80-qr-login-approval → Approve sign-in (web-login QR path) → API: POST approveQrLogin</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>23-scan.html</td><td>Open scanner (credential QR or web-login QR)</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>80-qr-login-approval.html</td><td>Approve sign-in (web-login path)</td><td><span class="api">POST approveQrLogin</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-consent">
+  <h2>Consent Manager <span class="badge">Post-login</span></h2>
+  <p class="desc">16-consent</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 16-consent (connected apps)
+    Note over S: GET getConsentData
+    U->>S: Revoke access
+    Note over S: POST revokeConsent
+    </div>
+    <pre class="fallback">Consent Manager Flow:
+1. 16-consent → Connected apps → API: GET getConsentData
+2. Revoke access → API: POST revokeConsent</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>16-consent.html</td><td>View connected apps (screen-load)</td><td><span class="api">GET getConsentData</span></td></tr>
+      <tr><td>2</td><td>16-consent.html</td><td>Revoke access</td><td><span class="api">POST revokeConsent</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-vc">
+  <h2>Verifiable Credential <span class="badge">Post-login</span></h2>
+  <p class="desc">19-vc-wallet</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 19-vc-wallet (credentials)
+    Note over S: GET getIssuerList
+    U->>S: Selective disclosure
+    Note over S: POST verifiablePresentation
+    </div>
+    <pre class="fallback">Verifiable Credential Flow:
+1. 19-vc-wallet → Credentials → API: GET getIssuerList
+2. Selective disclosure → API: POST verifiablePresentation</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>19-vc-wallet.html</td><td>View credentials (screen-load)</td><td><span class="api">GET getIssuerList</span></td></tr>
+      <tr><td>2</td><td>19-vc-wallet.html</td><td>Selective disclosure</td><td><span class="api">POST verifiablePresentation</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-health">
+  <h2>Health Locker <span class="badge">Post-login</span></h2>
+  <p class="desc">18-health</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 18-health (ABHA records)
+    Note over S: GET abhaList
+    Note over S: GET getAbhaProfile
+    </div>
+    <pre class="fallback">Health Locker Flow:
+1. 18-health → ABHA records → API: GET abhaList, GET getAbhaProfile</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>18-health.html</td><td>View ABHA records (screen-load)</td><td><span class="api">GET abhaList + GET getAbhaProfile</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-activity">
+  <h2>Activity <span class="badge">Post-login</span></h2>
+  <p class="desc">13-activity</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 13-activity (audit trail)
+    Note over S: GET getActivities
+    </div>
+    <pre class="fallback">Activity Flow:
+1. 13-activity → Audit trail → API: GET getActivities</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>13-activity.html</td><td>View audit trail (screen-load)</td><td><span class="api">GET getActivities</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-account">
+  <h2>Account / Settings <span class="badge">Post-login</span></h2>
+  <p class="desc">21-account → 22-settings</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    S->>S: 21-account (profile, security, switch, authenticator)
+    Note over S: GET getProfile
+    U->>S: Tap Settings (22-settings)
+    Note over S: Local preferences (no API)
+    </div>
+    <pre class="fallback">Account / Settings Flow:
+1. 21-account → Profile, security, switch account, authenticator → API: GET getProfile
+2. 22-settings → Lock, appearance, privacy → No API (local preferences)</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>21-account.html</td><td>View account (screen-load)</td><td><span class="api">GET getProfile</span></td></tr>
+      <tr><td>2</td><td>22-settings.html</td><td>Tap Settings</td><td><span class="no-api">— (local preferences)</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="flow-section" id="flow-saral">
+  <h2>Saral Mode · सरल मोड <span class="badge">Post-login</span></h2>
+  <p class="desc">E1-easy-welcome → E2-easy-home → E3-easy-show → E4-easy-docs → E5-easy-get → E6-easy-talk → E7-easy-help</p>
+  <div class="mermaid-wrap">
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant S as Screens
+    U->>S: Switch to Saral Mode
+    S->>S: E1-easy-welcome (Language + voice)
+    U->>S: Choose language
+    S->>S: E2-easy-home (one task per screen)
+    U->>S: Show ID
+    S->>S: E3-easy-show (Big QR)
+    U->>S: My papers
+    S->>S: E4-easy-docs (picture-led)
+    U->>S: Get paper
+    S->>S: E5-easy-get (guided fetch)
+    U->>S: Talk
+    S->>S: E6-easy-talk (voice assistant)
+    U->>S: Help
+    S->>S: E7-easy-help (call / assist)
+    </div>
+    <pre class="fallback">Saral Mode Flow:
+1. E1-easy-welcome → Language + voice setup
+2. E2-easy-home → One task per screen
+3. E3-easy-show → Show ID (Big QR)
+4. E4-easy-docs → My papers (picture-led)
+5. E5-easy-get → Get paper (guided fetch)
+6. E6-easy-talk → Talk (voice assistant)
+7. E7-easy-help → Help (call / assist)</pre>
+  </div>
+  <table class="step-table">
+    <thead><tr><th>Step</th><th>Screen</th><th>User Action</th><th>API Call</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>E1-easy-welcome.html</td><td>Switch to Saral Mode, choose language</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>2</td><td>E2-easy-home.html</td><td>View easy home (one task per screen)</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>3</td><td>E3-easy-show.html</td><td>Tap "Show ID" (Big QR)</td><td><span class="api">POST generateQRToken</span></td></tr>
+      <tr><td>4</td><td>E4-easy-docs.html</td><td>Tap "My papers" (picture-led)</td><td><span class="api">GET allAndRefreshListIssued</span></td></tr>
+      <tr><td>5</td><td>E5-easy-get.html</td><td>Tap "Get paper" (guided fetch)</td><td><span class="api">GET getCategoryList</span></td></tr>
+      <tr><td>6</td><td>E6-easy-talk.html</td><td>Tap "Talk" (voice assistant)</td><td><span class="no-api">—</span></td></tr>
+      <tr><td>7</td><td>E7-easy-help.html</td><td>Tap "Help" (call/assist)</td><td><span class="no-api">—</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</div><!-- end .wrap -->
+
+<!-- Mermaid CDN with raw-text fallback -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+(function(){
+  // Check if Mermaid loaded successfully
+  if(typeof mermaid !== 'undefined'){
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      securityLevel: 'loose',
+      sequence: { mirrorActors: false, messageMargin: 40 },
+      flowchart: { curve: 'basis', padding: 16 }
+    });
+  } else {
+    // Mermaid CDN failed — show raw text fallbacks
+    activateFallback();
+  }
+
+  function activateFallback(){
+    var wraps = document.querySelectorAll('.mermaid-wrap');
+    wraps.forEach(function(wrap){
+      wrap.classList.add('mermaid-failed');
+    });
+  }
+
+  // Also handle async load failure (script loaded but errored)
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      var diagrams = document.querySelectorAll('.mermaid svg');
+      if(diagrams.length === 0){
+        activateFallback();
+      }
+    }, 3000);
+  });
+})();
+</script>
+</body></html>

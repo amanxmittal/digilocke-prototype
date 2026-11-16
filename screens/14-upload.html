@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Upload</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('12-drive.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Upload to Drive</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="srcgrid">
+          <div class="srctile" onclick="up()"><div class="si"><span data-ic="camera"></span></div><b class="sm">Camera</b></div>
+          <div class="srctile" onclick="up()"><div class="si"><span data-ic="image"></span></div><b class="sm">Gallery</b></div>
+          <div class="srctile" onclick="up()"><div class="si"><span data-ic="file"></span></div><b class="sm">Files</b></div>
+          <div class="srctile" onclick="up()"><div class="si"><span data-ic="printer"></span></div><b class="sm">Scan doc</b></div>
+        </div>
+
+        <div id="prog" style="display:none" class="card mt6">
+          <div class="row"><div class="fileicon" style="background:var(--danger)"><span data-ic="file" data-icc="ic-sm"></span></div><div class="grow"><div class="bold sm">Aadhaar_copy.pdf</div><div class="sm muted" id="pct">Uploading… 0%</div></div></div>
+          <div class="pbar mt3"><i id="bar" style="width:0%"></i></div>
+        </div>
+
+        <div class="alert info mt6"><span data-ic="lock" data-icc="ic-sm"></span><span>Files are encrypted on-device before upload and stored in your private Drive.</span></div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function up(){document.getElementById('prog').style.display='block';var p=0;var b=document.getElementById('bar');var t=document.getElementById('pct');
+  var iv=setInterval(function(){p+=20;if(p>100)p=100;b.style.width=p+'%';t.textContent='Uploading… '+p+'%';
+    if(p===100){clearInterval(iv);t.textContent='Uploaded';toast('Uploaded to Drive','check');setTimeout(function(){nav('12-drive.html')},700);}},350);}
+</script>
+</body></html>

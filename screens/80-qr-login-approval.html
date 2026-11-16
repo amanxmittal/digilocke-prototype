@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Approve sign-in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('23-scan.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Approve sign-in</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="assur">
+          <div class="ribbon"></div>
+          <div class="row" style="position:relative"><span class="assurbadge"><span data-ic="shield" data-icc="ic-sm"></span>Sign-in request</span></div>
+          <div class="h2 mt3" style="color:#fff;position:relative">Someone wants to sign in with your DigiLocker account</div>
+          <div class="sm mt2" style="opacity:.9;position:relative">Only approve this if you just tried signing in on the website below.</div>
+        </div>
+
+        <div class="card mt5">
+          <div class="fieldfill"><div class="v"><div class="lab">Website</div><div class="val">digilocker.gov.in</div></div></div>
+          <div class="fieldfill"><div class="v"><div class="lab">Device</div><div class="val">Chrome on Windows</div></div></div>
+          <div class="fieldfill" style="border-bottom:0"><div class="v"><div class="lab">Time</div><div class="val">02:45 PM · 07 Jul 2026</div></div></div>
+        </div>
+
+        <div class="alert warn mt5"><span data-ic="lock" data-icc="ic-sm"></span><span>If you didn't request this, tap Deny — someone else may have your Aadhaar/VID number.</span></div>
+
+        <div class="row gap2 mt6">
+          <button class="btn ghost grow" onclick="nav('23-scan.html')">Deny</button>
+          <button class="btn grow" onclick="approve()">Allow</button>
+        </div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+// Mirrors v2's QrLoginApprovalActivity: builds an encrypted {session_id} payload and posts it
+// to approve_qr; on success the web session is authenticated and this screen closes.
+function approve(){
+  toast('Verifying…','shield');
+  setTimeout(function(){
+    toast('Sign-in approved ✓','check');
+    setTimeout(function(){ nav('06-home.html'); }, 700);
+  }, 900);
+}
+</script>
+</body></html>

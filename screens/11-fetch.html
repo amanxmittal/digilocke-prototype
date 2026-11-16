@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Get a document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+/* Category grid */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:var(--s4)}
+.cat-tile{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px;background:var(--surface);border:1px solid var(--hair);border-radius:var(--r-lg);cursor:pointer;text-align:center;transition:transform var(--fast) var(--spring),box-shadow var(--fast)}
+.cat-tile:active{transform:scale(.96)}
+.cat-tile:focus-visible{outline:0;box-shadow:var(--focus)}
+.cat-tile .ct-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--dl-primary);background:var(--dl-primary-50)}
+.cat-tile .ct-name{font-size:var(--t-cap);font-weight:600;line-height:1.25;color:var(--ink)}
+/* Search wrapper */
+.search-wrap{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:2px 14px}
+.search-wrap input{flex:1;border:0;background:transparent;font-size:15px;font-family:inherit;color:var(--ink);padding:12px 0;outline:none}
+.search-wrap input::placeholder{color:var(--ink-3)}
+</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('07-wallet.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Get a document</div></div>
+      <div class="pad" style="padding-top:14px">
+
+        <!-- Search bar -->
+        <div class="search-wrap" onclick="toast('Search coming soon — browse categories below','search')">
+          <span data-ic="search" data-icc="ic-sm"></span>
+          <input type="text" placeholder="Search documents or issuers" onfocus="toast('Search coming soon — browse categories below','search');this.blur()">
+        </div>
+
+        <!-- Category grid -->
+        <div class="eyebrow mt5">Categories</div>
+        <div class="cat-grid" id="catGrid"></div>
+
+        <!-- Browse by State -->
+        <div class="card mt5" style="padding:0">
+          <div class="lrow" style="padding:14px 16px;border-bottom:0" onclick="nav('11c-state.html')" role="button" tabindex="0" aria-label="Browse by State">
+            <div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)"><span data-ic="map"></span></div>
+            <div class="grow"><div class="bold sm">Browse by State</div><div class="sm muted">Find documents by your state or UT</div></div>
+            <span data-ic="chev" data-icc="ic-sm"></span>
+          </div>
+        </div>
+
+        <!-- Trending -->
+        <div class="eyebrow mt6">🔥 Trending</div>
+        <div class="card mt3" id="trendingList"></div>
+
+        <!-- Popular -->
+        <div class="eyebrow mt6">⭐ Popular</div>
+        <div class="card mt3" id="popularList"></div>
+
+        <!-- Newly Added -->
+        <div class="eyebrow mt6">✨ Newly Added</div>
+        <div class="card mt3" id="newList"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+/* ---- Simulated data ---- */
+var CATEGORIES = [
+  {catId:"1", name:"Education & Learning", icon:"grad"},
+  {catId:"2", name:"Central Government", icon:"building"},
+  {catId:"3", name:"State Government", icon:"map"},
+  {catId:"4", name:"Industry & Private Sector", icon:"building"},
+  {catId:"5", name:"Government & Public Sector", icon:"shield"},
+  {catId:"6", name:"Banking, Financial Services & Insurance", icon:"rupee"},
+  {catId:"7", name:"Skill & Vocational", icon:"award"},
+  {catId:"8", name:"Ministry of Defence", icon:"shield"},
+  {catId:"9", name:"Transport & Infrastructure", icon:"car"},
+  {catId:"10", name:"Health & Wellness", icon:"health"},
+  {catId:"11", name:"Identity Docs", icon:"idcard"},
+  {catId:"12", name:"National Service Scheme", icon:"people"},
+  {catId:"13", name:"Sports & Culture", icon:"award"}
+];
+
+var DOC_ITEMS = [
+  {id:"DL001", name:"Driving Licence", issuer:"Ministry of Road Transport", icon:"car", trending:1, popular:1, newadded:0},
+  {id:"ED001", name:"Class XII Marksheet", issuer:"CBSE", icon:"grad", trending:1, popular:1, newadded:0},
+  {id:"FIN001", name:"PAN Verification", issuer:"Income Tax Dept", icon:"doc", trending:0, popular:1, newadded:1},
+  {id:"ED002", name:"Class X Marksheet", issuer:"CBSE", icon:"grad", trending:1, popular:0, newadded:0},
+  {id:"VEH001", name:"Vehicle Registration (RC)", issuer:"Ministry of Road Transport", icon:"car", trending:1, popular:0, newadded:0},
+  {id:"HLT001", name:"Vaccination Certificate", issuer:"Ministry of Health", icon:"health", trending:0, popular:1, newadded:1},
+  {id:"ID001", name:"Aadhaar Card", issuer:"UIDAI", icon:"idcard", trending:0, popular:0, newadded:1},
+  {id:"SKL001", name:"Skill Certificate", issuer:"NSDC", icon:"award", trending:0, popular:0, newadded:1}
+];
+
+/* ---- Render categories ---- */
+(function(){
+  var grid = document.getElementById('catGrid');
+  grid.innerHTML = CATEGORIES.map(function(c){
+    return '<div class="cat-tile" onclick="nav(\'11b-category.html#cat='+c.catId+'&name='+encodeURIComponent(c.name)+'\')" role="button" tabindex="0" aria-label="'+c.name+'">'
+      + '<div class="ct-ic">'+svg(c.icon)+'</div>'
+      + '<div class="ct-name">'+c.name+'</div></div>';
+  }).join('');
+})();
+
+/* ---- Render doc lists ---- */
+function docRow(d, isLast){
+  return '<div class="lrow" style="'+(isLast?'border-bottom:0':'')+'" onclick="nav(\'11d-confirm.html#doc='+d.id+'&name='+encodeURIComponent(d.name)+'&issuer='+encodeURIComponent(d.issuer)+'&icon='+d.icon+'\')" role="button" tabindex="0" aria-label="'+d.name+'">'
+    + '<div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)">'+svg(d.icon)+'</div>'
+    + '<div class="grow"><div class="bold sm">'+d.name+'</div><div class="sm muted">'+d.issuer+'</div></div>'
+    + svg('chev','ic-sm')+'</div>';
+}
+function renderList(elId, items){
+  var el = document.getElementById(elId);
+  el.innerHTML = items.map(function(d,i){ return docRow(d, i===items.length-1); }).join('');
+}
+
+var trending = DOC_ITEMS.filter(function(d){return d.trending===1;});
+var popular = DOC_ITEMS.filter(function(d){return d.popular===1;});
+var newadded = DOC_ITEMS.filter(function(d){return d.newadded===1;});
+
+renderList('trendingList', trending);
+renderList('popularList', popular);
+renderList('newList', newadded);
+</script>
+</body></html>

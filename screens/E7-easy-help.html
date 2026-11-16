@@ -1,0 +1,43 @@
+<!doctype html><html lang="hi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Easy · Help</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen easy">
+    <div class="statusbar "><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+<div class="ebar">
+      <button class="iconbtn" style="width:52px;height:52px" onclick="goBack('E2-easy-home.html')" aria-label="Back / वापस"><span data-ic="back" data-icc="ic-lg"></span></button>
+      <div class="grow"><b style="font-size:19px">मदद</b></div>
+      <button class="spk" onclick="speak('घबराइए मत। आप किसी अपने को बुला सकते हैं, नज़दीकी केंद्र जा सकते हैं, या वीडियो में सीख सकते हैं।')" aria-label="Read page"><span data-ic="speaker" data-icc=""></span></button>
+      <button class="spk" style="background:var(--warning-50);color:#9a6b00" onclick="nav('E7-easy-help.html')" aria-label="Help"><span data-ic="help" data-icc=""></span></button></div>
+<div class="epad">
+  <div class="ereassure"><span data-ic="check" data-icc=""></span><div>घबराइए मत — मदद यहीं है।<br><span style="font-size:13px;font-weight:600;opacity:.8">Don't worry — help is right here.</span></div></div>
+  <div class="col gap4 mt5">
+    <button class="ebtn" onclick="speak('किसी अपने को बुला रहे हैं');toast('Calling your helper…','phone2')"><div class="eic" style="background:var(--green)"><span data-ic="phone2" data-icc=""></span></div><div class="etx"><b>किसी अपने को बुलाएँ</b><span>Call a family helper</span></div><button class="spk" aria-label="Read aloud" onclick="event.stopPropagation();speak('किसी अपने को बुलाएँ')"><span data-ic="speaker" data-icc=""></span></button></button>
+    <button class="ebtn" onclick="speak('नज़दीकी केंद्र दिखा रहे हैं');toast('Nearest CSC centre…','map')"><div class="eic" style="background:var(--dl-primary)"><span data-ic="building" data-icc=""></span></div><div class="etx"><b>नज़दीकी सहायता केंद्र</b><span>Nearest CSC centre</span></div><button class="spk" aria-label="Read aloud" onclick="event.stopPropagation();speak('नज़दीकी सहायता केंद्र')"><span data-ic="speaker" data-icc=""></span></button></button>
+    <button class="ebtn" onclick="speak('वीडियो चला रहे हैं');toast('Playing how-to video…','play')"><div class="eic" style="background:var(--dl-secondary)"><span data-ic="play" data-icc=""></span></div><div class="etx"><b>वीडियो में सीखें</b><span>Watch how it works</span></div><button class="spk" aria-label="Read aloud" onclick="event.stopPropagation();speak('वीडियो में सीखें')"><span data-ic="speaker" data-icc=""></span></button></button>
+  </div>
+</div>
+<div class="voicebar"><button class="micbtn" onclick="listen(this,function(){speak('बताइए, आप क्या करना चाहते हैं?')})"><span data-ic="mic" data-icc="mi"></span><span>मुझसे बोलिए · Talk to me</span></button></div></div>
+    <div class="homebar"></div>
+    
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function boardTheme(){var on=localStorage.getItem('dl-theme')==='dark';localStorage.setItem('dl-theme',on?'light':'dark');
+  document.querySelectorAll('iframe').forEach(function(f){f.src=f.src});
+  var b=document.getElementById('tg');if(b)b.textContent=on?'🌙 Dark preview':'☀️ Light preview';}
+</script>
+</body></html>

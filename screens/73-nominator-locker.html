@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Nominator locker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('17-nominee.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title" id="ttl">Debabrata Nayak</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="card row">
+          <div id="av" style="width:52px;height:52px;border-radius:15px;background:var(--dl-grad);color:#fff;display:grid;place-items:center;font-weight:800">DN</div>
+          <div class="grow"><div class="bold" id="name">Debabrata Nayak</div><div class="sm muted">You're viewing this locker as a nominee</div></div>
+        </div>
+
+        <div class="seg mt5"><button class="on" onclick="tab(this);showTab('issued')">Issued Documents</button><button onclick="tab(this);showTab('drive')">Drive</button></div>
+
+        <div id="tab-issued" class="mt4">
+          <div class="card">
+            <div class="lrow"><div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)"><span data-ic="idcard"></span></div><div class="grow"><div class="bold sm">Aadhaar</div><div class="sm muted">UIDAI · Verified</div></div><span data-ic="chev" data-icc="ic-sm"></span></div>
+            <div class="lrow" style="border-bottom:0"><div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)"><span data-ic="doc"></span></div><div class="grow"><div class="bold sm">PAN Card</div><div class="sm muted">Income Tax Dept</div></div><span data-ic="chev" data-icc="ic-sm"></span></div>
+          </div>
+        </div>
+
+        <div id="tab-drive" class="mt4" style="display:none">
+          <div class="card">
+            <div class="lrow"><div class="fileicon" style="background:var(--danger)"><span data-ic="file" data-icc="ic-sm"></span></div><div class="grow"><div class="bold sm">Insurance_policy.pdf</div><div class="sm muted">1.1 MB</div></div></div>
+            <div class="lrow" style="border-bottom:0"><div class="fileicon" style="background:var(--blue)"><span data-ic="image" data-icc="ic-sm"></span></div><div class="grow"><div class="bold sm">Locker_photo.jpg</div><div class="sm muted">340 KB</div></div></div>
+          </div>
+        </div>
+
+        <div class="alert info mt5"><span data-ic="shield" data-icc="ic-sm"></span><span>Read-only nominee access. All views are logged in the account holder's activity.</span></div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+function showTab(t){document.getElementById('tab-issued').style.display=t==='issued'?'block':'none';document.getElementById('tab-drive').style.display=t==='drive'?'block':'none';}
+(function(){var name=new URLSearchParams(location.search).get('name');if(name){document.getElementById('ttl').textContent=name;document.getElementById('name').textContent=name;document.getElementById('av').textContent=name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();}})();
+</script>
+</body></html>

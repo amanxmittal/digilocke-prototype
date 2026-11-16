@@ -1,0 +1,261 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+<div class="pad" style="padding-top:50px">
+  <div class="between">
+    <div class="row">
+      <div id="homeAvatar" style="width:46px;height:46px;border-radius:14px;background:var(--dl-grad);color:#fff;display:grid;place-items:center;font-weight:800">DN</div>
+      <div><div class="sm muted" data-i18n="Namaste 🙏">Namaste 🙏</div><div class="h3" id="homeName">Debabrata Nayak</div></div></div>
+    <div class="row gap2">
+      <button class="iconbtn" id="langTrigger" onclick="openLangSheet()" aria-label="Change language" data-i18n-aria="Change language" style="min-width:48px;min-height:48px;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg></button>
+      <button class="iconbtn" onclick="nav('23-scan.html')" aria-label="Scan" data-i18n-aria="Scan"><span data-ic="scan"></span></button>
+      <button class="iconbtn" onclick="nav('20-notifications.html')" aria-label="Notifications" data-i18n-aria="Notifications" style="position:relative"><span data-ic="bell"></span><span style="position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;background:var(--danger);border:2px solid #fff"></span></button>
+    </div></div>
+
+  <!-- IDENTITY HEALTH — Primary card, always on top -->
+  <div class="mt6" style="border-radius:var(--r-xl);padding:14px 16px;background:linear-gradient(135deg,#6366f1 0%,#818cf8 50%,#a5b4fc 100%);color:#fff;box-shadow:0 4px 16px rgba(99,102,241,.2);position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.07)"></div>
+    <div class="between"><span class="cap" data-i18n="IDENTITY HEALTH" style="letter-spacing:1px;opacity:.85;font-weight:700;font-size:10px">IDENTITY HEALTH</span><span class="badge" style="background:rgba(255,255,255,.95);color:var(--green);font-size:10px;padding:3px 8px"><span data-ic="check" data-icc="ic-sm"></span><span data-i18n="Strong">Strong</span></span></div>
+    <div class="row mt2" style="align-items:flex-end;gap:10px"><div style="font-size:32px;font-weight:900;letter-spacing:-1px">92<span style="font-size:13px;opacity:.7;font-weight:600">/100</span></div>
+      <div class="pbar grow" style="background:rgba(255,255,255,.25);margin-bottom:8px;height:5px;border-radius:99px"><i style="width:92%;background:linear-gradient(90deg,#fff,rgba(255,255,255,.85));border-radius:99px"></i></div></div>
+    <div style="opacity:.85;margin-top:4px;font-size:11px;line-height:1.3" data-i18n="Aadhaar linked · 6 docs verified · 1 expiring soon">Aadhaar linked · 6 docs verified · 1 expiring soon</div>
+  </div>
+
+  <!-- Warning/attention card -->
+  <div class="card row mt4" style="border-left:4px solid var(--warning)">
+    <div class="lico" style="background:var(--warning-50);color:#9a6b00"><span data-ic="clock"></span></div>
+    <div class="grow"><div class="bold sm" data-i18n="Vehicle insurance expires in 8 days">Vehicle insurance expires in 8 days</div><div class="sm muted">RC · MH 02 CK 9920</div></div>
+    <button class="btn sm" data-i18n="Renew" onclick="toast('Renewal reminder set','clock')">Renew</button>
+  </div>
+
+  <!-- SECTION 1: Offers & Updates — DigiLocker's own new features/launches -->
+  <div class="cap mt6" data-i18n="OFFERS & UPDATES FOR YOU" style="letter-spacing:1px;font-weight:700;color:var(--ink-3)">OFFERS & UPDATES FOR YOU</div>
+  <div class="mt3" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+    <a onclick="toast('Opening DigiLocker Authenticator','shield')" style="min-width:240px;flex:0 0 240px;scroll-snap-align:start;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#1a0a4a,#3E0DF5 60%,#7C4DFF);padding:14px 16px;color:#fff;position:relative;cursor:pointer;text-decoration:none;display:block">
+      <div style="position:absolute;right:-15px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)"></div>
+      <div class="bold" data-i18n="Try DigiLocker Authenticator" style="font-size:13px">Try DigiLocker Authenticator</div>
+      <div class="sm mt1" data-i18n="Secure 2FA for all your logins" style="opacity:.85;font-size:11px">Secure 2FA for all your logins</div>
+      <div class="sm mt2" data-i18n="Try now ›" style="font-weight:800;opacity:.9;font-size:11px">Try now ›</div>
+    </a>
+    <a onclick="toast('Opening VC Wallet','shield')" style="min-width:240px;flex:0 0 240px;scroll-snap-align:start;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#0E5A63,#0E7C86 55%,#22C7D6);padding:14px 16px;color:#fff;position:relative;cursor:pointer;text-decoration:none;display:block">
+      <div style="position:absolute;right:-15px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)"></div>
+      <div class="bold" data-i18n="Verifiable Credentials" style="font-size:13px">Verifiable Credentials</div>
+      <div class="sm mt1" data-i18n="Share only what's needed — selective disclosure" style="opacity:.85;font-size:11px">Share only what's needed — selective disclosure</div>
+      <div class="sm mt2" data-i18n="Create VC ›" style="font-weight:800;opacity:.9;font-size:11px">Create VC ›</div>
+    </a>
+    <a onclick="toast('Opening Nominee','family')" style="min-width:240px;flex:0 0 240px;scroll-snap-align:start;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#9A1668,#C7237F 55%,#FF7AC6);padding:14px 16px;color:#fff;position:relative;cursor:pointer;text-decoration:none;display:block">
+      <div style="position:absolute;right:-15px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)"></div>
+      <div class="bold" data-i18n="Add a Nominee" style="font-size:13px">Add a Nominee</div>
+      <div class="sm mt1" data-i18n="Secure your documents for your loved ones" style="opacity:.85;font-size:11px">Secure your documents for your loved ones</div>
+      <div class="sm mt2" data-i18n="Setup ›" style="font-weight:800;opacity:.9;font-size:11px">Setup ›</div>
+    </a>
+  </div>
+
+  <!-- SECTION 2: Government Services Ad — External govt schemes/platforms -->
+  <div class="cap mt6" data-i18n="GOVERNMENT SERVICES" style="letter-spacing:1px;font-weight:700;color:var(--ink-3)">GOVERNMENT SERVICES</div>
+  <div class="mt3" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+    <a href="https://www.myscheme.gov.in" target="_blank" style="min-width:240px;flex:0 0 240px;scroll-snap-align:start;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#1B5E20,#388E3C 55%,#66BB6A);padding:14px 16px;color:#fff;position:relative;cursor:pointer;text-decoration:none;display:block">
+      <div style="position:absolute;right:-15px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)"></div>
+      <div class="cap" data-i18n="GOVT. OF INDIA" style="opacity:.7;font-size:8px;letter-spacing:1px">GOVT. OF INDIA</div>
+      <div class="bold mt1" data-i18n="myScheme" style="font-size:13px">myScheme</div>
+      <div class="sm mt1" data-i18n="Find 2,500+ government schemes" style="opacity:.85;font-size:11px">Find 2,500+ government schemes</div>
+    </a>
+    <a href="https://diksha.gov.in" target="_blank" style="min-width:240px;flex:0 0 240px;scroll-snap-align:start;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#E65100,#F57C00 55%,#FFB74D);padding:14px 16px;color:#fff;position:relative;cursor:pointer;text-decoration:none;display:block">
+      <div style="position:absolute;right:-15px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)"></div>
+      <div class="cap" data-i18n="MINISTRY OF EDUCATION" style="opacity:.7;font-size:8px;letter-spacing:1px">MINISTRY OF EDUCATION</div>
+      <div class="bold mt1" data-i18n="DIKSHA" style="font-size:13px">DIKSHA</div>
+      <div class="sm mt1" data-i18n="Digital learning for teachers & students" style="opacity:.85;font-size:11px">Digital learning for teachers & students</div>
+    </a>
+    <a href="https://vandebharatexpress.irctc.co.in" target="_blank" style="min-width:240px;flex:0 0 240px;scroll-snap-align:start;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(135deg,#1A237E,#283593 55%,#5C6BC0);padding:14px 16px;color:#fff;position:relative;cursor:pointer;text-decoration:none;display:block">
+      <div style="position:absolute;right:-15px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)"></div>
+      <div class="cap" data-i18n="INDIAN RAILWAYS" style="opacity:.7;font-size:8px;letter-spacing:1px">INDIAN RAILWAYS</div>
+      <div class="bold mt1" data-i18n="Vande Bharat" style="font-size:13px">Vande Bharat</div>
+      <div class="sm mt1" data-i18n="Book premium semi-high speed trains" style="opacity:.85;font-size:11px">Book premium semi-high speed trains</div>
+    </a>
+  </div>
+
+  <div class="between mt6"><div class="h2" data-i18n="Your wallet">Your wallet</div><a class="link sm" data-i18n="See all" onclick="nav('07-wallet.html')">See all</a></div>
+  <div class="mt4"><div class="cred tier1 sk-aadhaar" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="fp"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span><span data-i18n="Verified">Verified</span></span></div>
+      <div class="cname" data-i18n="Aadhaar">Aadhaar</div><div class="cissuer" data-i18n="UIDAI · Govt. of India">UIDAI · Govt. of India</div>
+      <div class="cnum">XXXX XXXX 4821</div><div class="cfoot">
+          <div><small data-i18n="Holder">Holder</small><b>Debabrata N.</b></div>
+          <div style="text-align:right"><small data-i18n="Linked">Linked</small><b data-i18n="Verified">Verified</b></div></div></div></div>
+  <div class="grid4 mt4" style="grid-template-columns:1fr 1fr">
+    <div class="cred compact sk-pan" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="doc"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span><span data-i18n="Verified">Verified</span></span></div>
+      <div class="cname" data-i18n="PAN">PAN</div><div class="cissuer" data-i18n="Income Tax Dept">Income Tax Dept</div><div class="cnum">•••• 4821</div></div>
+    <div class="cred compact sk-dl" onclick="nav('08-document-detail.html')">
+      <div class="glow"></div><div class="ribbon"></div><div class="foil"></div>
+      <div class="ct"><div class="emb"><span data-ic="doc"></span></div><span class="vbadge"><span class="seal"><span data-ic="check"></span></span><span data-i18n="Verified">Verified</span></span></div>
+      <div class="cname" data-i18n="Licence">Licence</div><div class="cissuer" data-i18n="Transport Dept">Transport Dept</div><div class="cnum">•••• 9920</div></div>
+  </div>
+
+  <div class="h2 mt8" data-i18n="Quick actions">Quick actions</div>
+  <div class="grid4 mt4">
+    <a class="qa" onclick="nav('10-verify.html')"><span class="ico"><span data-ic="qr"></span></span><span data-i18n="Show ID">Show ID</span></a>
+    <a class="qa" onclick="nav('09-share.html')"><span class="ico"><span data-ic="share"></span></span><span data-i18n="Share">Share</span></a>
+    <a class="qa" onclick="nav('11-fetch.html')"><span class="ico"><span data-ic="plus"></span></span><span data-i18n="Get document">Get document</span></a>
+    <a class="qa" onclick="nav('23-scan.html')"><span class="ico"><span data-ic="scan"></span></span><span data-i18n="Scan">Scan</span></a>
+  </div>
+
+  <div class="between mt8"><div class="h2" data-i18n="Services">Services</div></div>
+  <div class="grid4 mt4">
+    <a class="qa" onclick="nav('12-drive.html')"><span class="ico"><span data-ic="drive"></span></span><span data-i18n="Drive">Drive</span></a>
+    <a class="qa" onclick="nav('18-health.html')"><span class="ico"><span data-ic="health"></span></span><span data-i18n="Health">Health</span></a>
+    <a class="qa" onclick="nav('19-vc-wallet.html')"><span class="ico"><span data-ic="shield"></span></span><span data-i18n="Credentials">Credentials</span></a>
+    <a class="qa" onclick="nav('16-consent.html')"><span class="ico"><span data-ic="lock"></span></span><span data-i18n="Consent">Consent</span></a>
+    <a class="qa" onclick="nav('17-nominee.html')"><span class="ico"><span data-ic="family"></span></span><span data-i18n="Nominee">Nominee</span></a>
+    <a class="qa" onclick="nav('30-esign.html')"><span class="ico"><span data-ic="pen"></span></span><span data-i18n="eSign">eSign</span></a>
+    <a class="qa" onclick="nav('13-activity.html')"><span class="ico"><span data-ic="activity"></span></span><span data-i18n="Activity">Activity</span></a>
+    <a class="qa" onclick="nav('21-account.html')"><span class="ico"><span data-ic="user"></span></span><span data-i18n="Account">Account</span></a>
+  </div>
+
+</div></div>
+    <div class="homebar"></div>
+    <button class="a11yfab" aria-label="Accessibility options" data-i18n-aria="Accessibility options" aria-expanded="false" onclick="var p=document.querySelector('.a11ypanel');var o=p.classList.toggle('open');this.setAttribute('aria-expanded',o)"><span data-ic="access"></span></button>
+    <div class="a11ypanel" role="dialog" aria-label="Accessibility" data-i18n-aria="Accessibility">
+      <div class="ttl" data-i18n="Text size">Text size</div>
+      <div class="grp"><button onclick="setText('sm',this)">A-</button><button class="on" onclick="setText('normal',this)">A</button><button onclick="setText('lg',this)">A+</button></div>
+      <div class="a11yrow"><span data-ic="eye" data-icc="ic-sm"></span><span class="sm grow" data-i18n="High contrast" style="margin-left:8px">High contrast</span><button class="switch" onclick="pin(this);toggleContrast(this)"><i></i></button></div>
+      <div class="a11yrow"><span data-ic="star" data-icc="ic-sm"></span><span class="sm grow" data-i18n="Dark mode" style="margin-left:8px">Dark mode</span><button class="switch" onclick="toggleTheme(this)"><i></i></button></div>
+    </div>
+    <!-- Language Selector Bottom Sheet -->
+    <div id="langOverlay" class="cscrim" onclick="dismissLangSheet()">
+      <div class="csheet" onclick="event.stopPropagation()">
+        <div class="grab"></div>
+        <div class="h3 center" data-i18n="Choose Language" style="margin-bottom:14px">Choose Language</div>
+        <div class="lang-grid">
+          <button class="lang-card" data-lang="en" style="background:#FFB54A">English<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="hi" style="background:#2196F3">हिंदी<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="as" style="background:#CC5D00">অসমীয়া<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="bn" style="background:#4AC367">বাংলা<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="gu" style="background:#CC5D00">ગુજરાતી<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="kn" style="background:#4AC367">ಕನ್ನಡ<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="ml" style="background:#FB6721">മലയാളം<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="mr" style="background:#FB6721">मराठी<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="or" style="background:#2196F3">ଓଡ଼ିଆ<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="pa" style="background:#CC5D00">ਪੰਜਾਬੀ<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="ta" style="background:#FBC8C8;color:#333">தமிழ்<span class="lang-check">✓</span></button>
+          <button class="lang-card" data-lang="te" style="background:#2196F3">తెలుగు<span class="lang-check">✓</span></button>
+        </div>
+        <div id="langDisclaimer" data-i18n="Some content from government issuers may not be available in this language" style="display:none;margin-top:12px;padding:8px 12px;font-size:12px;font-style:italic;color:var(--ink-3);line-height:1.4">Some content from government issuers may not be available in this language</div>
+        <button id="langConfirmBtn" class="btn primary w100 mt4" data-i18n="Confirm" onclick="confirmLangSelection()">Confirm</button>
+      </div>
+    </div>
+
+    <nav class="tabbar"><a class="tab on" href="06-home.html"><span data-ic="home"></span><span data-i18n="Home">Home</span></a><a class="tab" href="07-wallet.html"><span data-ic="cards"></span><span data-i18n="Wallet">Wallet</span></a><button class="tab center" onclick="nav('10-verify.html')" aria-label="Show / Verify" data-i18n-aria="Show / Verify"><span class="fab"><span data-ic="scan"></span></span></button><a class="tab" href="13-activity.html"><span data-ic="activity"></span><span data-i18n="Activity">Activity</span></a><a class="tab" href="21-account.html"><span data-ic="user"></span><span data-i18n="Account">Account</span></a></nav>
+  </div>
+</div>
+<script src="../assets/i18n.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+// Server-driven content (would come from the dashboard/container API — mirrors v2's
+// Items/Properties model: type, value, action->target, priority). Set to [] / null to
+// simulate the server sending nothing, which hides each section entirely.
+renderPromoBanner('promoBanner', [
+  {title:'Get your Ayushman Card', subtitle:'Free health coverage up to ₹5 lakh/year', icon:'health', skin:'promo-sk4', ctaLabel:'Apply now', cta:{type:'screen', target:'18-health.html'}},
+  {title:'Academic Passport', subtitle:'One verified record for every degree', icon:'grad', skin:'promo-sk1', ctaLabel:'Explore', cta:{type:'screen', target:'19-vc-wallet.html'}},
+  {title:'Insurance renewal reminders', subtitle:'Never miss a policy due date', icon:'umbrella', skin:'promo-sk2', ctaLabel:'Turn on', cta:{type:'screen', target:'20-notifications.html'}}
+]);
+
+// Reflect whichever profile is active after a Switch Account / Add Account MPIN unlock,
+// so the dashboard visibly shows that person's own name — proving the switch is real.
+(function(){
+  var name = localStorage.getItem('dl-active-profile-name');
+  var init = localStorage.getItem('dl-active-profile-init');
+  if(name){
+    document.getElementById('homeName').textContent = name;
+    document.getElementById('homeAvatar').textContent = init || name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+  }
+})();
+</script>
+<script>
+// Language Selector — Preview + Confirm flow for post-login home
+(function(){
+  var overlay = document.getElementById('langOverlay');
+  var disclaimer = document.getElementById('langDisclaimer');
+  var cards = overlay.querySelectorAll('.lang-card');
+  var previousLang = ''; // language before opening the sheet
+  var previewLang = '';  // language currently being previewed
+
+  function getActiveLang(){
+    if(window.i18n && window.i18n.getActiveLanguage) return window.i18n.getActiveLanguage();
+    return localStorage.getItem('dl-language') || 'en';
+  }
+
+  function highlightActive(code){
+    cards.forEach(function(c){
+      var isActive = c.getAttribute('data-lang') === code;
+      c.classList.toggle('active', isActive);
+      c.style.fontWeight = isActive ? '700' : '';
+      c.style.opacity = isActive ? '1' : '0.85';
+    });
+  }
+
+  function showDisclaimer(code){
+    disclaimer.style.display = code !== 'en' ? 'block' : 'none';
+  }
+
+  // Open the bottom sheet
+  window.openLangSheet = function(){
+    previousLang = getActiveLang();
+    previewLang = previousLang;
+    highlightActive(previousLang);
+    showDisclaimer(previousLang);
+    overlay.classList.add('show');
+    if(cards.length) cards[0].focus();
+  };
+
+  // Dismiss without confirming — revert to previous language
+  window.dismissLangSheet = function(){
+    if(previewLang !== previousLang && window.i18n && window.i18n.loadLanguage){
+      window.i18n.loadLanguage(previousLang);
+    }
+    overlay.classList.remove('show');
+    document.getElementById('langTrigger').focus();
+  };
+
+  // Confirm selection — persist and close
+  window.confirmLangSelection = function(){
+    // loadLanguage already persists to localStorage
+    if(previewLang && window.i18n && window.i18n.loadLanguage){
+      window.i18n.loadLanguage(previewLang);
+    }
+    overlay.classList.remove('show');
+    document.getElementById('langTrigger').focus();
+  };
+
+  // Language card tap — preview (not final persist)
+  cards.forEach(function(card){
+    card.addEventListener('click', function(e){
+      e.stopPropagation();
+      var code = card.getAttribute('data-lang');
+      previewLang = code;
+      highlightActive(code);
+      showDisclaimer(code);
+      if(window.i18n && window.i18n.loadLanguage){
+        window.i18n.loadLanguage(code);
+      }
+    });
+  });
+})();
+</script>
+</body></html>

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('21-account.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Settings</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="eyebrow">App lock</div>
+        <div class="card mt3">
+          <div class="a11yrow" style="border-top:0"><span class="sm grow">Biometric unlock</span><button class="switch" id="bioSwitch" onclick="toggleBio(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Require MPIN on open</span><button class="switch on" onclick="pin(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Passkey (FIDO2)</span><button class="switch" onclick="pin(this)"><i></i></button></div>
+        </div>
+
+        <div class="eyebrow mt6">Appearance</div>
+        <div class="card mt3">
+          <div class="a11yrow" style="border-top:0"><span class="sm grow">Dark mode</span><button class="switch" onclick="toggleTheme(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">High contrast</span><button class="switch" onclick="pin(this);toggleContrast(this)"><i></i></button></div>
+          <div class="a11yrow" style="align-items:center"><span class="sm grow">Text size</span><div class="grp" style="width:150px"><button onclick="setText('sm',this)">A-</button><button class="on" onclick="setText('normal',this)">A</button><button onclick="setText('lg',this)">A+</button></div></div>
+        </div>
+
+        <div class="eyebrow mt6">Data &amp; privacy</div>
+        <div class="card mt3">
+          <div class="a11yrow" style="border-top:0"><span class="sm grow">Offline copies (encrypted)</span><button class="switch on" onclick="pin(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Push new documents to wallet</span><button class="switch on" onclick="pin(this)"><i></i></button></div>
+          <div class="lrow" style="border-bottom:0" onclick="toast('Privacy policy','doc')"><div class="grow bold sm">Privacy policy</div><span data-ic="chev" data-icc="ic-sm"></span></div>
+        </div>
+
+        <div class="center sm muted mt6">DigiLocker Wallet · v1.0.0 (concept)</div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+// Reflect/persist the same flag the MPIN screen reads for the returning-user quick unlock.
+(function(){var on=localStorage.getItem('dl-biometric-enabled')==='true';var sw=document.getElementById('bioSwitch');sw.classList.toggle('on',on);sw.setAttribute('aria-checked',String(on));})();
+function toggleBio(el){pin(el);var on=el.classList.contains('on');localStorage.setItem('dl-biometric-enabled',on?'true':'false');toast(on?'Biometric unlock enabled':'Biometric unlock disabled','fp');}
+</script>
+</body></html>

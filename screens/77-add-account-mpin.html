@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Confirm their MPIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.pindot{width:16px;height:16px;border-radius:50%;border:2px solid var(--dl-primary)}
+.pindot.on{background:var(--dl-primary)}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="pad center" style="padding-top:64px">
+        <div style="width:64px;height:64px;border-radius:20px;background:var(--dl-primary-50);color:var(--dl-primary);display:grid;place-items:center;margin:0 auto"><span data-ic="lock" data-icc="ic-lg"></span></div>
+        <div class="h1 mt5">Enter their MPIN</div>
+        <div class="body ink2 mt2">Identity verified via OTP. Enter <b>their existing MPIN</b> to log in with their account on this device.</div>
+        <div class="row mt6" style="justify-content:center;gap:14px" id="pins">
+          <span class="pindot on"></span><span class="pindot on"></span><span class="pindot on"></span><span class="pindot"></span><span class="pindot"></span><span class="pindot"></span>
+        </div>
+        <div class="keypad mt6" style="max-width:280px;margin:24px auto 0">
+          <button onclick="press('1')">1</button><button onclick="press('2')">2</button><button onclick="press('3')">3</button>
+          <button onclick="press('4')">4</button><button onclick="press('5')">5</button><button onclick="press('6')">6</button>
+          <button onclick="press('7')">7</button><button onclick="press('8')">8</button><button onclick="press('9')">9</button>
+          <button style="background:transparent;border:0;box-shadow:none"></button>
+          <button onclick="press('0')">0</button>
+          <button onclick="press('<')" aria-label="Delete"><span data-ic="back"></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+var dots=[].slice.call(document.querySelectorAll('#pins .pindot'));var i=3;
+function press(k){if(k==='<'){if(i>0){i--;dots[i].classList.remove('on');}return;}
+  if(i<6){dots[i].classList.add('on');i++; if(i===6) setTimeout(function(){nav('77-add-account-done.html');},380);}}
+</script>
+</body></html>

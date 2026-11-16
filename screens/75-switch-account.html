@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Switch account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.prow{display:flex;align-items:center;gap:12px;border:1.5px solid var(--hair);border-radius:16px;padding:14px;cursor:pointer;background:var(--surface);box-shadow:var(--e1)}
+.prow:active{transform:scale(.99)}
+.prow .av{width:46px;height:46px;border-radius:14px;color:#fff;display:grid;place-items:center;font-weight:800;flex:0 0 auto}
+.prow.active{border-color:var(--dl-primary);box-shadow:0 0 0 2px var(--dl-primary-100)}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('21-account.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Switch account</div></div>
+      <div class="pad" style="padding-top:14px">
+
+        <!-- ===== A. SWITCH ACCOUNT — profiles linked to THIS device's mobile number (v2: SwitchAccountActivity) ===== -->
+        <div class="between"><span class="eyebrow">Profiles on +91 98765 43210</span></div>
+        <div class="sm muted mt1">Same mobile number · switching only needs your MPIN</div>
+        <div class="col gap2 mt3">
+          <div class="prow active" onclick="toast('Already active','check')">
+            <div class="av" style="background:var(--dl-grad)">DN</div>
+            <div class="grow"><div class="bold">Debabrata Nayak</div><div class="sm muted">debabrata.n · Aadhaar-verified</div></div>
+            <span class="badge indigo">Active</span></div>
+          <div class="prow" onclick="switchToProfile('Sunita Nayak','SN')">
+            <div class="av" style="background:linear-gradient(135deg,#0E7C86,#22C7D6)">SN</div>
+            <div class="grow"><div class="bold">Sunita Nayak</div><div class="sm muted">sunita.n · Aadhaar-verified</div></div>
+            <span data-ic="chev" data-icc="ic-sm"></span></div>
+        </div>
+        <button class="btn ghost block mt3" onclick="nav('78-add-profile-samenumber.html')"><span data-ic="plus" data-icc="ic-sm"></span> Add a profile on this number</button>
+        <div class="alert info mt3"><span data-ic="shield" data-icc="ic-sm"></span><span>These profiles share your mobile number. Switching between them only asks for that profile's MPIN — no OTP needed again.</span></div>
+
+        <hr class="divider mt6">
+
+        <!-- ===== B. ADD ACCOUNT — any other person, independent of this device's number (extension beyond v2) ===== -->
+        <div class="between mt2"><span class="eyebrow">Other people on this device</span></div>
+        <div class="sm muted mt1">Different Aadhaar/VID · verified independently, not tied to this number</div>
+        <div class="col gap2 mt3" id="otherPeople">
+          <div class="prow" onclick="switchToProfile('Ravi Kumar','RK')">
+            <div class="av" style="background:linear-gradient(135deg,#8A4B00,#FF8F00)">RK</div>
+            <div class="grow"><div class="bold">Ravi Kumar</div><div class="sm muted">Added on this device · own Aadhaar</div></div>
+            <span data-ic="chev" data-icc="ic-sm"></span></div>
+        </div>
+        <button class="btn ghost block mt3" onclick="nav('76-add-account-identity.html')"><span data-ic="plus" data-icc="ic-sm"></span> Add another person's account</button>
+        <div class="alert warn mt3"><span data-ic="lock" data-icc="ic-sm"></span><span>Only for people who <b>already have</b> a DigiLocker account: their own Aadhaar/VID → OTP to their mobile → their existing MPIN. This is separate from the number-linked profiles above.</span></div>
+
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+// Switching (either section) only ever asks for MPIN — identity was already proven when the
+// profile was added. We pass the display name/initials via query so 06-home can reflect it.
+function switchToProfile(name, initials){
+  nav('05-mpin.html?switchTo='+encodeURIComponent(name)+'&init='+initials+'#next=06-home.html');
+}
+</script>
+</body></html>

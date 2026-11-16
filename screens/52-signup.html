@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Your details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+.field{width:100%;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:14px 16px;font-size:15px;color:var(--ink);font-family:inherit}
+.field:focus{outline:0;border-color:var(--dl-primary);box-shadow:var(--focus)}
+.sel{width:100%;background:var(--surface);border:1.5px solid var(--hair);border-radius:14px;padding:14px 12px;font-size:15px;color:var(--ink);font-family:inherit}
+.sel:focus{outline:0;border-color:var(--dl-primary);box-shadow:var(--focus)}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('68-link-aadhaar-signup.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Your details</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="subjbanner"><span data-ic="user" data-icc="ic-sm"></span><span>Since you skipped Aadhaar, tell us a bit about you.</span></div>
+
+        <label class="sm bold mt5" style="display:block">Full name</label>
+        <input class="field mt2" placeholder="Enter your full name">
+
+        <label class="sm bold mt4" style="display:block">Date of birth</label>
+        <input class="field mt2" placeholder="DD / MM / YYYY">
+
+        <label class="sm bold mt4" style="display:block">Gender</label>
+        <select class="sel mt2">
+          <option>Select gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+
+        <label class="sm bold mt4" style="display:block">Email address</label>
+        <input class="field mt2" type="email" placeholder="you@example.com">
+
+        <div class="alert info mt5"><span data-ic="lock" data-icc="ic-sm"></span><span>Next, set a 6-digit MPIN to lock your wallet. (Your mobile is already verified.)</span></div>
+
+        <button class="btn lg block mt5" onclick="nav('64-set-mpin.html')">Continue</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

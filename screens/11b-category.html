@@ -1,0 +1,176 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Category</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}
+/* Category header */
+.cat-header{display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 16px 24px;gap:10px}
+.cat-header .cat-icon{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:var(--dl-primary-50);color:var(--dl-primary)}
+.cat-header .cat-icon svg.ic{width:30px;height:30px}
+.cat-header .cat-title{font-size:var(--t-h2);font-weight:800;color:var(--ink)}
+.cat-header .cat-sub{font-size:var(--t-sm);color:var(--ink-3)}
+</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar">
+        <button class="iconbtn" onclick="goBack('11-fetch.html')" aria-label="Back"><span data-ic="back"></span></button>
+        <div class="title" id="appbarTitle">Category</div>
+      </div>
+      <div class="pad" style="padding-top:10px">
+
+        <!-- Category header -->
+        <div class="cat-header" id="catHeader">
+          <div class="cat-icon" id="catIcon"></div>
+          <div class="cat-title" id="catTitle"></div>
+          <div class="cat-sub" id="catSub"></div>
+        </div>
+
+        <!-- Document list -->
+        <div class="card mt3" style="padding:0" id="docList"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+/* ---- Simulated category data ---- */
+var CATEGORY_DOCS = {
+  "1": [
+    {id:"ED001", name:"Class XII Marksheet", issuer:"CBSE", icon:"grad"},
+    {id:"ED002", name:"Class X Marksheet", issuer:"CBSE", icon:"grad"},
+    {id:"ED003", name:"Degree Certificate", issuer:"UGC", icon:"grad"},
+    {id:"ED004", name:"Diploma Certificate", issuer:"AICTE", icon:"grad"},
+    {id:"ED005", name:"Migration Certificate", issuer:"CBSE", icon:"doc"},
+    {id:"ED006", name:"Mark Sheet", issuer:"IGNOU", icon:"grad"}
+  ],
+  "2": [
+    {id:"CG001", name:"PAN Verification", issuer:"Income Tax Dept", icon:"doc"},
+    {id:"CG002", name:"Aadhaar Card", issuer:"UIDAI", icon:"idcard"},
+    {id:"CG003", name:"Passport", issuer:"Ministry of External Affairs", icon:"passport"},
+    {id:"CG004", name:"Voter ID", issuer:"ECI", icon:"idcard"},
+    {id:"CG005", name:"EPFO Passbook", issuer:"EPFO", icon:"doc"}
+  ],
+  "3": [
+    {id:"SG001", name:"Domicile Certificate", issuer:"State Revenue Dept", icon:"doc"},
+    {id:"SG002", name:"Caste Certificate", issuer:"State Revenue Dept", icon:"doc"},
+    {id:"SG003", name:"Income Certificate", issuer:"State Revenue Dept", icon:"doc"},
+    {id:"SG004", name:"Birth Certificate", issuer:"Municipal Corporation", icon:"doc"},
+    {id:"SG005", name:"Marriage Certificate", issuer:"State Govt", icon:"doc"}
+  ],
+  "9": [
+    {id:"TR001", name:"Driving Licence", issuer:"Ministry of Road Transport", icon:"car"},
+    {id:"TR002", name:"Vehicle Registration (RC)", issuer:"Ministry of Road Transport", icon:"car"},
+    {id:"TR003", name:"Fitness Certificate", issuer:"RTO", icon:"car"},
+    {id:"TR004", name:"Permit", issuer:"State Transport", icon:"car"}
+  ],
+  "10": [
+    {id:"HW001", name:"Vaccination Certificate", issuer:"Ministry of Health", icon:"health"},
+    {id:"HW002", name:"ABHA Health ID", issuer:"NHA", icon:"health"},
+    {id:"HW003", name:"Lab Report", issuer:"Registered Labs", icon:"health"}
+  ],
+  "6": [
+    {id:"BF001", name:"PAN Verification", issuer:"Income Tax Dept", icon:"doc"},
+    {id:"BF002", name:"Insurance Policy", issuer:"IRDAI Partners", icon:"umbrella"},
+    {id:"BF003", name:"Bank Statement", issuer:"RBI Partners", icon:"rupee"}
+  ]
+};
+
+/* Generic fallback for categories without specific data */
+var GENERIC_DOCS = [
+  {id:"GEN001", name:"Certificate Type A", issuer:"Issuing Authority", icon:"doc"},
+  {id:"GEN002", name:"Certificate Type B", issuer:"Issuing Authority", icon:"doc"},
+  {id:"GEN003", name:"Verification Document", issuer:"Govt Department", icon:"doc"},
+  {id:"GEN004", name:"Registration Certificate", issuer:"Registrar Office", icon:"doc"}
+];
+
+/* Category metadata (icon mapping) */
+var CATEGORIES = {
+  "1": {name:"Education & Learning", icon:"grad"},
+  "2": {name:"Central Government", icon:"building"},
+  "3": {name:"State Government", icon:"map"},
+  "4": {name:"Industry & Private Sector", icon:"building"},
+  "5": {name:"Government & Public Sector", icon:"shield"},
+  "6": {name:"Banking, Financial Services & Insurance", icon:"rupee"},
+  "7": {name:"Skill & Vocational", icon:"award"},
+  "8": {name:"Ministry of Defence", icon:"shield"},
+  "9": {name:"Transport & Infrastructure", icon:"car"},
+  "10": {name:"Health & Wellness", icon:"health"},
+  "11": {name:"Identity Docs", icon:"idcard"},
+  "12": {name:"National Service Scheme", icon:"people"},
+  "13": {name:"Sports & Culture", icon:"award"}
+};
+
+/* ---- Parse hash parameters ---- */
+function getHashParams(){
+  var hash = location.hash.replace(/^#/,'');
+  var params = {};
+  hash.split('&').forEach(function(pair){
+    var parts = pair.split('=');
+    if(parts.length===2) params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+  });
+  return params;
+}
+
+/* ---- Render document row ---- */
+function docRow(d, isLast){
+  return '<div class="lrow" style="padding:14px 16px;'+(isLast?'border-bottom:0':'border-bottom:1px solid var(--hair)')+'" onclick="nav(\'11d-confirm.html#doc='+d.id+'&name='+encodeURIComponent(d.name)+'&issuer='+encodeURIComponent(d.issuer)+'&icon='+d.icon+'\')" role="button" tabindex="0" aria-label="'+d.name+' from '+d.issuer+'">'
+    + '<div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)">'+svg(d.icon)+'</div>'
+    + '<div class="grow"><div class="bold sm">'+d.name+'</div><div class="sm muted">'+d.issuer+'</div></div>'
+    + svg('chev','ic-sm')+'</div>';
+}
+
+/* ---- Initialize screen ---- */
+(function(){
+  var params = getHashParams();
+  var catId = params.cat;
+  var catName = params.name || '';
+  var catMeta = catId ? CATEGORIES[catId] : null;
+
+  /* Fallback: if hash params missing/invalid, show all categories as links */
+  if(!catId || !catMeta){
+    document.getElementById('appbarTitle').textContent = 'All Categories';
+    document.getElementById('catHeader').style.display = 'none';
+    var list = document.getElementById('docList');
+    var catKeys = Object.keys(CATEGORIES);
+    list.innerHTML = catKeys.map(function(id, i){
+      var c = CATEGORIES[id];
+      var isLast = i === catKeys.length - 1;
+      return '<div class="lrow" style="padding:14px 16px;'+(isLast?'border-bottom:0':'border-bottom:1px solid var(--hair)')+'" onclick="nav(\'11b-category.html#cat='+id+'&name='+encodeURIComponent(c.name)+'\')" role="button" tabindex="0" aria-label="'+c.name+'">'
+        + '<div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)">'+svg(c.icon)+'</div>'
+        + '<div class="grow"><div class="bold sm">'+c.name+'</div></div>'
+        + svg('chev','ic-sm')+'</div>';
+    }).join('');
+    return;
+  }
+
+  /* Valid category — render header and documents */
+  var displayName = catName || catMeta.name;
+  var icon = catMeta.icon;
+  var docs = CATEGORY_DOCS[catId] || GENERIC_DOCS;
+
+  /* Appbar title */
+  document.getElementById('appbarTitle').textContent = displayName;
+
+  /* Category header */
+  document.getElementById('catIcon').innerHTML = svg(icon);
+  document.getElementById('catTitle').textContent = displayName;
+  document.getElementById('catSub').textContent = docs.length + ' document' + (docs.length !== 1 ? 's' : '') + ' available';
+
+  /* Document list */
+  var list = document.getElementById('docList');
+  list.innerHTML = docs.map(function(d, i){ return docRow(d, i === docs.length - 1); }).join('');
+})();
+</script>
+</body></html>

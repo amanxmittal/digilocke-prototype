@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Share</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('08-document-detail.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title">Share securely</div></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="subjbanner"><span data-ic="lock" data-icc="ic-sm"></span><span>You choose exactly what to share. Nothing leaves without your consent.</span></div>
+
+        <div class="h3 mt5">Document</div>
+        <div class="card row mt3"><div class="lico" style="background:var(--dl-primary-50);color:var(--dl-primary)"><span data-ic="idcard"></span></div><div class="grow"><div class="bold">Aadhaar</div><div class="sm muted">UIDAI · Verified</div></div><span data-ic="chev" data-icc="ic-sm"></span></div>
+
+        <div class="h3 mt5">Share only these fields</div>
+        <div class="card mt3">
+          <div class="a11yrow" style="border-top:0"><span class="sm grow">Photo</span><button class="switch on" onclick="pin(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Name</span><button class="switch on" onclick="pin(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Age over 18 (derived, no DOB)</span><button class="switch on" onclick="pin(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Full date of birth</span><button class="switch" onclick="pin(this)"><i></i></button></div>
+          <div class="a11yrow"><span class="sm grow">Address</span><button class="switch" onclick="pin(this)"><i></i></button></div>
+        </div>
+
+        <div class="h3 mt5">How to share</div>
+        <div class="srcgrid mt3">
+          <div class="srctile" onclick="nav('10-verify.html')"><div class="si"><span data-ic="qr"></span></div><b class="sm">QR code</b></div>
+          <div class="srctile" onclick="toast('Secure link created','link')"><div class="si"><span data-ic="link"></span></div><b class="sm">Secure link</b></div>
+          <div class="srctile" onclick="toast('Sent to another wallet','send')"><div class="si"><span data-ic="send"></span></div><b class="sm">To a person</b></div>
+          <div class="srctile" onclick="toast('Emailed','doc')"><div class="si"><span data-ic="doc"></span></div><b class="sm">Email PDF</b></div>
+        </div>
+
+        <div class="between mt5"><span class="sm bold">Access expires</span><span class="chip on">24 hours</span></div>
+        <button class="btn lg block mt5" onclick="confirmDo('Confirm share','Share Photo, Name and Age-over-18 for 24 hours?','Confirm & authenticate',false,'Shared securely','check','10-verify.html')">Continue</button>
+      </div>
+    </div>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

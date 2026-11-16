@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigiLocker · Drive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+
+<script>try{var _t=localStorage.getItem('dl-theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>body{display:grid;place-items:center;min-height:100vh;padding:10px;background:transparent;scrollbar-width:none;overflow:hidden}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body::-webkit-scrollbar{display:none}</style>
+</head><body>
+<div class="phone"><div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar"><span data-clock>9:41</span>
+      <span class="sb-r">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="20" height="9" rx="2.5" stroke="currentColor" stroke-opacity=".5"/><rect x="2.5" y="2.5" width="15" height="6" rx="1" fill="currentColor"/><rect x="22" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      </span></div>
+    <div class="view">
+      <div class="appbar"><button class="iconbtn" onclick="goBack('06-home.html')" aria-label="Back"><span data-ic="back"></span></button><div class="title grow">Drive</div>
+        <button class="iconbtn" onclick="toast('Search files','search')" aria-label="Search"><span data-ic="search"></span></button></div>
+      <div class="pad" style="padding-top:14px">
+        <div class="card" style="background:var(--dl-primary-50);border-color:var(--dl-primary-100)">
+          <div class="between"><span class="sm bold">Storage</span><span class="sm muted">1.2 GB of 5 GB</span></div>
+          <div class="pbar mt3"><i style="width:24%"></i></div>
+        </div>
+
+        <div class="eyebrow mt6">Folders</div>
+        <div class="grid4 mt3" style="grid-template-columns:1fr 1fr">
+          <div class="foldtile" onclick="toast('Opened Documents','folder')"><div class="fi"><span data-ic="folder"></span></div><div class="bold sm">Documents</div><div class="sm muted">12 files</div></div>
+          <div class="foldtile" onclick="toast('Opened eSigned','folder')"><div class="fi"><span data-ic="folder"></span></div><div class="bold sm">eSigned Docs</div><div class="sm muted">4 files</div></div>
+        </div>
+
+        <div class="between mt6"><div class="eyebrow">Recent files</div></div>
+        <div class="card mt3">
+          <div class="lrow" onclick="nav('15-drive-file.html')"><div class="fileicon" style="background:var(--danger)"><span data-ic="file" data-icc="ic-sm"></span></div><div class="grow"><div class="bold sm">Rent Agreement.pdf</div><div class="sm muted">820 KB · 2 days ago</div></div><span data-ic="dots" data-icc="ic-sm"></span></div>
+          <div class="lrow" onclick="nav('15-drive-file.html')"><div class="fileicon" style="background:var(--blue)"><span data-ic="image" data-icc="ic-sm"></span></div><div class="grow"><div class="bold sm">Passport Photo.jpg</div><div class="sm muted">210 KB · 5 days ago</div></div><span data-ic="dots" data-icc="ic-sm"></span></div>
+          <div class="lrow" style="border-bottom:0" onclick="nav('15-drive-file.html')"><div class="fileicon" style="background:var(--green)"><span data-ic="file" data-icc="ic-sm"></span></div><div class="grow"><div class="bold sm">Salary Slip.pdf</div><div class="sm muted">340 KB · 1 week ago</div></div><span data-ic="dots" data-icc="ic-sm"></span></div>
+        </div>
+      </div>
+    </div>
+    <button class="ffab" onclick="nav('14-upload.html')" aria-label="Upload"><span data-ic="plus"></span></button>
+    <div class="homebar"></div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>
